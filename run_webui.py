@@ -12,11 +12,17 @@ site_packages_dir = os.path.join(base_dir, "webui_env", "Lib", "site-packages")
 if os.path.exists(site_packages_dir) and site_packages_dir not in sys.path:
     sys.path.insert(0, site_packages_dir)
 
-data_dir = os.path.join(site_packages_dir, "open_webui", "data")
+try:
+    import open_webui
+    open_webui_dir = os.path.dirname(open_webui.__file__)
+except ImportError:
+    open_webui_dir = os.path.join(site_packages_dir, "open_webui")
+
+data_dir = os.environ.get("DATA_DIR", os.path.join(open_webui_dir, "data"))
 os.makedirs(data_dir, exist_ok=True)
 
 # The frontend lives at open_webui/frontend/
-frontend_dir = os.path.join(site_packages_dir, "open_webui", "frontend")
+frontend_dir = os.environ.get("FRONTEND_BUILD_DIR", os.path.join(open_webui_dir, "frontend"))
 os.environ["FRONTEND_BUILD_DIR"] = frontend_dir
 os.environ["FROM_INIT_PY"] = "true"
 
