@@ -1,0 +1,22 @@
+# ==========================================
+# ASTRA AI Ecosystem — Render Blueprint (render.yaml)
+# ==========================================
+services:
+  - type: web
+    name: astra-ai-ecosystem
+    env: docker
+    plan: free
+    region: oregon
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /health
+    envVars:
+      - key: PORT
+        value: 10000
+      - key: PYTHONUTF8
+        value: "1"
+      - key: PYTHONIOENCODING
+        value: "utf-8"
+      - key: OFFLINE_MODE
+        value: "True"
+      - key: ENABLE_DB_MIGRATIONS
+        value: "False"
