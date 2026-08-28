@@ -1,0 +1,77 @@
+import os
+import sys
+
+# Ensure UTF-8 streams to prevent Windows charmap encoding crashes on emojis / banners
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+if hasattr(sys.stderr, "reconfigure"):
+    sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+
+base_dir = os.path.abspath(os.path.dirname(__file__))
+site_packages_dir = os.path.join(base_dir, "webui_env", "Lib", "site-packages")
+if os.path.exists(site_packages_dir) and site_packages_dir not in sys.path:
+    sys.path.insert(0, site_packages_dir)
+
+data_dir = os.path.join(site_packages_dir, "open_webui", "data")
+os.makedirs(data_dir, exist_ok=True)
+
+# The frontend lives at open_webui/frontend/
+frontend_dir = os.path.join(site_packages_dir, "open_webui", "frontend")
+os.environ["FRONTEND_BUILD_DIR"] = frontend_dir
+os.environ["FROM_INIT_PY"] = "true"
+
+# Core WebUI configuration
+os.environ["DATA_DIR"] = data_dir
+os.environ["WEBUI_SECRET_KEY"] = "p0/6YLuw3mv6mLiP"
+os.environ["PYTHONUTF8"] = "1"
+os.environ["PYTHONIOENCODING"] = "utf-8"
+os.environ["OLLAMA_BASE_URL"] = "http://127.0.0.1:11434"
+os.environ["DEFAULT_MODELS"] = "astra"
+
+# Native Open WebUI Image Generation via ASTRA Image Server
+os.environ["ENABLE_IMAGE_GENERATION"] = "True"
+os.environ["IMAGE_GENERATION_ENGINE"] = "openai"
+os.environ["IMAGES_OPENAI_API_BASE_URL"] = "http://127.0.0.1:8892/v1"
+os.environ["IMAGES_OPENAI_API_KEY"] = "astra"
+os.environ["IMAGE_GENERATION_MODEL"] = "dreamshaper-8"
+os.environ["IMAGE_SIZE"] = "512x512"
+os.environ["IMAGE_STEPS"] = "25"
+os.environ["AUTOMATIC1111_BASE_URL"] = "http://127.0.0.1:8892"
+
+# Disable telemetry, external analytics, and redundant migrations for instant boot
+os.environ["ENABLE_DB_MIGRATIONS"] = "False"
+os.environ["OFFLINE_MODE"] = "True"
+os.environ["ENABLE_VERSION_UPDATE_CHECK"] = "False"
+os.environ["ENABLE_ADMIN_ANALYTICS"] = "False"
+os.environ["ENABLE_OTEL"] = "False"
+os.environ["ENABLE_BASE_MODELS_CACHE"] = "False"
+os.environ["ENABLE_OPENAI_API"] = "False"
+os.environ["OPENAI_API_BASE_URLS"] = ""
+os.environ["OPENAI_API_KEYS"] = ""
+os.environ["ENABLE_PIP_INSTALL_FRONTMATTER_REQUIREMENTS"] = "False"
+os.environ["USER_AGENT"] = "ASTRA-AI"
+os.environ["ANONYMIZED_TELEMETRY"] = "False"
+os.environ["CHROMA_TELEMETRY"] = "False"
+os.environ["POSTHOG_DISABLED"] = "1"
+os.environ["SCARF_NO_ANALYTICS"] = "True"
+os.environ["DO_NOT_TRACK"] = "1"
+os.environ["HF_HUB_DISABLE_TELEMETRY"] = "1"
+
+# Ultra-Low Latency & Chat Suggestions Enabled
+os.environ["RAG_EMBEDDING_ENGINE"] = "ollama"
+os.environ["RAG_OLLAMA_BASE_URL"] = "http://127.0.0.1:11434"
+os.environ["RAG_OLLAMA_MODEL"] = "astra"
+os.environ["ENABLE_SEARCH_QUERY_GENERATION"] = "False"
+os.environ["ENABLE_RETRIEVAL_QUERY_GENERATION"] = "False"
+os.environ["ENABLE_FOLLOW_UP_GENERATION"] = "True"
+os.environ["ENABLE_TAGS_GENERATION"] = "True"
+os.environ["ENABLE_TITLE_GENERATION"] = "True"
+os.environ["ENABLE_AUTOCOMPLETE_GENERATION"] = "True"
+os.environ["ENABLE_MEMORIES"] = "False"
+os.environ["ENABLE_RAG_HYBRID_SEARCH"] = "False"
+os.environ["ENABLE_WEB_SEARCH"] = "False"
+os.environ["OLLAMA_KEEP_ALIVE"] = "-1"
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run("open_webui.main:app", host="0.0.0.0", port=8080, reload=False)

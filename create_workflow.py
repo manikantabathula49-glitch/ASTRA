@@ -1,0 +1,142 @@
+import json
+import os
+
+workflow = {
+  "last_node_id": 8,
+  "last_link_id": 7,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "AstraWebSearch",
+      "pos": [100, 100],
+      "size": {"0": 315, "1": 130},
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [{"name": "search_results", "type": "STRING", "links": [1], "slot_index": 0}],
+      "title": "🌐 ASTRA Web Search",
+      "properties": {"Node name for S&R": "AstraWebSearch"},
+      "widgets_values": ["Latest breakthroughs in AI", 3]
+    },
+    {
+      "id": 2,
+      "type": "AstraBrain",
+      "pos": [500, 100],
+      "size": {"0": 400, "1": 200},
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [{"name": "prompt", "type": "STRING", "link": 1}],
+      "outputs": [{"name": "response", "type": "STRING", "links": [2, 3, 4, 5], "slot_index": 0}],
+      "title": "🧠 ASTRA Brain (Ollama)",
+      "properties": {"Node name for S&R": "AstraBrain"},
+      "widgets_values": ["astra", "Analyze the search results.", "You are ASTRA.", 0.7, 512]
+    },
+    {
+      "id": 3,
+      "type": "AstraPrompt",
+      "pos": [1000, -100],
+      "size": {"0": 315, "1": 200},
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [{"name": "subject", "type": "STRING", "link": 2}],
+      "outputs": [
+        {"name": "positive_prompt", "type": "STRING", "links": [], "slot_index": 0},
+        {"name": "negative_prompt", "type": "STRING", "links": [], "slot_index": 1}
+      ],
+      "title": "📝 ASTRA Prompt Builder",
+      "properties": {"Node name for S&R": "AstraPrompt"},
+      "widgets_values": ["cinematic", "ultra detailed, 8k, masterpiece, best quality", "blurry, bad quality", ""]
+    },
+    {
+      "id": 4,
+      "type": "AstraVideo",
+      "pos": [1000, 150],
+      "size": {"0": 315, "1": 300},
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [{"name": "prompt", "type": "STRING", "link": 3}],
+      "outputs": [{"name": "frames", "type": "IMAGE", "links": [], "slot_index": 0}],
+      "title": "🎬 ASTRA Video Generator",
+      "properties": {"Node name for S&R": "AstraVideo"},
+      "widgets_values": ["blurry", 16, 8, 20, 7.5, 512, 512, -1]
+    },
+    {
+      "id": 5,
+      "type": "AstraTTS",
+      "pos": [1000, 500],
+      "size": {"0": 315, "1": 150},
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [{"name": "text", "type": "STRING", "link": 4}],
+      "outputs": [{"name": "audio_path", "type": "STRING", "links": [], "slot_index": 0}],
+      "title": "🎙️ ASTRA Voice Generator",
+      "properties": {"Node name for S&R": "AstraTTS"},
+      "widgets_values": ["af_bella", 1.0, "astra_voice"]
+    },
+    {
+      "id": 6,
+      "type": "AstraPDF",
+      "pos": [1000, 700],
+      "size": {"0": 315, "1": 200},
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [{"name": "content", "type": "STRING", "link": 5}],
+      "outputs": [{"name": "pdf_path", "type": "STRING", "links": [], "slot_index": 0}],
+      "title": "📄 ASTRA PDF Generator",
+      "properties": {"Node name for S&R": "AstraPDF"},
+      "widgets_values": ["ASTRA Report", "report", "ASTRA", "astra_doc", ""]
+    },
+    {
+      "id": 7,
+      "type": "AstraImage",
+      "pos": [1000, 350],
+      "size": {"0": 315, "1": 250},
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [{"name": "prompt", "type": "STRING", "link": 6}],
+      "outputs": [{"name": "image", "type": "IMAGE", "links": [], "slot_index": 0}],
+      "title": "🎨 ASTRA Image Generator",
+      "properties": {"Node name for S&R": "AstraImage"},
+      "widgets_values": ["a stunning digital art of a futuristic city with violet neon lights, highly detailed, photorealistic", "blurry, bad quality", 25, 7.5, 512, 512, -1]
+    },
+    {
+      "id": 8,
+      "type": "AstraWhisper",
+      "pos": [1000, 950],
+      "size": {"0": 315, "1": 150},
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [{"name": "audio_path", "type": "STRING", "link": 7}],
+      "outputs": [{"name": "transcription", "type": "STRING", "links": [], "slot_index": 0}],
+      "title": "🎙️ ASTRA Whisper Transcriber",
+      "properties": {"Node name for S&R": "AstraWhisper"},
+      "widgets_values": ["f:\\ASTRA\\voice_output\\astra_voice.wav"]
+    }
+  ],
+  "links": [
+    [1, 1, 0, 2, 0, "STRING"],
+    [2, 2, 0, 3, 0, "STRING"],
+    [3, 2, 0, 4, 0, "STRING"],
+    [4, 2, 0, 5, 0, "STRING"],
+    [5, 2, 0, 6, 0, "STRING"],
+    [6, 2, 0, 7, 0, "STRING"],
+    [7, 5, 0, 8, 0, "STRING"]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {},
+  "version": 0.4
+}
+
+with open(r"f:\ASTRA\ASTRA_Master_Workflow.json", "w", encoding="utf-8") as f:
+    json.dump(workflow, f, indent=2)
+
+print("Workflow created successfully.")

@@ -1,0 +1,8 @@
+{
+  "venvPath": ".",
+  "venv": "webui_env",
+  "extraPaths": [
+    "webui_env/Lib/site-packages",
+    "comfy_env/Lib/site-packages"
+  ]
+}

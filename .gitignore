@@ -1,0 +1,34 @@
+# Virtual Environments
+webui_env/
+comfy_env/
+venv/
+.venv/
+env/
+
+# Outputs & Generated Media
+image_output/
+video_output/
+pdf_output/
+output/
+
+# Logs & Cache
+service_logs/
+*.log
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Secrets & Local Data
+.webui_secret_key
+*.db
+*.sqlite3
+
+# Large Model Files & ComfyUI Repository
+ollama_models/
+ComfyUI/
+
+# IDE & System Files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
