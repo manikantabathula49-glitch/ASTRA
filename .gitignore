@@ -1,34 +1,82 @@
-# Virtual Environments
+# ==========================================
+# ASTRA Ecosystem — Standard Python .gitignore
+# ==========================================
+
+# 🐍 Python Bytecode & Cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# 🧪 Testing & Coverage
+.pytest_cache/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+htmlcov/
+.hypothesis/
+
+# 📦 Virtual Environments
 webui_env/
 comfy_env/
 venv/
 .venv/
 env/
+ENV/
+env.bak/
+venv.bak/
 
-# Outputs & Generated Media
+# 🎨 ASTRA Media Outputs & Dynamic Storage
 image_output/
 video_output/
 pdf_output/
 output/
 
-# Logs & Cache
+# 📜 Logs & Runtime Files
 service_logs/
 *.log
-__pycache__/
-*.pyc
-.pytest_cache/
+*.pid
+*.seed
+*.pid.lock
 
-# Secrets & Local Data
+# 🔑 Secrets, Environment Variables & Databases
+.env
+.env.local
 .webui_secret_key
 *.db
 *.sqlite3
 
-# Large Model Files & ComfyUI Repository
+# 🧠 Heavy AI Model Weights & External Engines
 ollama_models/
 ComfyUI/
 
-# IDE & System Files
+# 💻 System & IDE Settings
 .vscode/
 .idea/
+*.swp
+*.swo
 .DS_Store
 Thumbs.db
+desktop.ini
