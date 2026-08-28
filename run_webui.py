@@ -57,10 +57,11 @@ os.environ["SCARF_NO_ANALYTICS"] = "True"
 os.environ["DO_NOT_TRACK"] = "1"
 os.environ["HF_HUB_DISABLE_TELEMETRY"] = "1"
 
-# Ultra-Low Latency & Chat Suggestions Enabled
-os.environ["RAG_EMBEDDING_ENGINE"] = "ollama"
-os.environ["RAG_OLLAMA_BASE_URL"] = "http://127.0.0.1:11434"
-os.environ["RAG_OLLAMA_MODEL"] = "astra"
+# Ultra-Low Latency Instant Startup for Cloud Deployment
+os.environ["RAG_EMBEDDING_ENGINE"] = ""
+os.environ["AUDIO_STT_ENGINE"] = ""
+os.environ["AUDIO_TTS_ENGINE"] = ""
+os.environ["ENABLE_RAG_LOCAL_WEB_FETCH"] = "False"
 os.environ["ENABLE_SEARCH_QUERY_GENERATION"] = "False"
 os.environ["ENABLE_RETRIEVAL_QUERY_GENERATION"] = "False"
 os.environ["ENABLE_FOLLOW_UP_GENERATION"] = "True"
