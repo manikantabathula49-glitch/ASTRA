@@ -2,6 +2,7 @@
 """
 ASTRA Ecosystem Process Supervisor
 Manages and keeps all ASTRA microservices and WebUI alive in persistent background processes.
+Prevents duplicate process spawning while PyTorch/FastAPI models warm up.
 """
 
 import os
@@ -60,6 +61,18 @@ def start_service(name):
         print(f"[OK] {name} is already active on Port {port}.")
         return None
 
+    # Check if process was already spawned and is currently warming up
+    if name in running_procs:
+        proc, out_file = running_procs[name]
+        if proc.poll() is None:
+            print(f"[*] {name} (PID {proc.pid}) is initializing... waiting for Port {port}.")
+            return proc
+        else:
+            try:
+                out_file.close()
+            except Exception:
+                pass
+
     log_dir = os.path.join(BASE_DIR, "service_logs")
     os.makedirs(log_dir, exist_ok=True)
     out_file = open(os.path.join(log_dir, f"{name.lower()}.log"), "a", encoding="utf-8", errors="replace")
@@ -68,7 +81,7 @@ def start_service(name):
     env["PYTHONUTF8"] = "1"
     env["PYTHONIOENCODING"] = "utf-8"
     
-    print(f"[*] Starting {name} (Port {port})...")
+    print(f"[*] Launching {name} (Port {port})...")
     proc = subprocess.Popen(
         conf["cmd"],
         cwd=BASE_DIR,
@@ -80,10 +93,10 @@ def start_service(name):
     return proc
 
 def monitor():
-    # Initial startup of all services
+    # Initial startup of all services with staggering to prevent memory spikes
     for name in SERVICES:
         start_service(name)
-        time.sleep(1)
+        time.sleep(2)
 
     print("\n====================================================")
     print(" [OK] ASTRA Ecosystem Supervisor Online")
@@ -91,13 +104,19 @@ def monitor():
     print("====================================================\n")
 
     while True:
-        time.sleep(5)
+        time.sleep(15)
         for name in list(SERVICES.keys()):
             conf = SERVICES[name]
             port = conf["port"]
             if not is_port_in_use(port):
-                print(f"[!] Warning: {name} on port {port} is not responding. Starting/Restarting...")
-                start_service(name)
+                # Check if process died
+                if name in running_procs:
+                    proc, _ = running_procs[name]
+                    if proc.poll() is not None:
+                        print(f"[!] {name} process (PID {proc.pid}) terminated. Restarting...")
+                        start_service(name)
+                else:
+                    start_service(name)
 
 if __name__ == "__main__":
     try:
