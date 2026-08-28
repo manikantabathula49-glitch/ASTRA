@@ -1,51 +1,77 @@
 # 🚀 ASTRA AI Ecosystem
-
-ASTRA is an all-in-one local AI ecosystem powered completely by **Open WebUI**, **ComfyUI**, and **Ollama**.
-Everything runs 100% locally on your machine with absolutely zero cloud dependency.
-
-## ✨ Interfaces:
-- 💬 **Open WebUI Chat (Port 8080)**: Centralized chat interface for interacting with LLM agents, generating images, videos, voice, and documents.
-- ⚙️ **ComfyUI Visual Engine (Port 8188)**: Node-based creative pipeline with native ASTRA custom nodes for high-quality Image & Video generation.
-
-## 🎨 Generation Capabilities:
-- 🎨 **Image Generation**: Powered by Stable Diffusion (DreamShaper 8) via ComfyUI & Open WebUI Chat.
-- 🎬 **Video Generation**: Powered by AnimateDiff + DreamShaper 8 via ComfyUI & Open WebUI Chat.
-- 🎙️ **Voice Generator**: High-quality local Text-to-Speech standalone engine.
-- 📄 **PDF Generator**: Styled PDF document compiler.
+> **Unified Autonomous Local AI Creator** — Powered by Open WebUI, ComfyUI, Ollama, PyTorch & FastAPI.
+> 100% Local. Zero Cloud Dependency. Zero Subscription Fees.
 
 ---
 
-## 🛠️ How to Launch ASTRA
+## ✨ System Architecture & Microservices
 
-Double-click `Start-ASTRA.bat`.
-This script will boot up all necessary background components and open both interfaces in your browser:
-1. **Open WebUI Chat**: `http://localhost:8080`
-2. **ComfyUI Engine**: `http://localhost:8188`
+ASTRA operates as a high-performance local microservices ecosystem managed by a background supervisor daemon (`astra_supervisor.py`).
 
----
-
-## 🧠 Importing & Customizing the ASTRA Model
-
-You can easily build, import, or switch the ASTRA AI model using the interactive importer:
-
-1. Double-click `Import-ASTRA-Model.bat`.
-2. Choose your base model:
-   - **Option [1]**: **Llama 3.2** *(Recommended — Fast, lightweight 3B with 4096 context)*
-   - **Option [2]**: **Mistral 7B** *(High reasoning power, already local)*
-   - **Option [3]**: **Custom Base Model** *(e.g. `deepseek-r1:7b`, `llama3.1`, `qwen2.5`)*
-   - **Option [4]**: **Local GGUF Model** *(Import any downloaded `.gguf` file)*
-3. Or manually build directly in the terminal:
-   ```bash
-   ollama create astra -f Modelfile
-   ```
+| Service Component | Port | Backend Engine | Capabilities |
+| :--- | :---: | :--- | :--- |
+| **Open WebUI Chat** | `8080` | WebUI Engine + Pipe API | Centralized Chat, In-Chat Video/Image/Audio/PDF Rendering |
+| **ComfyUI Visual Engine** | `8188` | ComfyUI + Custom ASTRA Nodes | Node-Based Creative Pipelines & Workflow Editor |
+| **Image Engine** | `8892` | Stable Diffusion 1.5 (DreamShaper 8) | Text-to-Image Generation (4GB VRAM FP16 Optimized) |
+| **Video Engine** | `8891` | AnimateDiff + SD 1.5 | Text-to-Video Animation & GIF Rendering |
+| **Voice Engine** | `8880` | Kokoro TTS | High-Quality Text-to-Speech (Multiple Voices) |
+| **Whisper STT Engine** | `8885` | OpenAI Whisper | Local Voice-to-Text Transcription |
+| **PDF Engine** | `8890` | FPDF2 Compiler | Styled PDF Document Generation |
 
 ---
 
-## 💡 Using Image & Video Generation in Open WebUI Chat
-1. Open `http://localhost:8080` in your browser.
-2. **Generate Image**: Ask the AI: *"Generate an image of a futuristic city with neon lights"*. The image will render directly inside your chat.
-3. **Generate Video**: Ask the AI: *"Generate a video of rain falling over a cyberpunk street"*. The animated clip will display inline.
-4. **ComfyUI Workflows**: Open `http://localhost:8188` to build visual pipelines using `ASTRA 🎨 Image Generator` and `ASTRA 🎬 Video Generator` nodes.
+## 🎨 Core Features & Capabilities
 
-Enjoy your local AI creator ecosystem!
+- 💬 **In-Chat Media Rendering**: Generate images, videos, audio, and documents inline directly inside your Open WebUI chat conversation without switching apps.
+- 🎨 **Stable Diffusion Image Studio**: High-res image generation with dynamic DPMSolverMultistepScheduler and Karras sigmas.
+- 🎬 **AnimateDiff Video Renderer**: Generate fluid animated clips directly from natural language prompts.
+- 🎙️ **Kokoro Text-to-Speech**: Crystal-clear speech synthesis with configurable voice profiles (`af_bella`, `af_sky`, `am_adam`).
+- 🧠 **Autonomous Model Importer**: Seamlessly switch or import GGUF / Ollama models (`Llama 3.2`, `Mistral 7B`, `DeepSeek-R1`, `Qwen 2.5`).
+- 🧩 **Native ComfyUI Custom Nodes**: Build node graphs using custom `ASTRA_Suite` nodes (`AstraBrain`, `AstraVideo`, `AstraVoice`, `AstraPDF`, `AstraWebSearch`).
 
+---
+
+## 🛠️ Quickstart Guide
+
+### 1. Launch Everything in One Click
+Double-click `Start-ASTRA.bat` or run in PowerShell:
+```powershell
+.\run_astra.ps1
+```
+This script automatically starts all background microservices, checks health ports, and opens your browser:
+- **Open WebUI Chat**: `http://localhost:8080`
+- **ComfyUI Engine**: `http://localhost:8188`
+
+### 2. Import / Switch AI Models
+Double-click `Import-ASTRA-Model.bat` or run:
+```bash
+ollama create astra -f Modelfile
+```
+
+### 3. In-Chat Usage Examples
+Open `http://localhost:8080` and try prompting:
+- **Generate Image**: *"Generate an image of a futuristic cyberpunk city lit by neon lights"*
+- **Generate Video**: *"Generate a video of rain falling on a rainy neon street"*
+- **Voice Synthesis**: *"Speak: Welcome to the ASTRA AI local ecosystem"*
+
+---
+
+## 🏗️ Technical Obstacles & Architectural Solutions
+
+### 1. VRAM & Hardware Optimization (4GB VRAM Capable)
+* **Challenge:** Running LLMs, Stable Diffusion, AnimateDiff, TTS, and STT simultaneously caused GPU Out-Of-Memory (OOM) errors.
+* **Solution:** Applied standard FP16 (`torch.float16`) precision, dynamic CPU offloading, model weight recycling, and on-demand microservice loading to keep VRAM footprint under 4GB during inference.
+
+### 2. Microservice Orchestration Daemon
+* **Challenge:** Managing 7 independent Python servers across dual virtual environments (`comfy_env` and `webui_env`) created process collisions and encoding issues.
+* **Solution:** Engineered `astra_supervisor.py`, a background process manager that continuously monitors ports, auto-restarts crashed services, and enforces UTF-8 encoding.
+
+### 3. Open WebUI Pipe Integration & Database Sync
+* **Challenge:** Open WebUI is natively text-focused and does not support real-time inline video/audio streaming or dynamic tool triggers by default.
+* **Solution:** Created a custom Pipe Function (`create_astra_pipe.py`) and SQLite database sync script (`sync_webui_db.py`) that captures prompt intents and renders base64 images and HTML video cards directly in chat streams.
+
+---
+
+## 📄 License & Credits
+- **Author**: PANIMANIKANTA
+- Built with **Open WebUI**, **ComfyUI**, **Ollama**, **PyTorch**, **Diffusers**, **FastAPI**, and **Kokoro TTS**.
