@@ -73,5 +73,6 @@ Open `http://localhost:8080` and try prompting:
 ---
 
 ## 📄 License & Credits
+- **License**: [MIT License](LICENSE)
 - **Author**: PANIMANIKANTA
 - Built with **Open WebUI**, **ComfyUI**, **Ollama**, **PyTorch**, **Diffusers**, **FastAPI**, and **Kokoro TTS**.
