@@ -3,7 +3,6 @@
 # ==========================================
 FROM python:3.11-slim
 
-# Set environment variables
 ENV PYTHONUNBUFFERED=1 \
     PYTHONUTF8=1 \
     PYTHONIOENCODING=utf-8 \
@@ -23,9 +22,10 @@ WORKDIR /app
 # Copy repository contents into container
 COPY . /app
 
-# Install core Python dependencies
+# Install open-webui and core Python dependencies
 RUN pip install --no-cache-dir --upgrade pip && \
     pip install --no-cache-dir \
+    open-webui \
     fastapi \
     uvicorn \
     requests \

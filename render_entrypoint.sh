@@ -11,5 +11,5 @@ echo "===================================================="
 echo " 🚀 Booting ASTRA Ecosystem on Render (Port $PORT)"
 echo "===================================================="
 
-# Start Web UI bound to Render PORT
-exec python -m uvicorn open_webui.main:app --host 0.0.0.0 --port "$PORT"
+# Execute run_webui.py which handles Open WebUI config and dynamic PORT binding
+exec python run_webui.py

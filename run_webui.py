@@ -74,4 +74,5 @@ os.environ["OLLAMA_KEEP_ALIVE"] = "-1"
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run("open_webui.main:app", host="0.0.0.0", port=8080, reload=False)
+    port = int(os.environ.get("PORT", 8080))
+    uvicorn.run("open_webui.main:app", host="0.0.0.0", port=port, reload=False)
