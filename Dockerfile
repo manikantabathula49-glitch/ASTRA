@@ -24,11 +24,12 @@ WORKDIR /app
 COPY . /app
 
 # 1. Pre-install CPU-only PyTorch to save 1.5GB disk & avoid CUDA RAM overload on Render
-RUN pip install --no-cache-dir --upgrade pip && \
-    pip install --no-cache-dir torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
+RUN pip install --no-cache-dir --break-system-packages --upgrade pip && \
+    pip install --no-cache-dir --break-system-packages \
+    torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
 
 # 2. Install open-webui and core microservice dependencies
-RUN pip install --no-cache-dir \
+RUN pip install --no-cache-dir --break-system-packages \
     open-webui \
     fastapi \
     uvicorn \

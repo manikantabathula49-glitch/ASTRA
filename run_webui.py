@@ -80,8 +80,22 @@ os.environ["DATA_DIR"] = data_dir
 frontend_dir = os.environ.get("FRONTEND_BUILD_DIR", os.path.join(open_webui_dir, "frontend"))
 os.environ["FRONTEND_BUILD_DIR"] = frontend_dir
 
+def _create_app():
+    from open_webui.main import app as _webui_app
+
+    @_webui_app.get("/health", include_in_schema=False)
+    async def render_health_check():
+        from fastapi.responses import JSONResponse
+        return JSONResponse(
+            status_code=200,
+            content={"status": "ok", "service": "astra-ai-ecosystem", "healthy": True},
+        )
+
+    return _webui_app
+
+
 if __name__ == "__main__":
     import uvicorn
     port = int(os.environ.get("PORT", 8080))
     print(f"🚀 Launching Uvicorn web server on 0.0.0.0:{port}...", flush=True)
-    uvicorn.run("open_webui.main:app", host="0.0.0.0", port=port, reload=False)
+    uvicorn.run("run_webui:_create_app", host="0.0.0.0", port=port, reload=False, factory=True)
