@@ -1,14 +1,15 @@
 # ==========================================
-# ASTRA AI Ecosystem — Render Dockerfile
+# ASTRA AI Ecosystem — Render Dockerfile (RAM & Speed Optimized)
 # ==========================================
 FROM python:3.11-slim
 
 ENV PYTHONUNBUFFERED=1 \
     PYTHONUTF8=1 \
     PYTHONIOENCODING=utf-8 \
-    PORT=10000
+    PORT=10000 \
+    MALLOC_TRIM_THRESHOLD_=100000
 
-# Install essential system dependencies (FFmpeg, Git, SQLite3, build tools)
+# Install essential system dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
     ffmpeg \
     git \
@@ -22,9 +23,12 @@ WORKDIR /app
 # Copy repository contents into container
 COPY . /app
 
-# Install open-webui and core Python dependencies
+# 1. Pre-install CPU-only PyTorch to save 1.5GB disk & avoid CUDA RAM overload on Render
 RUN pip install --no-cache-dir --upgrade pip && \
-    pip install --no-cache-dir \
+    pip install --no-cache-dir torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
+
+# 2. Install open-webui and core microservice dependencies
+RUN pip install --no-cache-dir \
     open-webui \
     fastapi \
     uvicorn \
