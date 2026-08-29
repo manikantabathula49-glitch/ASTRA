@@ -1,24 +1,3 @@
-# ==========================================
-# ASTRA AI Ecosystem — Render Blueprint (render.yaml)
-# ==========================================
-#
-# 🚀 ONE-CLICK DEPLOY (Blueprint):
-#   1. Push this repo to GitHub/GitLab
-#   2. Go to https://dashboard.render.com/blueprints
-#   3. Click "New Blueprint Instance" → select your repo
-#   4. Approve & deploy — Render auto-reads this file
-#
-# 💡 RECOMMENDED PLAN UPGRADE:
-#   • Free (512MB RAM) → boots but may OOM under load
-#   • Starter ($7/mo, 2GB RAM) → minimum for reliable chat + image gen
-#   • Pro ($20/mo, 4GB RAM) → recommended for multi-user / heavy usage
-#
-# 🧠 OLLAMA (LLM BACKEND):
-#   Render cannot run Ollama natively (no GPU, ephemeral disk).
-#   Provide an external Ollama URL after deploy via env var OLLAMA_BASE_URL:
-#     → self-hosted Ollama on a GPU VPS (RunPod, Lambda, etc.)
-#     → any OpenAI-compatible API (change DEFAULT_MODELS accordingly)
-# ==========================================
 services:
   - type: web
     name: astra-ai-ecosystem
@@ -26,17 +5,13 @@ services:
     plan: free
     region: oregon
     dockerfilePath: ./Dockerfile
-    dockerContext: .
     healthCheckPath: /health
     autoDeploy: yes
-    pullRequestPreviewsEnabled: no
     envVars:
       - key: PORT
         value: 10000
       - key: PYTHONUTF8
         value: "1"
-      - key: PYTHONIOENCODING
-        value: "utf-8"
       - key: OFFLINE_MODE
         value: "True"
       - key: ENABLE_DB_MIGRATIONS
@@ -45,20 +20,20 @@ services:
         value: "False"
       - key: ENABLE_ADMIN_ANALYTICS
         value: "False"
-      - key: ENABLE_OTEL
-        value: "False"
       - key: ANONYMIZED_TELEMETRY
         value: "False"
       - key: POSTHOG_DISABLED
         value: "1"
       - key: DO_NOT_TRACK
         value: "1"
-      - key: MALLOC_TRIM_THRESHOLD_
-        value: "100000"
+      - key: WEBUI_SECRET_KEY
+        generateValue: true
+      - key: OLLAMA_BASE_URL
+        value: "http://127.0.0.1:11434"
+      - key: DEFAULT_MODELS
+        value: "astra"
       - key: FROM_INIT_PY
         value: "true"
-      - key: USER_AGENT
-        value: "ASTRA-AI"
       - key: ENABLE_IMAGE_GENERATION
         value: "True"
       - key: IMAGE_GENERATION_ENGINE
@@ -69,27 +44,13 @@ services:
         value: "astra"
       - key: IMAGE_GENERATION_MODEL
         value: "dreamshaper-8"
-      - key: IMAGE_SIZE
-        value: "512x512"
-      - key: IMAGE_STEPS
-        value: "25"
-      - key: WEBUI_SECRET_KEY
-        generateValue: true
-      - key: OLLAMA_BASE_URL
-        value: "http://127.0.0.1:11434"
-      - key: DEFAULT_MODELS
-        value: "astra"
-      - key: ENABLE_RAG_LOCAL_WEB_FETCH
-        value: "False"
-      - key: ENABLE_WEB_SEARCH
-        value: "False"
-      - key: ENABLE_MEMORIES
-        value: "False"
-      - key: ENABLE_RAG_HYBRID_SEARCH
-        value: "False"
       - key: RAG_EMBEDDING_ENGINE
         value: ""
       - key: AUDIO_STT_ENGINE
         value: ""
       - key: AUDIO_TTS_ENGINE
         value: ""
+      - key: ENABLE_WEB_SEARCH
+        value: "False"
+      - key: ENABLE_MEMORIES
+        value: "False"
