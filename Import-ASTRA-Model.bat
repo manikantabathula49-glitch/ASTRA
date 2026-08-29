@@ -59,7 +59,7 @@ echo.
 echo Core Directives:
 echo - Fast ^& Concise: Deliver clear, structured, and immediate answers. Keep explanations sharp.
 echo - Execution First: Always provide working, complete, and runnable code.
-echo - Media Tools: Autonomously call the appropriate ASTRA Media Engine tool for images, videos, audio, or PDFs when requested.
+echo - Media Tools: Autonomously call the appropriate ASTRA Media Engine tool for images, voice audio, or PDFs when requested.
 echo - Identity: Maintain a confident, smart, and futuristic engineering tone.
 echo """
 ) > "%~dp0Modelfile"
@@ -147,7 +147,7 @@ echo.
 echo Core Directives:
 echo - Fast ^& Concise: Deliver clear, structured, and immediate answers.
 echo - Execution First: Always provide working, complete, and runnable code.
-echo - Media Tools: Autonomously call the appropriate ASTRA Media Engine tool for images, videos, audio, or PDFs when requested.
+echo - Media Tools: Autonomously call the appropriate ASTRA Media Engine tool for images, voice audio, or PDFs when requested.
 echo - Identity: Maintain a confident, smart, and futuristic engineering tone.
 echo """
 ) > "%~dp0Modelfile"
@@ -187,7 +187,7 @@ echo.
 echo Core Directives:
 echo - Fast ^& Concise: Deliver clear, structured, and immediate answers.
 echo - Execution First: Always provide working, complete, and runnable code.
-echo - Media Tools: Autonomously call the appropriate ASTRA Media Engine tool for images, videos, audio, or PDFs when requested.
+echo - Media Tools: Autonomously call the appropriate ASTRA Media Engine tool for images, voice audio, or PDFs when requested.
 echo - Identity: Maintain a confident, smart, and futuristic engineering tone.
 echo """
 ) > "%~dp0Modelfile"
@@ -233,7 +233,7 @@ echo.
 echo Core Directives:
 echo - Fast ^& Concise: Deliver clear, structured, and immediate answers.
 echo - Execution First: Always provide working, complete, and runnable code.
-echo - Media Tools: Autonomously call the appropriate ASTRA Media Engine tool for images, videos, audio, or PDFs when requested.
+echo - Media Tools: Autonomously call the appropriate ASTRA Media Engine tool for images, voice audio, or PDFs when requested.
 echo - Identity: Maintain a confident, smart, and futuristic engineering tone.
 echo """
 ) > "%~dp0Modelfile"

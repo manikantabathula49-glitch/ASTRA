@@ -77,13 +77,10 @@ Start-Process -FilePath "f:\ASTRA\comfy_env\Scripts\python.exe" -ArgumentList ".
 Write-Host "[6/9] Starting Whisper Transcriber (Port 8885)..."
 Start-Process -FilePath "f:\ASTRA\comfy_env\Scripts\python.exe" -ArgumentList ".\whisper_server.py" -WorkingDirectory "f:\ASTRA" -WindowStyle Hidden
 
-Write-Host "[7/9] Starting PDF Engine (Port 8890)..."
+Write-Host "[7/8] Starting PDF Engine (Port 8890)..."
 Start-Process -FilePath "f:\ASTRA\comfy_env\Scripts\python.exe" -ArgumentList ".\pdf_server.py" -WorkingDirectory "f:\ASTRA" -WindowStyle Hidden
 
-Write-Host "[8/9] Starting Video Engine (Port 8891)..."
-Start-Process -FilePath "f:\ASTRA\comfy_env\Scripts\python.exe" -ArgumentList ".\video_server.py" -WorkingDirectory "f:\ASTRA" -WindowStyle Hidden
-
-Write-Host "[9/9] Starting Image Engine (Port 8892)..."
+Write-Host "[8/8] Starting Image Engine (Port 8892)..."
 Start-Process -FilePath "f:\ASTRA\comfy_env\Scripts\python.exe" -ArgumentList ".\image_server.py" -WorkingDirectory "f:\ASTRA" -WindowStyle Hidden
 
 Write-Host "`nWaiting for Open WebUI to complete initialization..." -ForegroundColor Yellow

@@ -29,20 +29,6 @@ specs = [
         }
     },
     {
-        "name": "generate_video",
-        "description": "Generate an animated video or GIF from a descriptive text prompt using local AnimateDiff + DreamShaper 8.\nCall this when the user asks to generate a video, animation, or moving clip.",
-        "parameters": {
-            "type": "object",
-            "properties": {
-                "prompt": {
-                    "type": "string",
-                    "description": "Detailed description of the video to create."
-                }
-            },
-            "required": ["prompt"]
-        }
-    },
-    {
         "name": "generate_voice",
         "description": "Convert text into high-quality spoken audio using Kokoro TTS.\nCall this when the user asks to speak text, read something aloud, or synthesize speech.",
         "parameters": {
@@ -97,11 +83,11 @@ specs = [
 
 specs_json = json.dumps(specs)
 meta_json = json.dumps({
-    "description": "Unified tool for local Image, Video, Voice, and PDF generation.",
+    "description": "Unified tool for local Image, Voice, and PDF generation.",
     "manifest": {
         "title": "ASTRA Media Engine",
         "author": "PANIMANIKANTA",
-        "description": "Unified tool for local Image, Video, Voice, and PDF generation."
+        "description": "Unified tool for local Image, Voice, and PDF generation."
     }
 })
 
@@ -134,7 +120,7 @@ else:
 # 4. Update or insert 'astra' model (Optimized for Instant Response & GPU Acceleration)
 model_meta = {
     "profile_image_url": "/static/favicon.png",
-    "description": "Ultra-fast local ASTRA AI Ecosystem with native chat, image generation, video animation, voice synthesis, and document compilation.",
+    "description": "Ultra-fast local ASTRA AI Ecosystem with native chat, image generation, voice synthesis, and document compilation.",
     "capabilities": {
         "file_context": True,
         "vision": True,
@@ -150,9 +136,8 @@ model_meta = {
     },
     "suggestion_prompts": [
         {"title": ["🎨 Generate Image", "Futuristic City"], "content": "Generate a futuristic cyberpunk city with vibrant violet neon lights"},
-        {"title": ["🎬 Generate Video", "Sunset Ocean Beach"], "content": "Generate a video of waves gently crashing on a sunset beach"},
-        {"title": ["🎙️ Synthesize Voice", "Local Text-to-Speech"], "content": "Speak this message: Welcome to ASTRA, your local AI creator ecosystem."},
         {"title": ["📄 Create PDF Report", "Document Compiler"], "content": "Generate a PDF report on the Architecture of Local Multi-Agent AI Systems"},
+        {"title": ["🎙️ Synthesize Voice", "Local Text-to-Speech"], "content": "Speak this message: Welcome to ASTRA, your local AI creator ecosystem."},
         {"title": ["⚡ Check Status", "System Diagnostics"], "content": "Check the status of all ASTRA system services"}
     ],
     "tags": ["astra", "gpu", "fast", "media-engine"],
@@ -164,15 +149,13 @@ system_prompt = (
     "You are ASTRA, a state-of-the-art AI assistant, developer, and creator engineered by PANIMANIKANTA.\n\n"
     "Core Capabilities:\n"
     "You have BUILT-IN, fully active local tools for generating multimedia content:\n"
-    "1. Video Generation: You can generate videos and animated clips using the local AnimateDiff engine (`generate_video`).\n"
-    "2. Image Generation: You can generate high-resolution images using the local Stable Diffusion DreamShaper engine (`generate_image`).\n"
-    "3. Voice Synthesis: You can convert text to speech using the local Kokoro TTS engine (`generate_voice`).\n"
-    "4. PDF Generation: You can compile styled documents to PDF (`generate_pdf`).\n\n"
+    "1. Image Generation: You can generate high-resolution images using the local Stable Diffusion DreamShaper engine (`generate_image`).\n"
+    "2. Voice Synthesis: You can convert text to speech using the local Kokoro TTS engine (`generate_voice`).\n"
+    "3. PDF Generation: You can compile styled documents to PDF (`generate_pdf`).\n\n"
     "CRITICAL RULES:\n"
-    "- When a user asks you to generate, create, make, or design a video, animation, image, drawing, voice audio, or PDF document:\n"
-    "  ALWAYS invoke the appropriate tool (`generate_video`, `generate_image`, `generate_voice`, `generate_pdf`) or execute the generation immediately.\n"
-    "- NEVER say \"I don't have the capability to generate videos/images/audio\" or \"As an AI language model, I cannot create videos\". You DO have these capabilities integrated.\n"
-    "- NEVER suggest third-party video editors like Premiere Pro, Final Cut, or Python OpenCV scripts when the user asks you to generate a video.\n"
+    "- When a user asks you to generate, create, make, or design an image, drawing, voice audio, or PDF document:\n"
+    "  ALWAYS invoke the appropriate tool (`generate_image`, `generate_voice`, `generate_pdf`) or execute the generation immediately.\n"
+    "- NEVER say \"I don't have the capability to generate images/audio/PDFs\". You DO have these capabilities integrated.\n"
     "- DISPLAYING MEDIA (CRITICAL): When an image or media generation tool returns results, ALWAYS display the generated media directly to the user.\n"
     "  NEVER enclose markdown image tags (![...](...)), HTML <img> tags, or download links inside code blocks or triple backticks (```).\n"
     "  Always output the raw markdown and HTML directly in your text so the user's browser renders the visual image immediately.\n"
@@ -251,19 +234,19 @@ else:
 # Register ASTRA Creator Pipe Model
 creator_meta = {
     "profile_image_url": "/static/favicon.png",
-    "description": "Autonomous AI Creator — Generates Videos, Images, Voice Audio, and PDFs directly in chat",
+    "description": "Autonomous AI Creator — Generates Images, Voice Audio, and PDFs directly in chat",
     "capabilities": {"file_context": True, "vision": True, "file_upload": True, "image_generation": True},
     "suggestion_prompts": model_meta["suggestion_prompts"],
-    "tags": ["astra", "creator", "video", "image"]
+    "tags": ["astra", "creator", "image", "pdf"]
 }
 existing_creator = cur.execute("SELECT id FROM model WHERE id='astra_creator'").fetchone()
 if existing_creator:
-    cur.execute("UPDATE model SET is_active=1, updated_at=? WHERE id='astra_creator'", (now,))
+    cur.execute("UPDATE model SET name='ASTRA (In-Chat Creator)', is_active=1, meta=?, updated_at=? WHERE id='astra_creator'", (json.dumps(creator_meta), now))
 else:
     cur.execute("""
         INSERT INTO model (id, user_id, base_model_id, name, meta, params, created_at, updated_at, is_active)
-        VALUES ('astra_creator', ?, 'astra_creator', 'ASTRA (In-Chat Video & Image)', ?, '{}', ?, ?, 1)
-    """, (admin_id, json.dumps(creator_meta), now, now))
+        VALUES ('astra_creator', ?, 'astra_creator', 'ASTRA (In-Chat Creator)', ?, '{}', ?, ?, 1)
+    """, (admin_id, json.dumps(creator_meta), json.dumps(creator_meta), now, now))
 
 # 5. Enable & Configure Open WebUI Native Image Generation, Task Suggestions, and Prompt Suggestions in config table
 config_row = cur.execute("SELECT id, data FROM config WHERE id=1").fetchone()

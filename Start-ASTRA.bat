@@ -87,15 +87,11 @@ echo [5/8] Launching ASTRA Whisper Transcriber (Port 8885)
 START "ASTRA WHISPER" /MIN cmd /k "cd /d "%~dp0" && chcp 65001 >nul && set PYTHONUTF8=1 && set PYTHONIOENCODING=utf-8 && "%~dp0comfy_env\Scripts\python.exe" ".\whisper_server.py""
 ping -n 2 127.0.0.1 >nul
 
-echo [6/8] Launching ASTRA PDF Engine (Port 8890)
+echo [6/7] Launching ASTRA PDF Engine (Port 8890)
 START "ASTRA PDF" /MIN cmd /k "cd /d "%~dp0" && chcp 65001 >nul && set PYTHONUTF8=1 && set PYTHONIOENCODING=utf-8 && "%~dp0comfy_env\Scripts\python.exe" ".\pdf_server.py""
 ping -n 2 127.0.0.1 >nul
 
-echo [7/8] Launching ASTRA Video Engine (Port 8891)
-START "ASTRA VIDEO" /MIN cmd /k "cd /d "%~dp0" && chcp 65001 >nul && set PYTHONUTF8=1 && set PYTHONIOENCODING=utf-8 && "%~dp0comfy_env\Scripts\python.exe" ".\video_server.py""
-ping -n 2 127.0.0.1 >nul
-
-echo [8/8] Launching ASTRA Image Engine (Port 8892)
+echo [7/7] Launching ASTRA Image Engine (Port 8892)
 START "ASTRA IMAGE" /MIN cmd /k "cd /d "%~dp0" && chcp 65001 >nul && set PYTHONUTF8=1 && set PYTHONIOENCODING=utf-8 && "%~dp0comfy_env\Scripts\python.exe" ".\image_server.py""
 ping -n 2 127.0.0.1 >nul
 
@@ -136,6 +132,6 @@ echo   ASTRA IS ONLINE (Ultra-Speed Streaming Active).
 echo.
 echo   OPEN WEBUI CHAT:  http://localhost:8080
 echo   COMFYUI ENGINE:   http://localhost:8188
-echo   MEDIA SERVICES:   Image(8892), Video(8891), Voice(8880), PDF(8890)
+echo   MEDIA SERVICES:   Image(8892), Voice(8880), PDF(8890)
 echo  ====================================================
 echo.

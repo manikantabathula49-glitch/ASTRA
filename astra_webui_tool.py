@@ -17,7 +17,6 @@ class Tools:
         BRAIN_URL: str = Field(default="http://localhost:11434", description="Ollama API URL")
         VOICE_URL: str = Field(default="http://localhost:8880", description="Voice Server URL")
         PDF_URL:   str = Field(default="http://localhost:8890", description="PDF Server URL")
-        VIDEO_URL: str = Field(default="http://localhost:8891", description="Video Server URL")
         IMAGE_URL: str = Field(default="http://localhost:8892", description="Image Server URL")
 
     def __init__(self):
@@ -90,67 +89,6 @@ class Tools:
         except Exception as e:
             return f"❌ Image generation error: {e}"
 
-    def generate_video(self, prompt: str) -> str:
-        """
-        Generate an animated video or GIF from a descriptive text prompt using local AnimateDiff + DreamShaper 8.
-        Call this when the user asks to generate a video, animation, or moving clip.
-
-        :param prompt: Detailed description of the video to create.
-        :return: Markdown link and preview of the generated animation.
-        """
-        try:
-            url = f"{self.valves.VIDEO_URL}/generate"
-            payload = {"prompt": prompt, "frames": 16, "steps": 20}
-            
-            # Wait for pipeline to finish loading if needed (up to 45s)
-            res = None
-            for _ in range(20):
-                res = requests.post(url, json=payload, timeout=15)
-                if res.status_code == 200:
-                    break
-                elif res.status_code == 503:
-                    time.sleep(2)
-                else:
-                    break
-
-            if res is None or res.status_code != 200:
-                err_text = res.text if res is not None else "No response"
-                return f"❌ Video submission status ({res.status_code if res else 'None'}): {err_text}"
-
-            job_id = res.json().get("job_id")
-            if not job_id:
-                return "❌ Video server returned an invalid job ID."
-
-            # Poll for video completion (up to 240 seconds, fast 1s check)
-            start_time = time.time()
-            while time.time() - start_time < 240:
-                time.sleep(1)
-                try:
-                    status_res = requests.get(f"{self.valves.VIDEO_URL}/status/{job_id}", timeout=5)
-                    if status_res.status_code == 200:
-                        data = status_res.json()
-                        status = data.get("status")
-                        if status == "done":
-                            filename = data.get("filename")
-                            video_url = f"{self.valves.VIDEO_URL}/download/{filename}"
-                            return (
-                                f"🎬 **Video Generated Successfully!**\n\n"
-                                f'<img src="{video_url}" alt="{prompt}" style="max-width:100%; border-radius:12px; margin: 10px 0; box-shadow: 0 8px 30px rgba(0,0,0,0.3); display: block;" />\n\n'
-                                f"![{prompt}]({video_url})\n\n"
-                                f"📥 **[Download Video / Animation ({filename})]({video_url})**\n\n"
-                                f"*(Prompt: \"{prompt}\")*"
-                            )
-                        elif status == "error":
-                            return f"❌ Video generation error: {data.get('error', 'Unknown error')}"
-                except Exception:
-                    pass
-
-            return f"🎬 **Video job queued!** (Job ID: `{job_id[:8]}`)\nGeneration takes 1-3 minutes. Preview at: {self.valves.VIDEO_URL}/web"
-        except requests.exceptions.ConnectionError:
-            return f"❌ Video Server is offline at `{self.valves.VIDEO_URL}`."
-        except Exception as e:
-            return f"❌ Video error: {e}"
-
     def generate_voice(self, text: str, voice: str = "af_bella") -> str:
         """
         Convert text into high-quality spoken audio using Kokoro TTS.
@@ -181,18 +119,28 @@ class Tools:
         :param title: Document title.
         :param content: Markdown content of the document.
         :param template: Design template (report, technical, resume, notes, proposal).
-        :return: Confirmation and local path to the generated PDF.
+        :return: Confirmation, local path, and download link for the generated PDF.
         """
         try:
             url = f"{self.valves.PDF_URL}/generate"
             payload = {"title": title, "content": content, "template": template, "author": "ASTRA AI"}
             response = requests.post(url, json=payload, timeout=30)
             if response.status_code == 200:
+                data = response.json()
+                filename = data.get("filename", "document.pdf")
+                download_path = data.get("download_url", f"/download/{filename}")
+                pdf_url = f"{self.valves.PDF_URL}{download_path}"
+                filepath = data.get("filepath", f"f:\\ASTRA\\pdf_output\\{filename}")
                 return (
-                    f"✅ **PDF Created Successfully: '{title}'**\n\n"
+                    f"📄 **PDF Document Created Successfully!**\n\n"
+                    f"### 📑 {title}\n"
                     f"- **Template**: `{template.capitalize()}`\n"
-                    f"- **Saved Location**: `f:\\ASTRA\\pdf_output\\`\n"
-                    f"- **PDF Engine**: [{self.valves.PDF_URL}/web]({self.valves.PDF_URL}/web)"
+                    f"- **File Name**: `{filename}`\n"
+                    f"- **Saved Location**: `{filepath}`\n\n"
+                    f'<div style="margin: 15px 0;">'
+                    f'<a href="{pdf_url}" download="{filename}" target="_blank" style="background: linear-gradient(135deg, #3b82f6, #6366f1); color: white; padding: 10px 22px; border-radius: 12px; text-decoration: none; font-weight: 600; font-size: 0.95em; display: inline-flex; align-items: center; gap: 8px;">📥 Download PDF ({filename})</a>'
+                    f'</div>\n\n'
+                    f"📄 **[Download PDF Document]({pdf_url})** | 🌐 **[PDF Web Studio]({self.valves.PDF_URL}/web)**"
                 )
             return f"❌ PDF generation failed ({response.status_code}): {response.text}"
         except requests.exceptions.ConnectionError:
@@ -213,7 +161,6 @@ class Tools:
             ("⚙️ ASTRA Engine (ComfyUI)", "http://localhost:8188/system_stats"),
             ("🎙️ ASTRA Voice (Kokoro TTS)", f"{self.valves.VOICE_URL}/health"),
             ("📄 ASTRA PDF (FPDF Engine)", f"{self.valves.PDF_URL}/health"),
-            ("🎬 ASTRA Video (AnimateDiff)", f"{self.valves.VIDEO_URL}/health"),
             ("🎨 ASTRA Image (DreamShaper 8)", f"{self.valves.IMAGE_URL}/health"),
         ]
 

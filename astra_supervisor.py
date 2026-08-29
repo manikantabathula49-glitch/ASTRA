@@ -24,10 +24,6 @@ SERVICES = {
         "cmd": [COMFY_PY, os.path.join(BASE_DIR, "image_server.py")],
         "port": 8892,
     },
-    "VideoEngine": {
-        "cmd": [COMFY_PY, os.path.join(BASE_DIR, "video_server.py")],
-        "port": 8891,
-    },
     "PDFEngine": {
         "cmd": [COMFY_PY, os.path.join(BASE_DIR, "pdf_server.py")],
         "port": 8890,
@@ -100,7 +96,7 @@ def monitor():
 
     print("\n====================================================")
     print(" [OK] ASTRA Ecosystem Supervisor Online")
-    print(" Monitoring ports: 8080, 8188, 8880, 8885, 8890, 8891, 8892")
+    print(" Monitoring ports: 8080, 8188, 8880, 8885, 8890, 8892")
     print("====================================================\n")
 
     while True:

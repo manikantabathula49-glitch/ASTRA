@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 Register ASTRA Autonomous Creator Pipe Function in Open WebUI.
-This enables 100% in-chat inline Video, Image, Audio, and AI reasoning.
+This enables 100% in-chat inline Image, Voice, PDF generation, and AI reasoning.
 """
 
 import sqlite3
@@ -14,8 +14,8 @@ DB_PATH = r"f:\ASTRA\webui_env\Lib\site-packages\open_webui\data\webui.db"
 PIPE_CODE = r'''"""
 title: ASTRA AI Creator
 author: PANIMANIKANTA
-version: 3.0.0
-description: Unified Autonomous AI Creator — in-chat Video, Image, Voice, PDF & Reasoning
+version: 3.1.0
+description: Unified Autonomous AI Creator — in-chat Image, Voice, PDF & Reasoning
 """
 
 import json
@@ -28,7 +28,6 @@ from typing import Optional, Union, Generator, Iterator
 class Pipe:
     class Valves(BaseModel):
         BRAIN_URL: str = Field(default="http://127.0.0.1:11434", description="Ollama Brain API URL")
-        VIDEO_URL: str = Field(default="http://127.0.0.1:8891", description="ASTRA Video Server URL")
         IMAGE_URL: str = Field(default="http://127.0.0.1:8892", description="ASTRA Image Server URL")
         VOICE_URL: str = Field(default="http://127.0.0.1:8880", description="ASTRA Voice Server URL")
         PDF_URL:   str = Field(default="http://127.0.0.1:8890", description="ASTRA PDF Server URL")
@@ -36,63 +35,38 @@ class Pipe:
     def __init__(self):
         self.type = "pipe"
         self.id = "astra_creator"
-        self.name = "ASTRA (In-Chat Video & Image)"
+        self.name = "ASTRA (In-Chat Creator)"
         self.valves = self.Valves()
 
     def pipes(self):
         return [
-            {"id": "astra_creator", "name": "ASTRA (In-Chat Video & Image)"}
+            {"id": "astra_creator", "name": "ASTRA (In-Chat Creator)"}
         ]
 
-    def generate_video_in_chat(self, prompt: str) -> str:
-        url = f"{self.valves.VIDEO_URL}/generate"
-        payload = {"prompt": prompt, "frames": 16, "steps": 20, "fps": 8}
-        
-        # Fast retry if pipeline is warming up
-        res = None
-        for _ in range(15):
-            try:
-                res = requests.post(url, json=payload, timeout=10)
-                if res.status_code == 200:
-                    break
-                elif res.status_code == 503:
-                    time.sleep(2)
-            except Exception:
-                time.sleep(1)
-
-        if not res or res.status_code != 200:
-            err_msg = res.text if res is not None else "Timeout"
-            return f"🎬 **Video Generation Initialized**\n\nVideo request for *\"{prompt}\"* has been submitted to the local engine.\n\n> ℹ️ Local AnimateDiff engine is loading weights. Video will be accessible at: {self.valves.VIDEO_URL}/web"
-
-        job_id = res.json().get("job_id")
-        if not job_id:
-            return "❌ Failed to obtain video job ID from local video server."
-
-        # Poll for completion
-        start_time = time.time()
-        while time.time() - start_time < 240:
-            time.sleep(1.5)
-            try:
-                status_res = requests.get(f"{self.valves.VIDEO_URL}/status/{job_id}", timeout=5)
-                if status_res.status_code == 200:
-                    data = status_res.json()
-                    status = data.get("status")
-                    if status == "done":
-                        filename = data.get("filename")
-                        video_url = f"{self.valves.VIDEO_URL}/download/{filename}"
-                        return (
-                            f"🎬 **Video Generated Successfully!**\n\n"
-                            f'<img src="{video_url}" alt="{prompt}" style="max-width:100%; border-radius:12px; margin: 12px 0; box-shadow: 0 8px 30px rgba(0,0,0,0.3); display: block;" />\n\n'
-                            f"![{prompt}]({video_url})\n\n"
-                            f"📥 **[Download Video / Animation ({filename})]({video_url})**\n\n"
-                            f"*(Prompt: \"{prompt}\")*"
-                        )
-                    elif status == "error":
-                        return f"❌ Video generation error: {data.get('error', 'Unknown error')}"
-            except Exception:
-                pass
-
-        return f"🎬 **Video rendering in progress!**\n\nJob ID: `{job_id[:8]}`. Preview directly at {self.valves.VIDEO_URL}/web"
+    def generate_pdf_in_chat(self, title: str, content: str) -> str:
+        url = f"{self.valves.PDF_URL}/generate"
+        payload = {"title": title or "ASTRA Report", "content": content, "template": "report", "author": "ASTRA AI"}
+        try:
+            res = requests.post(url, json=payload, timeout=30)
+            if res.status_code == 200:
+                data = res.json()
+                filename = data.get("filename", "document.pdf")
+                download_path = data.get("download_url", f"/download/{filename}")
+                pdf_url = f"{self.valves.PDF_URL}{download_path}"
+                filepath = data.get("filepath", f"f:\\ASTRA\\pdf_output\\{filename}")
+                return (
+                    f"📄 **PDF Created Successfully!**\n\n"
+                    f"### 📑 {title}\n"
+                    f"- **File Name**: `{filename}`\n"
+                    f"- **Saved Location**: `{filepath}`\n\n"
+                    f'<div style="margin: 12px 0;">'
+                    f'<a href="{pdf_url}" download="{filename}" target="_blank" style="background: linear-gradient(135deg, #3b82f6, #6366f1); color: white; padding: 10px 22px; border-radius: 12px; text-decoration: none; font-weight: 600; font-size: 0.95em; display: inline-flex; align-items: center; gap: 8px;">📥 Download PDF Document</a>'
+                    f'</div>\n\n'
+                    f"📄 **[Download PDF File]({pdf_url})**"
+                )
+            return f"❌ PDF generation failed ({res.status_code}): {res.text}"
+        except Exception as e:
+            return f"❌ PDF error: {e}"
 
     def generate_image_in_chat(self, prompt: str) -> str:
         url = f"{self.valves.IMAGE_URL}/generate"
@@ -144,19 +118,23 @@ class Pipe:
         user_message = messages[-1].get("content", "").strip()
         lower_msg = user_message.lower()
 
-        # Check for Video Generation intent
-        video_triggers = ["generate video", "create video", "make a video", "animate", "animation of", "generate a video", "make video", "video of"]
-        if any(trig in lower_msg for trig in video_triggers):
-            clean_prompt = user_message
-            for trig in ["generate a video of", "generate video of", "create a video of", "create video of", "make a video of", "animate", "generate video", "create video"]:
+        # Check for PDF Generation intent
+        pdf_triggers = ["generate pdf", "create pdf", "make pdf", "make a pdf", "convert to pdf", "pdf report", "download pdf", "pdf document"]
+        if any(trig in lower_msg for trig in pdf_triggers):
+            clean_title = "ASTRA Document"
+            clean_content = user_message
+            for trig in ["generate a pdf of", "generate pdf of", "create a pdf of", "create pdf of", "generate pdf", "create pdf", "make a pdf", "make pdf", "pdf report"]:
                 if lower_msg.startswith(trig):
-                    clean_prompt = user_message[len(trig):].strip(" :,-")
+                    clean_content = user_message[len(trig):].strip(" :,-")
                     break
-            return self.generate_video_in_chat(clean_prompt or user_message)
+            lines = clean_content.split("\n")
+            if lines:
+                clean_title = lines[0].lstrip("# ").strip() or "ASTRA Report"
+            return self.generate_pdf_in_chat(clean_title, clean_content)
 
         # Check for Image Generation intent
         image_triggers = ["generate image", "create image", "draw", "generate an image", "make an image", "picture of", "photo of"]
-        if any(trig in lower_msg for trig in image_triggers) and not any(v in lower_msg for v in ["video", "animation"]):
+        if any(trig in lower_msg for trig in image_triggers):
             clean_prompt = user_message
             for trig in ["generate an image of", "generate image of", "create an image of", "create image of", "draw a", "draw an", "draw", "generate image", "create image"]:
                 if lower_msg.startswith(trig):
@@ -206,12 +184,12 @@ def register_pipe():
     now = int(time.time())
 
     func_meta = {
-        "description": "Unified Autonomous AI Creator — in-chat Video, Image, Voice, PDF & Reasoning",
+        "description": "Unified Autonomous AI Creator — in-chat Image, Voice, PDF & Reasoning",
         "manifest": {
             "title": "ASTRA AI Creator",
             "author": "PANIMANIKANTA",
-            "version": "3.0.0",
-            "description": "Unified Autonomous AI Creator — in-chat Video, Image, Voice, PDF & Reasoning"
+            "version": "3.1.0",
+            "description": "Unified Autonomous AI Creator — in-chat Image, Voice, PDF & Reasoning"
         }
     }
 
@@ -220,7 +198,7 @@ def register_pipe():
     if existing:
         cur.execute("""
             UPDATE function
-            SET name='ASTRA (In-Chat Video & Image)',
+            SET name='ASTRA (In-Chat Creator)',
                 type='pipe',
                 content=?,
                 meta=?,
@@ -233,7 +211,7 @@ def register_pipe():
     else:
         cur.execute("""
             INSERT INTO function (id, user_id, name, type, content, meta, created_at, updated_at, valves, is_active, is_global)
-            VALUES (?, ?, 'ASTRA (In-Chat Video & Image)', 'pipe', ?, ?, ?, ?, '{}', 1, 1)
+            VALUES (?, ?, 'ASTRA (In-Chat Creator)', 'pipe', ?, ?, ?, ?, '{}', 1, 1)
         """, (func_id, admin_id, PIPE_CODE, json.dumps(func_meta), now, now))
         print(f"Inserted function '{func_id}' into webui.db.")
 

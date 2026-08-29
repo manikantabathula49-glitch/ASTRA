@@ -8,13 +8,14 @@ Port: 8890
 import io, re, os
 from datetime import datetime
 from fastapi import FastAPI, HTTPException
-from fastapi.responses import StreamingResponse, HTMLResponse
+from fastapi.responses import StreamingResponse, HTMLResponse, FileResponse
 from pydantic import BaseModel
 from typing import Optional
 from fpdf import FPDF
 
-app = FastAPI(title="ASTRA PDF Server", version="1.0.0")
-os.makedirs("f:\\ASTRA\\pdf_output", exist_ok=True)
+app = FastAPI(title="ASTRA PDF Server", version="1.1.0")
+OUTPUT_DIR = r"f:\ASTRA\pdf_output"
+os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 # ─── Color Palette ────────────────────────────────────────────────────────────
 COLORS = {
@@ -202,6 +203,7 @@ class PDFRequest(BaseModel):
     template: str = "report"
     author: str = "ASTRA AI"
     subtitle: Optional[str] = None
+    direct_download: bool = False
 
 
 # ─── Routes ───────────────────────────────────────────────────────────────────
@@ -215,17 +217,46 @@ async def generate_pdf(req: PDFRequest):
         pdf.add_page()
         render_markdown(pdf, req.content)
 
-        buf = io.BytesIO()
-        buf.write(pdf.output())
-        buf.seek(0)
-        safe_name = re.sub(r"[^\w\s-]", "", req.title).strip().replace(" ", "_")
-        return StreamingResponse(
-            buf,
-            media_type="application/pdf",
-            headers={"Content-Disposition": f"attachment; filename={safe_name}.pdf"}
-        )
+        safe_title = re.sub(r"[^\w\s-]", "", req.title).strip().replace(" ", "_") or "ASTRA_Document"
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        filename = f"{safe_title}_{timestamp}.pdf"
+        filepath = os.path.join(OUTPUT_DIR, filename)
+
+        raw_bytes = pdf.output()
+        with open(filepath, "wb") as f:
+            f.write(raw_bytes)
+
+        if req.direct_download:
+            return StreamingResponse(
+                io.BytesIO(raw_bytes),
+                media_type="application/pdf",
+                headers={"Content-Disposition": f"attachment; filename={filename}"}
+            )
+
+        return {
+            "status": "success",
+            "title": req.title,
+            "filename": filename,
+            "filepath": filepath,
+            "download_url": f"/download/{filename}",
+            "template": req.template
+        }
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/download/{filename}")
+async def download_pdf(filename: str):
+    filepath = os.path.join(OUTPUT_DIR, filename)
+    if not os.path.exists(filepath):
+        raise HTTPException(status_code=404, detail="PDF file not found.")
+    return FileResponse(filepath, media_type="application/pdf", filename=filename)
+
+
+@app.get("/list")
+async def list_pdfs():
+    files = [f for f in os.listdir(OUTPUT_DIR) if f.endswith(".pdf")]
+    return {"pdfs": files}
 
 
 @app.get("/health")

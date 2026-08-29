@@ -40,7 +40,6 @@ services = [
     ("Open WebUI (8080)", [webui_python, "-X", "utf8", os.path.join(base_dir, "run_webui.py")], 8080, "webui.log"),
     ("ComfyUI Backend (8188)", [comfy_python, "-X", "utf8", os.path.join(base_dir, "ComfyUI", "main.py"), "--listen", "0.0.0.0", "--cpu"], 8188, "comfyui.log"),
     ("ASTRA Image Server (8892)", [comfy_python, "-X", "utf8", os.path.join(base_dir, "image_server.py")], 8892, "image_server.log"),
-    ("ASTRA Video Server (8891)", [comfy_python, "-X", "utf8", os.path.join(base_dir, "video_server.py")], 8891, "video_server.log"),
     ("ASTRA PDF Server (8890)", [comfy_python, "-X", "utf8", os.path.join(base_dir, "pdf_server.py")], 8890, "pdf_server.log"),
     ("ASTRA Voice Server (8880)", [comfy_python, "-X", "utf8", os.path.join(base_dir, "voice_server.py")], 8880, "voice_server.log"),
     ("ASTRA Whisper Server (8885)", [comfy_python, "-X", "utf8", os.path.join(base_dir, "whisper_server.py")], 8885, "whisper_server.log"),
@@ -136,4 +135,4 @@ else:
 
 print("\n  WebUI Chat:      http://localhost:8080")
 print("  ComfyUI Engine:  http://localhost:8188")
-print("  Media Engines:   Image(8892), Video(8891), Voice(8880), PDF(8890), Whisper(8885)\n")
+print("  Media Engines:   Image(8892), PDF(8890), Voice(8880), Whisper(8885)\n")
