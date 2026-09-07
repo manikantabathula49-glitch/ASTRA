@@ -62,10 +62,10 @@ echo - Execution First: Always provide working, complete, and runnable code.
 echo - Media Tools: Autonomously call the appropriate ASTRA Media Engine tool for images, voice audio, or PDFs when requested.
 echo - Identity: Maintain a confident, smart, and futuristic engineering tone.
 echo """
-) > "%~dp0Modelfile"
+) > "%~dp0..\Modelfile"
 
 echo [2/2] Compiling ASTRA model in Ollama...
-ollama create astra -f "%~dp0Modelfile"
+ollama create astra -f "%~dp0..\Modelfile"
 if %errorlevel% equ 0 (
     echo.
     echo [SUCCESS] ASTRA Model (Llama 3.2 based) imported successfully with GPU acceleration!
@@ -97,10 +97,10 @@ echo.
 echo SYSTEM """
 echo You are ASTRA, an ultra-fast AI assistant created by PANIMANIKANTA. Deliver instant, concise, and structured answers immediately.
 echo """
-) > "%~dp0Modelfile"
+) > "%~dp0..\Modelfile"
 
 echo [2/2] Compiling ASTRA model in Ollama...
-ollama create astra -f "%~dp0Modelfile"
+ollama create astra -f "%~dp0..\Modelfile"
 if %errorlevel% neq 0 (
     echo Qwen 2.5 1.5B not cached, falling back to llama3.2:1b...
     (
@@ -115,8 +115,8 @@ if %errorlevel% neq 0 (
     echo PARAMETER top_k 40
     echo PARAMETER repeat_penalty 1.1
     echo SYSTEM """You are ASTRA, an ultra-fast AI assistant created by PANIMANIKANTA. Deliver instant, concise, and structured answers."""
-    ) > "%~dp0Modelfile"
-    ollama create astra -f "%~dp0Modelfile"
+    ) > "%~dp0..\Modelfile"
+    ollama create astra -f "%~dp0..\Modelfile"
 )
 if %errorlevel% equ 0 (
     echo.
@@ -150,10 +150,10 @@ echo - Execution First: Always provide working, complete, and runnable code.
 echo - Media Tools: Autonomously call the appropriate ASTRA Media Engine tool for images, voice audio, or PDFs when requested.
 echo - Identity: Maintain a confident, smart, and futuristic engineering tone.
 echo """
-) > "%~dp0Modelfile"
+) > "%~dp0..\Modelfile"
 
 echo [2/2] Compiling ASTRA model in Ollama...
-ollama create astra -f "%~dp0Modelfile"
+ollama create astra -f "%~dp0..\Modelfile"
 if %errorlevel% equ 0 (
     echo.
     echo [SUCCESS] ASTRA Model (Mistral based) imported successfully!
@@ -190,10 +190,10 @@ echo - Execution First: Always provide working, complete, and runnable code.
 echo - Media Tools: Autonomously call the appropriate ASTRA Media Engine tool for images, voice audio, or PDFs when requested.
 echo - Identity: Maintain a confident, smart, and futuristic engineering tone.
 echo """
-) > "%~dp0Modelfile"
+) > "%~dp0..\Modelfile"
 
 echo [2/2] Compiling ASTRA model in Ollama from %base_model%...
-ollama create astra -f "%~dp0Modelfile"
+ollama create astra -f "%~dp0..\Modelfile"
 if %errorlevel% equ 0 (
     echo.
     echo [SUCCESS] ASTRA Model imported from %base_model%!
@@ -236,10 +236,10 @@ echo - Execution First: Always provide working, complete, and runnable code.
 echo - Media Tools: Autonomously call the appropriate ASTRA Media Engine tool for images, voice audio, or PDFs when requested.
 echo - Identity: Maintain a confident, smart, and futuristic engineering tone.
 echo """
-) > "%~dp0Modelfile"
+) > "%~dp0..\Modelfile"
 
 echo [2/2] Compiling ASTRA model from GGUF file...
-ollama create astra -f "%~dp0Modelfile"
+ollama create astra -f "%~dp0..\Modelfile"
 if %errorlevel% equ 0 (
     echo.
     echo [SUCCESS] ASTRA Model imported from %gguf_path%!

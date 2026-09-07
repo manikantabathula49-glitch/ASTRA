@@ -42,7 +42,7 @@ This script automatically starts all background microservices, checks health por
 - **ComfyUI Engine**: `http://localhost:8188`
 
 ### 2. Import / Switch AI Models
-Double-click `Import-ASTRA-Model.bat` or run:
+Double-click `scripts\Import-ASTRA-Model.bat` or run:
 ```bash
 ollama create astra -f Modelfile
 ```
@@ -55,6 +55,57 @@ Open `http://localhost:8080` and try prompting:
 
 ---
 
+## 📁 Repository Structure
+
+```text
+f:\ASTRA\
+├── Start-ASTRA.bat                  # Primary 1-click startup launcher
+├── run_astra.ps1                    # PowerShell startup script
+├── Modelfile                        # Root Ollama model configuration
+├── README.md                        # Project documentation
+│
+├── services\                        # 🚀 Backend FastAPI Microservices
+│   ├── image_server.py              # DreamShaper 8 Stable Diffusion (Port 8892)
+│   ├── pdf_server.py                # FPDF2 Document Compiler (Port 8890)
+│   ├── voice_server.py              # Kokoro TTS Engine (Port 8880)
+│   ├── whisper_server.py            # Whisper STT Transcription (Port 8885)
+│   └── run_webui.py                 # Open WebUI Server Runner (Port 8080)
+│
+├── core\                            # ⚙️ Orchestration, Supervisor & DB
+│   ├── astra_supervisor.py          # Background process manager & auto-restart daemon
+│   ├── launch_all.py                # Universal background launcher
+│   └── sync_webui_db.py             # Open WebUI DB syncer & pipeline config
+│
+├── tools\                           # 🧩 WebUI & Chat Integrations
+│   ├── astra_webui_tool.py          # Open WebUI In-Chat Tool definition
+│   └── create_astra_pipe.py         # Open WebUI Pipe Function registration
+│
+├── workflows\                       # 🎨 ComfyUI & AI Pipelines
+│   ├── ASTRA_Master_Workflow.json   # ComfyUI Master Creative Workflow
+│   ├── create_workflow.py           # ComfyUI Workflow Generator
+│   └── download_model.py            # HuggingFace Model Downloader
+│
+├── scripts\                         # 🛠️ Setup & Maintenance Batch Files
+│   ├── Import-ASTRA-Model.bat       # Ollama model build/import
+│   ├── Install-ASTRA-Nodes.bat      # ComfyUI custom nodes installer
+│   ├── Install-PDF.bat              # PDF engine virtualenv installer
+│   └── Install-Voice.bat            # Voice engine virtualenv installer
+│
+├── tests\                           # 🧪 Diagnostics & Health Tests
+│   ├── test_all_services.py         # Multi-service health & port check
+│   ├── test_image_gen.py            # Image generation validation
+│   ├── test_pipe.py                 # Open WebUI Pipe validation
+│   ├── test_runner.py               # Process runner diagnostic
+│   └── inspect_astra.py             # SQLite DB inspector
+│
+└── deployment\                      # ☁️ Docker & Cloud Configurations
+    ├── Dockerfile                   # Render / Docker container specification
+    ├── render.yaml                  # Render cloud blueprint
+    └── render_entrypoint.sh         # Linux container boot script
+```
+
+---
+
 ## 🏗️ Technical Obstacles & Architectural Solutions
 
 ### 1. VRAM & Hardware Optimization (4GB VRAM Capable)
@@ -63,11 +114,11 @@ Open `http://localhost:8080` and try prompting:
 
 ### 2. Microservice Orchestration Daemon
 * **Challenge:** Managing independent Python servers across dual virtual environments (`comfy_env` and `webui_env`) created process collisions and encoding issues.
-* **Solution:** Engineered `astra_supervisor.py`, a background process manager that continuously monitors ports, auto-restarts crashed services, and enforces UTF-8 encoding.
+* **Solution:** Engineered `core/astra_supervisor.py`, a background process manager that continuously monitors ports, auto-restarts crashed services, and enforces UTF-8 encoding.
 
 ### 3. Open WebUI Pipe Integration & Database Sync
 * **Challenge:** Open WebUI is natively text-focused and does not support real-time inline document/audio rendering or dynamic tool triggers by default.
-* **Solution:** Created a custom Pipe Function (`create_astra_pipe.py`) and SQLite database sync script (`sync_webui_db.py`) that captures prompt intents and renders base64 images and PDF download cards directly in chat streams.
+* **Solution:** Created a custom Pipe Function (`tools/create_astra_pipe.py`) and SQLite database sync script (`core/sync_webui_db.py`) that captures prompt intents and renders base64 images and PDF download cards directly in chat streams.
 
 ---
 

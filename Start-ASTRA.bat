@@ -60,7 +60,7 @@ REM Warmup model into GPU VRAM for instant sub-second responses
 curl -s -m 10 -X POST http://127.0.0.1:11434/api/generate -d "{\"model\":\"astra\",\"keep_alive\":-1}" >nul 2>&1
 
 echo [1/8] Synchronizing Open WebUI High-Speed Settings...
-"%~dp0webui_env\Scripts\python.exe" "%~dp0sync_webui_db.py" >nul 2>&1
+"%~dp0webui_env\Scripts\python.exe" "%~dp0core\sync_webui_db.py" >nul 2>&1
 
 echo [2/8] Starting Open WebUI Chat (Port 8080)
 set DATA_DIR=%~dp0webui_env\Lib\site-packages\open_webui\data
@@ -72,7 +72,7 @@ set DEFAULT_MODELS=astra
 set PYTHONUTF8=1
 set PYTHONIOENCODING=utf-8
 set ENABLE_IMAGE_GENERATION=True
-START "ASTRA CHAT" /MIN cmd /k "cd /d "%~dp0" && chcp 65001 >nul && set PYTHONUTF8=1 && set PYTHONIOENCODING=utf-8 && "%~dp0webui_env\Scripts\python.exe" "run_webui.py""
+START "ASTRA CHAT" /MIN cmd /k "cd /d "%~dp0" && chcp 65001 >nul && set PYTHONUTF8=1 && set PYTHONIOENCODING=utf-8 && "%~dp0webui_env\Scripts\python.exe" "services\run_webui.py""
 ping -n 2 127.0.0.1 >nul
 
 echo [3/8] Launching ComfyUI Backend Engine (Port 8188)
@@ -80,19 +80,19 @@ START "ASTRA ENGINE" /MIN cmd /k "cd /d "%~dp0" && chcp 65001 >nul && set PYTHON
 ping -n 2 127.0.0.1 >nul
 
 echo [4/8] Launching ASTRA Voice Agent (Port 8880)
-START "ASTRA VOICE" /MIN cmd /k "cd /d "%~dp0" && chcp 65001 >nul && set PYTHONUTF8=1 && set PYTHONIOENCODING=utf-8 && "%~dp0comfy_env\Scripts\python.exe" ".\voice_server.py""
+START "ASTRA VOICE" /MIN cmd /k "cd /d "%~dp0" && chcp 65001 >nul && set PYTHONUTF8=1 && set PYTHONIOENCODING=utf-8 && "%~dp0comfy_env\Scripts\python.exe" ".\services\voice_server.py""
 ping -n 2 127.0.0.1 >nul
 
 echo [5/8] Launching ASTRA Whisper Transcriber (Port 8885)
-START "ASTRA WHISPER" /MIN cmd /k "cd /d "%~dp0" && chcp 65001 >nul && set PYTHONUTF8=1 && set PYTHONIOENCODING=utf-8 && "%~dp0comfy_env\Scripts\python.exe" ".\whisper_server.py""
+START "ASTRA WHISPER" /MIN cmd /k "cd /d "%~dp0" && chcp 65001 >nul && set PYTHONUTF8=1 && set PYTHONIOENCODING=utf-8 && "%~dp0comfy_env\Scripts\python.exe" ".\services\whisper_server.py""
 ping -n 2 127.0.0.1 >nul
 
 echo [6/7] Launching ASTRA PDF Engine (Port 8890)
-START "ASTRA PDF" /MIN cmd /k "cd /d "%~dp0" && chcp 65001 >nul && set PYTHONUTF8=1 && set PYTHONIOENCODING=utf-8 && "%~dp0comfy_env\Scripts\python.exe" ".\pdf_server.py""
+START "ASTRA PDF" /MIN cmd /k "cd /d "%~dp0" && chcp 65001 >nul && set PYTHONUTF8=1 && set PYTHONIOENCODING=utf-8 && "%~dp0comfy_env\Scripts\python.exe" ".\services\pdf_server.py""
 ping -n 2 127.0.0.1 >nul
 
 echo [7/7] Launching ASTRA Image Engine (Port 8892)
-START "ASTRA IMAGE" /MIN cmd /k "cd /d "%~dp0" && chcp 65001 >nul && set PYTHONUTF8=1 && set PYTHONIOENCODING=utf-8 && "%~dp0comfy_env\Scripts\python.exe" ".\image_server.py""
+START "ASTRA IMAGE" /MIN cmd /k "cd /d "%~dp0" && chcp 65001 >nul && set PYTHONUTF8=1 && set PYTHONIOENCODING=utf-8 && "%~dp0comfy_env\Scripts\python.exe" ".\services\image_server.py""
 ping -n 2 127.0.0.1 >nul
 
 echo.

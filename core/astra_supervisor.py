@@ -11,29 +11,29 @@ import time
 import socket
 import subprocess
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 COMFY_PY = os.path.join(BASE_DIR, "comfy_env", "Scripts", "python.exe")
 WEBUI_PY = os.path.join(BASE_DIR, "webui_env", "Scripts", "python.exe")
 
 SERVICES = {
     "WebUI": {
-        "cmd": [WEBUI_PY, os.path.join(BASE_DIR, "run_webui.py")],
+        "cmd": [WEBUI_PY, os.path.join(BASE_DIR, "services", "run_webui.py")],
         "port": 8080,
     },
     "ImageEngine": {
-        "cmd": [COMFY_PY, os.path.join(BASE_DIR, "image_server.py")],
+        "cmd": [COMFY_PY, os.path.join(BASE_DIR, "services", "image_server.py")],
         "port": 8892,
     },
     "PDFEngine": {
-        "cmd": [COMFY_PY, os.path.join(BASE_DIR, "pdf_server.py")],
+        "cmd": [COMFY_PY, os.path.join(BASE_DIR, "services", "pdf_server.py")],
         "port": 8890,
     },
     "VoiceEngine": {
-        "cmd": [COMFY_PY, os.path.join(BASE_DIR, "voice_server.py")],
+        "cmd": [COMFY_PY, os.path.join(BASE_DIR, "services", "voice_server.py")],
         "port": 8880,
     },
     "WhisperEngine": {
-        "cmd": [COMFY_PY, os.path.join(BASE_DIR, "whisper_server.py")],
+        "cmd": [COMFY_PY, os.path.join(BASE_DIR, "services", "whisper_server.py")],
         "port": 8885,
     },
     "ComfyUI": {

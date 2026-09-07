@@ -4,7 +4,7 @@ import os
 import time
 
 db_path = r"f:\ASTRA\webui_env\Lib\site-packages\open_webui\data\webui.db"
-tool_file = r"f:\ASTRA\astra_webui_tool.py"
+tool_file = r"f:\ASTRA\tools\astra_webui_tool.py"
 
 with open(tool_file, "r", encoding="utf-8") as f:
     tool_content = f.read()
@@ -78,16 +78,63 @@ specs = [
             "type": "object",
             "properties": {}
         }
+    },
+    {
+        "name": "search_and_play_media",
+        "description": "Search and open YouTube, Spotify, or the web for any song, music video, artist, playlist, or topic. Directly launches the user's browser or media application to the playback or search results.\nCall this whenever the user asks to search YouTube, play a song, open a video, or find music.",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "query": {
+                    "type": "string",
+                    "description": "Name of the song, artist, video title, or search query (e.g. 'Shape of You', 'Interstellar soundtrack', 'classical piano')."
+                },
+                "platform": {
+                    "type": "string",
+                    "description": "Target platform ('youtube', 'spotify', or 'web'). Default is 'youtube'.",
+                    "default": "youtube"
+                }
+            },
+            "required": ["query"]
+        }
+    },
+    {
+        "name": "open_system_application",
+        "description": "Launch a local Windows desktop application or system utility (e.g. calculator, notepad, chrome, file explorer, downloads folder, settings, task manager).\nCall this whenever the user asks to open an app, program, or system utility.",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "app_name": {
+                    "type": "string",
+                    "description": "Name of the application to open (e.g. 'calculator', 'notepad', 'chrome', 'explorer', 'downloads', 'task manager', 'settings')."
+                }
+            },
+            "required": ["app_name"]
+        }
+    },
+    {
+        "name": "run_terminal_command",
+        "description": "Execute a safe local Windows PowerShell command and return its console output.\nCall this when the user asks to run a terminal command, check system resources, or inspect files.",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "command": {
+                    "type": "string",
+                    "description": "PowerShell command string to execute."
+                }
+            },
+            "required": ["command"]
+        }
     }
 ]
 
 specs_json = json.dumps(specs)
 meta_json = json.dumps({
-    "description": "Unified tool for local Image, Voice, and PDF generation.",
+    "description": "Unified tool for local Image, Voice, PDF generation, YouTube/Media playback, and Windows System Automation.",
     "manifest": {
         "title": "ASTRA Media Engine",
         "author": "PANIMANIKANTA",
-        "description": "Unified tool for local Image, Voice, and PDF generation."
+        "description": "Unified tool for local Image, Voice, PDF generation, YouTube/Media playback, and Windows System Automation."
     }
 })
 
@@ -120,7 +167,7 @@ else:
 # 4. Update or insert 'astra' model (Optimized for Instant Response & GPU Acceleration)
 model_meta = {
     "profile_image_url": "/static/favicon.png",
-    "description": "Ultra-fast local ASTRA AI Ecosystem with native chat, image generation, voice synthesis, and document compilation.",
+    "description": "Ultra-fast local ASTRA AI Ecosystem with native chat, image generation, voice synthesis, document compilation, YouTube playback, and desktop system commands.",
     "capabilities": {
         "file_context": True,
         "vision": True,
@@ -128,19 +175,20 @@ model_meta = {
         "web_search": False,
         "image_generation": True,
         "code_interpreter": False,
-        "terminal": False,
+        "terminal": True,
         "citations": False,
         "status_updates": True,
         "usage": False,
         "builtin_tools": True
     },
     "suggestion_prompts": [
+        {"title": ["🎵 Play Song", "Search YouTube"], "content": "Open YouTube and search for Interstellar soundtrack"},
         {"title": ["🎨 Generate Image", "Futuristic City"], "content": "Generate a futuristic cyberpunk city with vibrant violet neon lights"},
         {"title": ["📄 Create PDF Report", "Document Compiler"], "content": "Generate a PDF report on the Architecture of Local Multi-Agent AI Systems"},
         {"title": ["🎙️ Synthesize Voice", "Local Text-to-Speech"], "content": "Speak this message: Welcome to ASTRA, your local AI creator ecosystem."},
-        {"title": ["⚡ Check Status", "System Diagnostics"], "content": "Check the status of all ASTRA system services"}
+        {"title": ["🚀 Open App", "Windows Automation"], "content": "Open calculator on my system"}
     ],
-    "tags": ["astra", "gpu", "fast", "media-engine"],
+    "tags": ["astra", "gpu", "fast", "media-engine", "system-automation"],
     "toolIds": ["astra_media_engine"],
     "defaultFeatureIds": []  # Empty by default to eliminate redundant pre-inference planning latency
 }
@@ -148,14 +196,18 @@ model_meta = {
 system_prompt = (
     "You are ASTRA, a state-of-the-art AI assistant, developer, and creator engineered by PANIMANIKANTA.\n\n"
     "Core Capabilities:\n"
-    "You have BUILT-IN, fully active local tools for generating multimedia content:\n"
-    "1. Image Generation: You can generate high-resolution images using the local Stable Diffusion DreamShaper engine (`generate_image`).\n"
-    "2. Voice Synthesis: You can convert text to speech using the local Kokoro TTS engine (`generate_voice`).\n"
-    "3. PDF Generation: You can compile styled documents to PDF (`generate_pdf`).\n\n"
+    "You have BUILT-IN, fully active local tools for multimedia and Windows system control:\n"
+    "1. Media & YouTube Player: You can search and open YouTube, Spotify, or the web for any song, video, or query using `search_and_play_media`.\n"
+    "2. Windows Desktop Apps: You can launch local Windows apps (calculator, notepad, chrome, file explorer, settings, task manager, etc.) using `open_system_application`.\n"
+    "3. Terminal Execution: You can execute safe PowerShell commands using `run_terminal_command`.\n"
+    "4. Image Generation: You can generate high-resolution images using the local Stable Diffusion DreamShaper engine (`generate_image`).\n"
+    "5. Voice Synthesis: You can convert text to speech using the local Kokoro TTS engine (`generate_voice`).\n"
+    "6. PDF Generation: You can compile styled documents to PDF (`generate_pdf`).\n\n"
     "CRITICAL RULES:\n"
-    "- When a user asks you to generate, create, make, or design an image, drawing, voice audio, or PDF document:\n"
-    "  ALWAYS invoke the appropriate tool (`generate_image`, `generate_voice`, `generate_pdf`) or execute the generation immediately.\n"
-    "- NEVER say \"I don't have the capability to generate images/audio/PDFs\". You DO have these capabilities integrated.\n"
+    "- When a user asks you to search YouTube, play a song, open a music video, open an application (e.g. calculator, notepad, chrome), or run a system command:\n"
+    "  ALWAYS invoke the appropriate tool (`search_and_play_media`, `open_system_application`, `run_terminal_command`) immediately.\n"
+    "- When a user asks you to generate an image, voice, or PDF, ALWAYS invoke `generate_image`, `generate_voice`, or `generate_pdf`.\n"
+    "- NEVER say \"I don't have the capability to open YouTube or apps\". You DO have these capabilities integrated.\n"
     "- DISPLAYING MEDIA (CRITICAL): When an image or media generation tool returns results, ALWAYS display the generated media directly to the user.\n"
     "  NEVER enclose markdown image tags (![...](...)), HTML <img> tags, or download links inside code blocks or triple backticks (```).\n"
     "  Always output the raw markdown and HTML directly in your text so the user's browser renders the visual image immediately.\n"

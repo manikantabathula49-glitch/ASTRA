@@ -136,7 +136,7 @@ workflow = {
   "version": 0.4
 }
 
-with open(r"f:\ASTRA\ASTRA_Master_Workflow.json", "w", encoding="utf-8") as f:
+with open(r"f:\ASTRA\workflows\ASTRA_Master_Workflow.json", "w", encoding="utf-8") as f:
     json.dump(workflow, f, indent=2)
 
 print("Workflow created successfully.")

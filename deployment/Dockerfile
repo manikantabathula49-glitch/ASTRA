@@ -40,11 +40,12 @@ RUN pip install --no-cache-dir --break-system-packages \
     duckduckgo-search
 
 # Fix line endings & permissions for Linux execution
-RUN sed -i 's/\r$//' /app/render_entrypoint.sh && \
-    chmod +x /app/render_entrypoint.sh
+RUN sed -i 's/\r$//' /app/deployment/render_entrypoint.sh && \
+    chmod +x /app/deployment/render_entrypoint.sh
 
 # Expose port (Render automatically maps PORT)
 EXPOSE 10000
 
 # Launch Render deployment entrypoint
-CMD ["/app/render_entrypoint.sh"]
+CMD ["/app/deployment/render_entrypoint.sh"]
+

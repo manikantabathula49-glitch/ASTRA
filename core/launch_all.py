@@ -31,18 +31,18 @@ except Exception:
 # 2. Sync DB
 print("[1/8] Synchronizing WebUI DB...")
 try:
-    subprocess.run([webui_python, os.path.join(base_dir, "sync_webui_db.py")], cwd=base_dir, capture_output=True, timeout=10)
+    subprocess.run([webui_python, os.path.join(base_dir, "core", "sync_webui_db.py")], cwd=base_dir, capture_output=True, timeout=10)
     print("  -> WebUI database synchronized.")
 except Exception as e:
     print(f"  -> DB sync warning: {e}")
 
 services = [
-    ("Open WebUI (8080)", [webui_python, "-X", "utf8", os.path.join(base_dir, "run_webui.py")], 8080, "webui.log"),
+    ("Open WebUI (8080)", [webui_python, "-X", "utf8", os.path.join(base_dir, "services", "run_webui.py")], 8080, "webui.log"),
     ("ComfyUI Backend (8188)", [comfy_python, "-X", "utf8", os.path.join(base_dir, "ComfyUI", "main.py"), "--listen", "0.0.0.0", "--cpu"], 8188, "comfyui.log"),
-    ("ASTRA Image Server (8892)", [comfy_python, "-X", "utf8", os.path.join(base_dir, "image_server.py")], 8892, "image_server.log"),
-    ("ASTRA PDF Server (8890)", [comfy_python, "-X", "utf8", os.path.join(base_dir, "pdf_server.py")], 8890, "pdf_server.log"),
-    ("ASTRA Voice Server (8880)", [comfy_python, "-X", "utf8", os.path.join(base_dir, "voice_server.py")], 8880, "voice_server.log"),
-    ("ASTRA Whisper Server (8885)", [comfy_python, "-X", "utf8", os.path.join(base_dir, "whisper_server.py")], 8885, "whisper_server.log"),
+    ("ASTRA Image Server (8892)", [comfy_python, "-X", "utf8", os.path.join(base_dir, "services", "image_server.py")], 8892, "image_server.log"),
+    ("ASTRA PDF Server (8890)", [comfy_python, "-X", "utf8", os.path.join(base_dir, "services", "pdf_server.py")], 8890, "pdf_server.log"),
+    ("ASTRA Voice Server (8880)", [comfy_python, "-X", "utf8", os.path.join(base_dir, "services", "voice_server.py")], 8880, "voice_server.log"),
+    ("ASTRA Whisper Server (8885)", [comfy_python, "-X", "utf8", os.path.join(base_dir, "services", "whisper_server.py")], 8885, "whisper_server.log"),
 ]
 
 def is_port_in_use(port):

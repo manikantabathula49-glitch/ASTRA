@@ -61,7 +61,7 @@ os.environ["ENABLE_WEB_SEARCH"] = "False"
 os.environ["OLLAMA_KEEP_ALIVE"] = "-1"
 
 # 2. Add local site-packages if present
-base_dir = os.path.abspath(os.path.dirname(__file__))
+base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 site_packages_dir = os.path.join(base_dir, "webui_env", "Lib", "site-packages")
 if os.path.exists(site_packages_dir) and site_packages_dir not in sys.path:
     sys.path.insert(0, site_packages_dir)
@@ -98,4 +98,4 @@ if __name__ == "__main__":
     import uvicorn
     port = int(os.environ.get("PORT", 8080))
     print(f"🚀 Launching Uvicorn web server on 0.0.0.0:{port}...", flush=True)
-    uvicorn.run("run_webui:_create_app", host="0.0.0.0", port=port, reload=False, factory=True)
+    uvicorn.run(_create_app, host="0.0.0.0", port=port, reload=False, factory=True)

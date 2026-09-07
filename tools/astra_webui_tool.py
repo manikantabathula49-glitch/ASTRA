@@ -7,6 +7,12 @@ version: 2.1.0
 
 import json
 import time
+import os
+import re
+import urllib.parse
+import urllib.request
+import webbrowser
+import subprocess
 import requests
 from pydantic import BaseModel, Field
 from typing import Optional, Dict
@@ -177,3 +183,165 @@ class Tools:
             report += f"| {name} | `{url}` | {status} |\n"
 
         return report
+
+    def _resolve_youtube_direct_play(self, query: str):
+        """Fetch YouTube search and extract the top matching video ID, title, and channel for direct playback."""
+        search_url = "https://www.youtube.com/results?search_query=" + urllib.parse.quote_plus(query.strip())
+        headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"}
+        req = urllib.request.Request(search_url, headers=headers)
+        try:
+            with urllib.request.urlopen(req, timeout=6) as resp:
+                html = resp.read().decode("utf-8", errors="ignore")
+
+            # Parse ytInitialData JSON for precision
+            match = re.search(r"var ytInitialData = ({.*?});</script>", html)
+            if match:
+                data = json.loads(match.group(1))
+                contents = data.get("contents", {}).get("twoColumnSearchResultsRenderer", {}).get("primaryContents", {}).get("sectionListRenderer", {}).get("contents", [])
+                for section in contents:
+                    for item in section.get("itemSectionRenderer", {}).get("contents", []):
+                        if "videoRenderer" in item:
+                            vr = item["videoRenderer"]
+                            vid = vr.get("videoId")
+                            title = vr.get("title", {}).get("runs", [{}])[0].get("text", query)
+                            channel = vr.get("ownerText", {}).get("runs", [{}])[0].get("text", "")
+                            if vid:
+                                return vid, title, channel
+            # Fallback to regex
+            ids = re.findall(r'"videoId":"([a-zA-Z0-9_-]{11})"', html)
+            if ids:
+                return ids[0], query, ""
+        except Exception:
+            pass
+        return None, query, ""
+
+    def search_and_play_media(self, query: str, platform: str = "youtube") -> str:
+        """
+        Directly find, open, and automatically play any song, music video, playlist, or topic on YouTube, Spotify, or the web.
+        Instantly launches Google Chrome and starts playing the actual video with autoplay enabled.
+
+        :param query: Name of the song, artist, video title, or search terms (e.g. 'Shepard Film Music and Played', 'Shape of You', 'Interstellar soundtrack').
+        :param platform: Target platform ('youtube', 'spotify', or 'web'). Default is 'youtube'.
+        :return: Confirmation message with clickable direct links and autoplay status.
+        """
+        try:
+            plat = platform.strip().lower()
+            chrome_paths = [
+                r"C:\Program Files\Google\Chrome\Application\chrome.exe",
+                r"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
+            ]
+            chrome_bin = next((p for p in chrome_paths if os.path.exists(p)), None)
+
+            if plat == "spotify":
+                encoded_query = urllib.parse.quote_plus(query.strip())
+                url = f"https://open.spotify.com/search/{encoded_query}"
+                name = "Spotify"
+                title = query
+                channel = ""
+            elif plat == "web":
+                encoded_query = urllib.parse.quote_plus(query.strip())
+                url = f"https://www.google.com/search?q={encoded_query}"
+                name = "Google Search"
+                title = query
+                channel = ""
+            else:
+                name = "YouTube"
+                vid, title, channel = self._resolve_youtube_direct_play(query)
+                if vid:
+                    url = f"https://www.youtube.com/watch?v={vid}&autoplay=1"
+                else:
+                    encoded_query = urllib.parse.quote_plus(query.strip())
+                    url = f"https://www.youtube.com/results?search_query={encoded_query}"
+
+            # Launch directly in Chrome or default browser
+            try:
+                if chrome_bin:
+                    subprocess.Popen([chrome_bin, url])
+                elif hasattr(os, "startfile"):
+                    os.startfile(url)
+                else:
+                    webbrowser.open(url)
+            except Exception:
+                webbrowser.open(url)
+
+            artist_info = f" by *{channel}*" if channel else ""
+            browser_info = "Google Chrome" if chrome_bin else "your default browser"
+            return (
+                f"▶️ **Now Playing on {name}: \"{title}\"{artist_info}**\n\n"
+                f"ASTRA resolved the top matching video and launched it in **{browser_info}** with **autoplay** enabled:\n\n"
+                f"- 🎬 **Direct Video URL:** [{url}]({url})\n"
+                f'- <div style="margin: 12px 0;"><a href="{url}" target="_blank" style="background: linear-gradient(135deg, #ef4444, #dc2626); color: white; padding: 10px 22px; border-radius: 12px; text-decoration: none; font-weight: 600; font-size: 0.95em; display: inline-flex; align-items: center; gap: 8px;">▶️ Open Video in YouTube</a></div>\n\n'
+                f"*(Now playing automatically on your Windows desktop)*"
+            )
+        except Exception as e:
+            return f"❌ Media playback error: {e}"
+
+    def open_system_application(self, app_name: str) -> str:
+        """
+        Launch a local Windows desktop application or system utility.
+        Call this when the user asks to open an app like calculator, notepad, chrome, file explorer, settings, task manager, etc.
+
+        :param app_name: Name of the application (e.g. 'calculator', 'notepad', 'chrome', 'explorer', 'task manager', 'downloads', 'settings').
+        :return: Confirmation of the launched application.
+        """
+        app_map = {
+            "calculator": "calc.exe",
+            "calc": "calc.exe",
+            "notepad": "notepad.exe",
+            "chrome": "chrome.exe",
+            "browser": "start msedge",
+            "explorer": "explorer.exe",
+            "files": "explorer.exe",
+            "file explorer": "explorer.exe",
+            "downloads": f"explorer.exe {os.path.expanduser('~')}\\Downloads",
+            "task manager": "taskmgr.exe",
+            "taskmgr": "taskmgr.exe",
+            "cmd": "cmd.exe",
+            "terminal": "powershell.exe",
+            "powershell": "powershell.exe",
+            "settings": "start ms-settings:",
+            "spotify": "spotify.exe"
+        }
+
+        clean_name = app_name.strip().lower()
+        target = app_map.get(clean_name, clean_name)
+        try:
+            if target.startswith("explorer.exe ") or target.startswith("start "):
+                subprocess.Popen(target, shell=True)
+            else:
+                try:
+                    os.startfile(target)
+                except Exception:
+                    subprocess.Popen(target, shell=True)
+            return f"🚀 **Successfully launched {app_name.capitalize()} on your Windows system!**"
+        except Exception as e:
+            return f"❌ Failed to launch '{app_name}': {e}"
+
+    def run_terminal_command(self, command: str) -> str:
+        """
+        Execute a safe local Windows PowerShell command and return its console output.
+        Call this when the user asks to run a terminal command, check system resources, or inspect local files.
+
+        :param command: PowerShell command string to execute.
+        :return: Console output from the command.
+        """
+        forbidden = ["format ", "rmdir /s /q c:", "del /f /s /q c:", "drop database", "mkfs"]
+        if any(f in command.lower() for f in forbidden):
+            return "❌ Command blocked by ASTRA security policy."
+
+        try:
+            proc = subprocess.run(
+                ["powershell", "-NoProfile", "-Command", command],
+                capture_output=True,
+                text=True,
+                timeout=15
+            )
+            output = proc.stdout.strip() or proc.stderr.strip() or "Command completed with no output."
+            if len(output) > 2000:
+                output = output[:2000] + "\n... (truncated)"
+            return f"💻 **Command Output:**\n```powershell\n{output}\n```"
+        except subprocess.TimeoutExpired:
+            return "⏳ Command timed out after 15 seconds."
+        except Exception as e:
+            return f"❌ Execution error: {e}"
+

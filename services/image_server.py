@@ -36,7 +36,7 @@ logging.basicConfig(
 )
 logger = logging.getLogger("ASTRA-Image")
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUTPUT_DIR = os.path.join(BASE_DIR, "image_output")
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 

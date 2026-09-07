@@ -32,13 +32,57 @@ COLORS = {
 }
 
 
+def clean_text(text: str) -> str:
+    if not text:
+        return ""
+    replacements = {
+        "\u2014": " - ",
+        "\u2013": "-",
+        "\u2018": "'",
+        "\u2019": "'",
+        "\u201c": '"',
+        "\u201d": '"',
+        "\u2026": "...",
+        "\u00a0": " ",
+        "\u2022": "*",
+        "\u2192": "->",
+        "\u2190": "<-",
+    }
+    for k, v in replacements.items():
+        text = text.replace(k, v)
+    return text
+
+
 # ─── Custom PDF Class ─────────────────────────────────────────────────────────
 class ASTRAPDF(FPDF):
     def __init__(self, title, author, template):
         super().__init__()
-        self.doc_title = title
-        self.doc_author = author
+        self.doc_title = clean_text(title)
+        self.doc_author = clean_text(author)
         self.template = template
+        self.font_main = "Helvetica"
+        self.font_code = "Courier"
+        
+        # Load high-fidelity TrueType fonts if available on Windows
+        if os.path.exists("C:/Windows/Fonts/arial.ttf"):
+            try:
+                self.add_font("Arial", "", "C:/Windows/Fonts/arial.ttf")
+                if os.path.exists("C:/Windows/Fonts/arialbd.ttf"):
+                    self.add_font("Arial", "B", "C:/Windows/Fonts/arialbd.ttf")
+                if os.path.exists("C:/Windows/Fonts/ariali.ttf"):
+                    self.add_font("Arial", "I", "C:/Windows/Fonts/ariali.ttf")
+                if os.path.exists("C:/Windows/Fonts/arialbi.ttf"):
+                    self.add_font("Arial", "BI", "C:/Windows/Fonts/arialbi.ttf")
+                self.font_main = "Arial"
+            except Exception:
+                pass
+        if os.path.exists("C:/Windows/Fonts/consola.ttf"):
+            try:
+                self.add_font("Consolas", "", "C:/Windows/Fonts/consola.ttf")
+                self.font_code = "Consolas"
+            except Exception:
+                pass
+                
         self.set_margins(20, 25, 20)
         self.set_auto_page_break(auto=True, margin=18)
 
@@ -46,11 +90,11 @@ class ASTRAPDF(FPDF):
         r, g, b = COLORS["header_bg"]
         self.set_fill_color(r, g, b)
         self.rect(0, 0, 210, 16, "F")
-        self.set_font("Helvetica", "B", 8)
+        self.set_font(self.font_main, "B", 8)
         r, g, b = COLORS["accent"]
         self.set_text_color(r, g, b)
         self.set_xy(10, 4)
-        self.cell(0, 8, f"  ASTRA AI  —  {self.doc_title}", align="L")
+        self.cell(0, 8, f"  ASTRA AI  -  {self.doc_title}", align="L")
         r, g, b = COLORS["muted"]
         self.set_text_color(r, g, b)
         self.set_xy(10, 4)
@@ -63,7 +107,7 @@ class ASTRAPDF(FPDF):
         r, g, b = COLORS["header_bg"]
         self.set_fill_color(r, g, b)
         self.rect(0, self.get_y(), 210, 14, "F")
-        self.set_font("Helvetica", "I", 7)
+        self.set_font(self.font_main, "I", 7)
         r, g, b = COLORS["accent"]
         self.set_text_color(r, g, b)
         self.cell(
@@ -79,20 +123,20 @@ class ASTRAPDF(FPDF):
         self.set_fill_color(r, g, b)
         self.rect(0, 60, 210, 4, "F")
         # Title
-        self.set_font("Helvetica", "B", 28)
+        self.set_font(self.font_main, "B", 24)
         r, g, b = COLORS["body"]
         self.set_text_color(r, g, b)
         self.set_xy(20, 75)
         self.multi_cell(170, 12, self.doc_title, align="C")
         # Subtitle
         if subtitle:
-            self.set_font("Helvetica", "", 14)
+            self.set_font(self.font_main, "", 13)
             r, g, b = COLORS["muted"]
             self.set_text_color(r, g, b)
             self.set_x(20)
-            self.multi_cell(170, 8, subtitle, align="C")
+            self.multi_cell(170, 8, clean_text(subtitle), align="C")
         # Meta
-        self.set_font("Helvetica", "", 10)
+        self.set_font(self.font_main, "", 10)
         r, g, b = COLORS["muted"]
         self.set_text_color(r, g, b)
         self.set_xy(20, 160)
@@ -108,6 +152,7 @@ class ASTRAPDF(FPDF):
 
 # ─── Markdown Renderer ────────────────────────────────────────────────────────
 def render_markdown(pdf: ASTRAPDF, content: str):
+    content = clean_text(content)
     lines = content.split("\n")
     i = 0
     while i < len(lines):
@@ -122,7 +167,7 @@ def render_markdown(pdf: ASTRAPDF, content: str):
                 i += 1
             r, g, b = COLORS["code_bg"]
             pdf.set_fill_color(r, g, b)
-            pdf.set_font("Courier", "", 8)
+            pdf.set_font(pdf.font_code, "", 8)
             r, g, b = COLORS["code_text"]
             pdf.set_text_color(r, g, b)
             pdf.multi_cell(0, 5, "\n".join(code), fill=True, border=1)
@@ -134,7 +179,7 @@ def render_markdown(pdf: ASTRAPDF, content: str):
             pdf.ln(4)
             r, g, b = COLORS["h1"]
             pdf.set_text_color(r, g, b)
-            pdf.set_font("Helvetica", "B", 18)
+            pdf.set_font(pdf.font_main, "B", 18)
             pdf.multi_cell(0, 9, line[2:].strip())
             # underline
             pdf.set_draw_color(*COLORS["h1"])
@@ -146,7 +191,7 @@ def render_markdown(pdf: ASTRAPDF, content: str):
             pdf.ln(3)
             r, g, b = COLORS["h2"]
             pdf.set_text_color(r, g, b)
-            pdf.set_font("Helvetica", "B", 14)
+            pdf.set_font(pdf.font_main, "B", 13)
             pdf.multi_cell(0, 8, line[3:].strip())
             pdf.ln(2)
 
@@ -155,16 +200,26 @@ def render_markdown(pdf: ASTRAPDF, content: str):
             pdf.ln(2)
             r, g, b = COLORS["h3"]
             pdf.set_text_color(r, g, b)
-            pdf.set_font("Helvetica", "BI", 11)
+            pdf.set_font(pdf.font_main, "BI", 10.5)
             pdf.multi_cell(0, 7, line[4:].strip())
             pdf.ln(1)
 
         # Bullet
         elif re.match(r"^[-*] ", line):
             pdf.set_text_color(*COLORS["body"])
-            pdf.set_font("Helvetica", "", 10)
             pdf.set_x(24)
-            pdf.multi_cell(0, 6, f"\u2022  {line[2:].strip()}")
+            bullet_text = line[2:].strip()
+            parts = re.split(r"\*\*(.*?)\*\*", bullet_text)
+            pdf.set_font(pdf.font_main, "", 9.5)
+            pdf.write(5, "*  ")
+            for j, part in enumerate(parts):
+                if j % 2 == 1:
+                    pdf.set_font(pdf.font_main, "B", 9.5)
+                else:
+                    pdf.set_font(pdf.font_main, "", 9.5)
+                if part:
+                    pdf.write(5, part)
+            pdf.ln(5.5)
 
         # Horizontal rule
         elif line.strip() == "---":
@@ -180,17 +235,16 @@ def render_markdown(pdf: ASTRAPDF, content: str):
         # Regular paragraph
         else:
             pdf.set_text_color(*COLORS["body"])
-            # Handle bold inline
             parts = re.split(r"\*\*(.*?)\*\*", line)
             pdf.set_x(20)
             for j, part in enumerate(parts):
                 if j % 2 == 1:
-                    pdf.set_font("Helvetica", "B", 10)
+                    pdf.set_font(pdf.font_main, "B", 9.5)
                 else:
-                    pdf.set_font("Helvetica", "", 10)
+                    pdf.set_font(pdf.font_main, "", 9.5)
                 if part:
-                    pdf.write(6, part)
-            pdf.ln(6)
+                    pdf.write(5.5, part)
+            pdf.ln(5.5)
 
         i += 1
     pdf.set_text_color(0, 0, 0)

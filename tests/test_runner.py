@@ -7,11 +7,11 @@ base_dir = r"f:\ASTRA"
 comfy_python = os.path.join(base_dir, "comfy_env", "Scripts", "python.exe")
 
 # Test starting image_server and logging to file
-log_out = open(os.path.join(base_dir, "image_server.log"), "w", encoding="utf-8")
-log_err = open(os.path.join(base_dir, "image_server_err.log"), "w", encoding="utf-8")
+log_out = open(os.path.join(base_dir, "service_logs", "image_server.log"), "w", encoding="utf-8")
+log_err = open(os.path.join(base_dir, "service_logs", "image_server_err.log"), "w", encoding="utf-8")
 
 proc = subprocess.Popen(
-    [comfy_python, os.path.join(base_dir, "image_server.py")],
+    [comfy_python, os.path.join(base_dir, "services", "image_server.py")],
     cwd=base_dir,
     stdout=log_out,
     stderr=log_err

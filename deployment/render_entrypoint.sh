@@ -13,4 +13,4 @@ echo " 🚀 Booting ASTRA Ecosystem on Render (Port $PORT)"
 echo "===================================================="
 
 # Execute run_webui.py with unbuffered logs for instant port binding
-exec python -u run_webui.py
+exec python -u services/run_webui.py

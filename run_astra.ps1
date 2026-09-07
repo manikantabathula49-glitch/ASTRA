@@ -62,26 +62,26 @@ try {
 } catch {}
 
 Write-Host "[2/9] Synchronizing Open WebUI High-Speed Settings..."
-& "f:\ASTRA\webui_env\Scripts\python.exe" "f:\ASTRA\sync_webui_db.py"
+& "f:\ASTRA\webui_env\Scripts\python.exe" "f:\ASTRA\core\sync_webui_db.py"
 
 Write-Host "[3/9] Starting Open WebUI Chat (Port 8080)..."
-Start-Process -FilePath "f:\ASTRA\webui_env\Scripts\python.exe" -ArgumentList "run_webui.py" -WorkingDirectory "f:\ASTRA" -WindowStyle Hidden
+Start-Process -FilePath "f:\ASTRA\webui_env\Scripts\python.exe" -ArgumentList "services\run_webui.py" -WorkingDirectory "f:\ASTRA" -WindowStyle Hidden
 
 Write-Host "[4/9] Starting ComfyUI (Port 8188)..."
 Start-Process -FilePath "f:\ASTRA\comfy_env\Scripts\python.exe" -ArgumentList ".\ComfyUI\main.py", "--listen", "0.0.0.0", "--cpu" -WorkingDirectory "f:\ASTRA" -WindowStyle Hidden
 Start-Sleep -Seconds 1
 
 Write-Host "[5/9] Starting Voice Agent (Port 8880)..."
-Start-Process -FilePath "f:\ASTRA\comfy_env\Scripts\python.exe" -ArgumentList ".\voice_server.py" -WorkingDirectory "f:\ASTRA" -WindowStyle Hidden
+Start-Process -FilePath "f:\ASTRA\comfy_env\Scripts\python.exe" -ArgumentList ".\services\voice_server.py" -WorkingDirectory "f:\ASTRA" -WindowStyle Hidden
 
 Write-Host "[6/9] Starting Whisper Transcriber (Port 8885)..."
-Start-Process -FilePath "f:\ASTRA\comfy_env\Scripts\python.exe" -ArgumentList ".\whisper_server.py" -WorkingDirectory "f:\ASTRA" -WindowStyle Hidden
+Start-Process -FilePath "f:\ASTRA\comfy_env\Scripts\python.exe" -ArgumentList ".\services\whisper_server.py" -WorkingDirectory "f:\ASTRA" -WindowStyle Hidden
 
 Write-Host "[7/8] Starting PDF Engine (Port 8890)..."
-Start-Process -FilePath "f:\ASTRA\comfy_env\Scripts\python.exe" -ArgumentList ".\pdf_server.py" -WorkingDirectory "f:\ASTRA" -WindowStyle Hidden
+Start-Process -FilePath "f:\ASTRA\comfy_env\Scripts\python.exe" -ArgumentList ".\services\pdf_server.py" -WorkingDirectory "f:\ASTRA" -WindowStyle Hidden
 
 Write-Host "[8/8] Starting Image Engine (Port 8892)..."
-Start-Process -FilePath "f:\ASTRA\comfy_env\Scripts\python.exe" -ArgumentList ".\image_server.py" -WorkingDirectory "f:\ASTRA" -WindowStyle Hidden
+Start-Process -FilePath "f:\ASTRA\comfy_env\Scripts\python.exe" -ArgumentList ".\services\image_server.py" -WorkingDirectory "f:\ASTRA" -WindowStyle Hidden
 
 Write-Host "`nWaiting for Open WebUI to complete initialization..." -ForegroundColor Yellow
 $ready = $false
