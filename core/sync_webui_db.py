@@ -1,10 +1,38 @@
 import sqlite3
 import json
 import os
+import sys
+import glob
 import time
 
-db_path = r"f:\ASTRA\webui_env\Lib\site-packages\open_webui\data\webui.db"
-tool_file = r"f:\ASTRA\tools\astra_webui_tool.py"
+BASE_DIR = os.environ.get("ASTRA_HOME") or os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+
+def find_webui_db():
+    """Locate Open WebUI's webui.db (DATA_DIR env, Windows venv, Linux venv, or installed package)."""
+    candidates = []
+    if os.environ.get("DATA_DIR"):
+        candidates.append(os.path.join(os.environ["DATA_DIR"], "webui.db"))
+    candidates.append(os.path.join(BASE_DIR, "webui_env", "Lib", "site-packages", "open_webui", "data", "webui.db"))
+    candidates += glob.glob(os.path.join(BASE_DIR, "webui_env", "lib", "python*", "site-packages", "open_webui", "data", "webui.db"))
+    try:
+        import open_webui
+        candidates.append(os.path.join(os.path.dirname(open_webui.__file__), "data", "webui.db"))
+    except Exception:
+        pass
+    for path in candidates:
+        if os.path.exists(path):
+            return path
+    return candidates[0]
+
+
+db_path = find_webui_db()
+tool_file = os.path.join(BASE_DIR, "tools", "astra_webui_tool.py")
+
+if not os.path.exists(db_path):
+    print(f"[!] Open WebUI database not found at {db_path}.")
+    print("    Start Open WebUI once (so it creates webui.db) and re-run this script.")
+    sys.exit(1)
 
 with open(tool_file, "r", encoding="utf-8") as f:
     tool_content = f.read()
@@ -298,7 +326,7 @@ else:
     cur.execute("""
         INSERT INTO model (id, user_id, base_model_id, name, meta, params, created_at, updated_at, is_active)
         VALUES ('astra_creator', ?, 'astra_creator', 'ASTRA (In-Chat Creator)', ?, '{}', ?, ?, 1)
-    """, (admin_id, json.dumps(creator_meta), json.dumps(creator_meta), now, now))
+    """, (admin_id, json.dumps(creator_meta), now, now))
 
 # 5. Enable & Configure Open WebUI Native Image Generation, Task Suggestions, and Prompt Suggestions in config table
 config_row = cur.execute("SELECT id, data FROM config WHERE id=1").fetchone()

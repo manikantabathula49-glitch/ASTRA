@@ -66,7 +66,6 @@ echo [2/8] Starting Open WebUI Chat (Port 8080)
 set DATA_DIR=%~dp0webui_env\Lib\site-packages\open_webui\data
 set FRONTEND_BUILD_DIR=%~dp0webui_env\Lib\site-packages\open_webui\frontend
 set FROM_INIT_PY=true
-set WEBUI_SECRET_KEY=p0/6YLuw3mv6mLiP
 set OLLAMA_BASE_URL=http://127.0.0.1:11434
 set DEFAULT_MODELS=astra
 set PYTHONUTF8=1
@@ -87,11 +86,11 @@ echo [5/8] Launching ASTRA Whisper Transcriber (Port 8885)
 START "ASTRA WHISPER" /MIN cmd /k "cd /d "%~dp0" && chcp 65001 >nul && set PYTHONUTF8=1 && set PYTHONIOENCODING=utf-8 && "%~dp0comfy_env\Scripts\python.exe" ".\services\whisper_server.py""
 ping -n 2 127.0.0.1 >nul
 
-echo [6/7] Launching ASTRA PDF Engine (Port 8890)
+echo [6/8] Launching ASTRA PDF Engine (Port 8890)
 START "ASTRA PDF" /MIN cmd /k "cd /d "%~dp0" && chcp 65001 >nul && set PYTHONUTF8=1 && set PYTHONIOENCODING=utf-8 && "%~dp0comfy_env\Scripts\python.exe" ".\services\pdf_server.py""
 ping -n 2 127.0.0.1 >nul
 
-echo [7/7] Launching ASTRA Image Engine (Port 8892)
+echo [7/8] Launching ASTRA Image Engine (Port 8892)
 START "ASTRA IMAGE" /MIN cmd /k "cd /d "%~dp0" && chcp 65001 >nul && set PYTHONUTF8=1 && set PYTHONIOENCODING=utf-8 && "%~dp0comfy_env\Scripts\python.exe" ".\services\image_server.py""
 ping -n 2 127.0.0.1 >nul
 
@@ -132,6 +131,6 @@ echo   ASTRA IS ONLINE (Ultra-Speed Streaming Active).
 echo.
 echo   OPEN WEBUI CHAT:  http://localhost:8080
 echo   COMFYUI ENGINE:   http://localhost:8188
-echo   MEDIA SERVICES:   Image(8892), Voice(8880), PDF(8890)
+echo   MEDIA SERVICES:   Image(8892), Voice(8880), Whisper(8885), PDF(8890)
 echo  ====================================================
 echo.

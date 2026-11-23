@@ -17,7 +17,9 @@ import uuid
 import asyncio
 import time
 import base64
+import json
 import logging
+import threading
 from contextlib import asynccontextmanager
 from typing import Optional, List, Dict, Any
 
@@ -37,7 +39,7 @@ logging.basicConfig(
 logger = logging.getLogger("ASTRA-Image")
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-OUTPUT_DIR = os.path.join(BASE_DIR, "image_output")
+OUTPUT_DIR = os.environ.get("ASTRA_IMAGE_OUTPUT", os.path.join(BASE_DIR, "image_output"))
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 # Global pipeline — loaded once on first use or on startup
@@ -45,11 +47,50 @@ pipeline = None
 pipeline_loading = False
 pipeline_error = None
 jobs: Dict[str, Dict[str, Any]] = {}   # job_id → {"status", "filename", "error", "progress", ...}
+MAX_JOBS = 50                           # finished jobs kept in memory (each holds a base64 PNG)
+
+# One lock for loading (prevents the startup thread and a first request from
+# loading the model twice) and one for inference (a diffusers pipeline is not
+# safe to call from several threads at once and would exhaust VRAM).
+_load_lock = threading.Lock()
+_infer_lock = threading.Lock()
+
+
+def _snap(value: int, lo: int = 256, hi: int = 1024) -> int:
+    """Stable Diffusion needs dimensions divisible by 8; clamp to a sane range."""
+    try:
+        value = int(value)
+    except (TypeError, ValueError):
+        value = 512
+    return max(lo, min(hi, value - value % 8))
+
+
+def _prune_jobs():
+    if len(jobs) <= MAX_JOBS:
+        return
+    finished = sorted(
+        (jid for jid, j in jobs.items() if j.get("status") in ("done", "error")),
+        key=lambda jid: jobs[jid].get("created", 0),
+    )
+    for jid in finished[: len(jobs) - MAX_JOBS]:
+        jobs.pop(jid, None)
+
+
+def safe_filename(filename: str) -> str:
+    name = os.path.basename(filename.replace("\\", "/"))
+    if not name or name != filename or name.startswith("."):
+        raise HTTPException(status_code=400, detail="Invalid filename.")
+    return name
 
 
 # ─── Pipeline Loader ─────────────────────────────────────────────────────────
 
 def load_pipeline():
+    with _load_lock:
+        return _load_pipeline_locked()
+
+
+def _load_pipeline_locked():
     global pipeline, pipeline_loading, pipeline_error
     if pipeline is not None:
         return pipeline
@@ -222,20 +263,20 @@ def generate_image_sync(prompt: str, negative_prompt: str = "", steps: int = 15,
     else:
         pipe = pipeline
 
-    import torch
     generator = None
     if seed is not None and seed != -1:
-        generator = torch.Generator(device="cuda" if torch.cuda.is_available() else "cpu").manual_seed(seed)
+        generator = torch.Generator(device="cuda" if torch.cuda.is_available() else "cpu").manual_seed(int(seed))
 
-    result = pipe(
-        prompt=prompt,
-        negative_prompt=negative_prompt,
-        num_inference_steps=steps,
-        guidance_scale=guidance,
-        width=width,
-        height=height,
-        generator=generator,
-    )
+    with _infer_lock:
+        result = pipe(
+            prompt=prompt,
+            negative_prompt=negative_prompt,
+            num_inference_steps=max(1, min(int(steps), 100)),
+            guidance_scale=guidance,
+            width=_snap(width),
+            height=_snap(height),
+            generator=generator,
+        )
     return result.images[0]
 
 
@@ -296,6 +337,7 @@ def run_generation(job_id: str, req: ImageRequest):
 @app.post("/generate")
 async def generate(req: ImageRequest, background: BackgroundTasks):
     job_id = str(uuid.uuid4())
+    _prune_jobs()
     jobs[job_id] = {
         "status": "queued",
         "filename": None,
@@ -327,6 +369,7 @@ async def status(job_id: str):
 @app.get("/download/{filename}")
 @app.get("/image/{filename}")
 async def download(filename: str):
+    filename = safe_filename(filename)
     path = os.path.join(OUTPUT_DIR, filename)
     if not os.path.exists(path):
         raise HTTPException(status_code=404, detail="File not found.")
@@ -446,7 +489,7 @@ async def a1111_txt2img(req: A1111Txt2ImgRequest):
         return {
             "images": [b64_str],
             "parameters": req.model_dump(),
-            "info": f'{{"prompt": "{req.prompt}", "steps": {req.steps}}}',
+            "info": json.dumps({"prompt": req.prompt, "steps": req.steps}),
         }
     except Exception as e:
         logger.error(f"A1111 txt2img error: {e}")

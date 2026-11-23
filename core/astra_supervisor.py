@@ -11,9 +11,20 @@ import time
 import socket
 import subprocess
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-COMFY_PY = os.path.join(BASE_DIR, "comfy_env", "Scripts", "python.exe")
-WEBUI_PY = os.path.join(BASE_DIR, "webui_env", "Scripts", "python.exe")
+BASE_DIR = os.environ.get("ASTRA_HOME") or os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+
+def venv_python(name):
+    """Return the interpreter of a project venv (Windows or Linux/macOS layout), else the current one."""
+    for rel in (("Scripts", "python.exe"), ("bin", "python")):
+        path = os.path.join(BASE_DIR, name, *rel)
+        if os.path.exists(path):
+            return path
+    return sys.executable
+
+
+COMFY_PY = venv_python("comfy_env")
+WEBUI_PY = venv_python("webui_env")
 
 SERVICES = {
     "WebUI": {

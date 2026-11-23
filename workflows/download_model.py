@@ -2,8 +2,10 @@ import urllib.request
 import sys
 import os
 
-url = "https://huggingface.co/runwayml/stable-diffusion-v1-5/resolve/main/v1-5-pruned-emaonly.safetensors"
-dest = r"f:\ASTRA\ComfyUI\models\checkpoints\v1-5-pruned-emaonly.safetensors"
+url = "https://huggingface.co/stable-diffusion-v1-5/stable-diffusion-v1-5/resolve/main/v1-5-pruned-emaonly.safetensors"
+BASE_DIR = os.environ.get("ASTRA_HOME") or os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+dest = os.path.join(BASE_DIR, "ComfyUI", "models", "checkpoints", "v1-5-pruned-emaonly.safetensors")
+os.makedirs(os.path.dirname(dest), exist_ok=True)
 
 def reporthook(blocknum, blocksize, totalsize):
     readsofar = blocknum * blocksize

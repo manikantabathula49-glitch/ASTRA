@@ -51,3 +51,9 @@ inspect_astra.py
 Modelfile
 ASTRA_Master_Workflow.json
 pyrightconfig.json
+tests/
+scripts/
+service_logs/
+pdf_output/
+image_output/
+.webui_secret_key

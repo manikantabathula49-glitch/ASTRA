@@ -5,11 +5,35 @@ Register ASTRA Autonomous Creator Pipe Function in Open WebUI.
 This enables 100% in-chat inline Image, Voice, PDF generation, and AI reasoning.
 """
 
+import os
+import glob
 import sqlite3
 import json
 import time
 
-DB_PATH = r"f:\ASTRA\webui_env\Lib\site-packages\open_webui\data\webui.db"
+
+BASE_DIR = os.environ.get("ASTRA_HOME") or os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+
+def find_webui_db():
+    """Locate Open WebUI's webui.db (DATA_DIR env, Windows venv, Linux venv, or installed package)."""
+    candidates = []
+    if os.environ.get("DATA_DIR"):
+        candidates.append(os.path.join(os.environ["DATA_DIR"], "webui.db"))
+    candidates.append(os.path.join(BASE_DIR, "webui_env", "Lib", "site-packages", "open_webui", "data", "webui.db"))
+    candidates += glob.glob(os.path.join(BASE_DIR, "webui_env", "lib", "python*", "site-packages", "open_webui", "data", "webui.db"))
+    try:
+        import open_webui
+        candidates.append(os.path.join(os.path.dirname(open_webui.__file__), "data", "webui.db"))
+    except Exception:
+        pass
+    for path in candidates:
+        if os.path.exists(path):
+            return path
+    return candidates[0]
+
+
+DB_PATH = find_webui_db()
 
 PIPE_CODE = r'''"""
 title: ASTRA AI Creator
@@ -53,7 +77,7 @@ class Pipe:
                 filename = data.get("filename", "document.pdf")
                 download_path = data.get("download_url", f"/download/{filename}")
                 pdf_url = f"{self.valves.PDF_URL}{download_path}"
-                filepath = data.get("filepath", f"f:\\ASTRA\\pdf_output\\{filename}")
+                filepath = data.get("filepath", filename)
                 return (
                     f"📄 **PDF Created Successfully!**\n\n"
                     f"### 📑 {title}\n"
