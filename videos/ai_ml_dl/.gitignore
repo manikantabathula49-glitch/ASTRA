@@ -2,3 +2,4 @@ out/
 out_preview/
 __pycache__/
 *.zip
+out_next/

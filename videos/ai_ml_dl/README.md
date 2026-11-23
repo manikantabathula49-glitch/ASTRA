@@ -16,3 +16,11 @@ pip install manim        # needs FFmpeg; on Linux also libpango1.0-dev, libcairo
 ```
 
 Colour code used everywhere: AI = blue, ML = green, DL = orange.
+
+## Next-level scenes (`next_level.py`)
+Original scenes in styles found on Pinterest: kinetic typography, holographic HUD, object + big counter.
+| Scene | Use |
+|---|---|
+| `HookKinetic` | First 12s of the video: "AI. ML. DL. Confused?" |
+| `HudNeural` | Deep Learning chapter: futuristic neural-network dashboard |
+| `BigFact` | Fact card: GPT-3's 175 billion parameters counting up |
