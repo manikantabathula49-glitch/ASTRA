@@ -1,0 +1,19 @@
+{
+  "name": "aiwithmani-motion",
+  "private": true,
+  "description": "Motion libraries from the 18-repos guide: GSAP, Three.js, Remotion, HyperFrames",
+  "scripts": {
+    "remotion": "remotion",
+    "hyperframes": "hyperframes"
+  },
+  "dependencies": {
+    "@remotion/cli": "^4.0.545",
+    "@remotion/renderer": "^4.0.545",
+    "gsap": "^3.15.1",
+    "hyperframes": "^0.9.84",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "remotion": "^4.0.545",
+    "three": "^0.187.0"
+  }
+}
