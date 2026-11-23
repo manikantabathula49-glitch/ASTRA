@@ -24,3 +24,12 @@ Original scenes in styles found on Pinterest: kinetic typography, holographic HU
 | `HookKinetic` | First 12s of the video: "AI. ML. DL. Confused?" |
 | `HudNeural` | Deep Learning chapter: futuristic neural-network dashboard |
 | `BigFact` | Fact card: GPT-3's 175 billion parameters counting up |
+
+## IT-style informational scenes (`it_scenes.py`)
+Original scenes in styles referenced from Pinterest (isometric servers, code typing, neon dashboards, glowing chips).
+| Scene | Teaches | Place near |
+|---|---|---|
+| `IsoPipeline` | How an ML model is built: Data → Clean → Train → Model → Use | C16 |
+| `CodeVsData` | Hand-written rules vs rules learned from data | C07 |
+| `NeonData` | How much data rule-based AI, ML and DL need | C64 |
+| `GpuChip` | Why GPUs train neural networks faster | C66 |
