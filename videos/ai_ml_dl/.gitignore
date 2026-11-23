@@ -4,3 +4,4 @@ __pycache__/
 *.zip
 out_next/
 shorts/
+flow/*.mp4
