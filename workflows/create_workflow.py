@@ -136,7 +136,8 @@ workflow = {
   "version": 0.4
 }
 
-with open(r"f:\ASTRA\workflows\ASTRA_Master_Workflow.json", "w", encoding="utf-8") as f:
+out_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "ASTRA_Master_Workflow.json")
+with open(out_path, "w", encoding="utf-8") as f:
     json.dump(workflow, f, indent=2)
 
 print("Workflow created successfully.")

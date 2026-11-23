@@ -1,5 +1,6 @@
 import os
 import sys
+import secrets
 
 # Ensure UTF-8 streams to prevent Windows charmap encoding crashes on emojis / banners
 if hasattr(sys.stdout, "reconfigure"):
@@ -8,7 +9,6 @@ if hasattr(sys.stderr, "reconfigure"):
     sys.stderr.reconfigure(encoding="utf-8", errors="replace")
 
 # 1. Set environment variables FIRST before importing open_webui
-os.environ["WEBUI_SECRET_KEY"] = os.environ.get("WEBUI_SECRET_KEY", "p0/6YLuw3mv6mLiP")
 os.environ["PYTHONUTF8"] = "1"
 os.environ["PYTHONIOENCODING"] = "utf-8"
 os.environ["OLLAMA_BASE_URL"] = os.environ.get("OLLAMA_BASE_URL", "http://127.0.0.1:11434")
@@ -76,6 +76,33 @@ except ImportError:
 data_dir = os.environ.get("DATA_DIR", os.path.join(open_webui_dir, "data"))
 os.makedirs(data_dir, exist_ok=True)
 os.environ["DATA_DIR"] = data_dir
+
+
+def _load_or_create_secret_key(directory):
+    """Use WEBUI_SECRET_KEY from the environment, else a random key persisted in DATA_DIR.
+
+    A key hardcoded in a public repo lets anyone forge Open WebUI login tokens.
+    """
+    if os.environ.get("WEBUI_SECRET_KEY"):
+        return os.environ["WEBUI_SECRET_KEY"]
+    key_file = os.path.join(directory, ".webui_secret_key")
+    try:
+        with open(key_file, "r", encoding="utf-8") as f:
+            key = f.read().strip()
+        if key:
+            return key
+    except OSError:
+        pass
+    key = secrets.token_urlsafe(32)
+    try:
+        with open(key_file, "w", encoding="utf-8") as f:
+            f.write(key)
+    except OSError:
+        pass
+    return key
+
+
+os.environ["WEBUI_SECRET_KEY"] = _load_or_create_secret_key(data_dir)
 
 frontend_dir = os.environ.get("FRONTEND_BUILD_DIR", os.path.join(open_webui_dir, "frontend"))
 os.environ["FRONTEND_BUILD_DIR"] = frontend_dir

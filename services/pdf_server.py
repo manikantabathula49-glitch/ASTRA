@@ -13,9 +13,35 @@ from pydantic import BaseModel
 from typing import Optional
 from fpdf import FPDF
 
-app = FastAPI(title="ASTRA PDF Server", version="1.1.0")
-OUTPUT_DIR = r"f:\ASTRA\pdf_output"
+app = FastAPI(title="ASTRA PDF Server", version="1.2.0")
+BASE_DIR = os.environ.get("ASTRA_HOME") or os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+OUTPUT_DIR = os.environ.get("ASTRA_PDF_OUTPUT", os.path.join(BASE_DIR, "pdf_output"))
 os.makedirs(OUTPUT_DIR, exist_ok=True)
+
+# Unicode TrueType font candidates (Windows, Linux, macOS). Each entry maps
+# a style ("", "B", "I", "BI") to a font file; the first family whose regular
+# face exists is used. Core PDF fonts (Helvetica) only support Latin-1.
+FONT_CANDIDATES = [
+    ("Arial", {"": "C:/Windows/Fonts/arial.ttf", "B": "C:/Windows/Fonts/arialbd.ttf",
+               "I": "C:/Windows/Fonts/ariali.ttf", "BI": "C:/Windows/Fonts/arialbi.ttf"}),
+    ("DejaVu", {"": "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
+                "B": "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
+                "I": "/usr/share/fonts/truetype/dejavu/DejaVuSans-Oblique.ttf",
+                "BI": "/usr/share/fonts/truetype/dejavu/DejaVuSans-BoldOblique.ttf"}),
+    ("ArialUnicode", {"": "/Library/Fonts/Arial Unicode.ttf"}),
+]
+CODE_FONT_CANDIDATES = [
+    ("Consolas", "C:/Windows/Fonts/consola.ttf"),
+    ("DejaVuMono", "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf"),
+]
+
+
+def safe_filename(filename: str) -> str:
+    """Reject path traversal (e.g. '..\\..\\secret' on Windows)."""
+    name = os.path.basename(filename.replace("\\", "/"))
+    if not name or name != filename or name.startswith("."):
+        raise HTTPException(status_code=400, detail="Invalid filename.")
+    return name
 
 # ─── Color Palette ────────────────────────────────────────────────────────────
 COLORS = {
@@ -53,6 +79,11 @@ def clean_text(text: str) -> str:
     return text
 
 
+def latin1_safe(text: str) -> str:
+    """Core PDF fonts only cover Latin-1; replace anything else with '?'."""
+    return text.encode("latin-1", errors="replace").decode("latin-1")
+
+
 # ─── Custom PDF Class ─────────────────────────────────────────────────────────
 class ASTRAPDF(FPDF):
     def __init__(self, title, author, template):
@@ -63,28 +94,38 @@ class ASTRAPDF(FPDF):
         self.font_main = "Helvetica"
         self.font_code = "Courier"
         
-        # Load high-fidelity TrueType fonts if available on Windows
-        if os.path.exists("C:/Windows/Fonts/arial.ttf"):
+        self.unicode_fonts = False
+
+        # Load Unicode TrueType fonts if available (falls back to Latin-1 core fonts)
+        for family, files in FONT_CANDIDATES:
+            regular = files.get("")
+            if not regular or not os.path.exists(regular):
+                continue
             try:
-                self.add_font("Arial", "", "C:/Windows/Fonts/arial.ttf")
-                if os.path.exists("C:/Windows/Fonts/arialbd.ttf"):
-                    self.add_font("Arial", "B", "C:/Windows/Fonts/arialbd.ttf")
-                if os.path.exists("C:/Windows/Fonts/ariali.ttf"):
-                    self.add_font("Arial", "I", "C:/Windows/Fonts/ariali.ttf")
-                if os.path.exists("C:/Windows/Fonts/arialbi.ttf"):
-                    self.add_font("Arial", "BI", "C:/Windows/Fonts/arialbi.ttf")
-                self.font_main = "Arial"
+                for style in ("", "B", "I", "BI"):
+                    path = files.get(style)
+                    self.add_font(family, style, path if path and os.path.exists(path) else regular)
+                self.font_main = family
+                self.unicode_fonts = True
+                break
             except Exception:
-                pass
-        if os.path.exists("C:/Windows/Fonts/consola.ttf"):
-            try:
-                self.add_font("Consolas", "", "C:/Windows/Fonts/consola.ttf")
-                self.font_code = "Consolas"
-            except Exception:
-                pass
-                
+                continue
+        for family, path in CODE_FONT_CANDIDATES:
+            if self.unicode_fonts and os.path.exists(path):
+                try:
+                    self.add_font(family, "", path)
+                    self.font_code = family
+                    break
+                except Exception:
+                    continue
+
         self.set_margins(20, 25, 20)
         self.set_auto_page_break(auto=True, margin=18)
+
+    def normalize_text(self, text):
+        if not self.unicode_fonts or self.font_family in ("helvetica", "courier", "times"):
+            text = latin1_safe(text)
+        return super().normalize_text(text)
 
     def header(self):
         r, g, b = COLORS["header_bg"]
@@ -262,7 +303,7 @@ class PDFRequest(BaseModel):
 
 # ─── Routes ───────────────────────────────────────────────────────────────────
 @app.post("/generate")
-async def generate_pdf(req: PDFRequest):
+def generate_pdf(req: PDFRequest):
     if req.template not in ["report", "resume", "technical", "notes", "proposal"]:
         raise HTTPException(status_code=400, detail="Invalid template.")
     try:
@@ -282,9 +323,9 @@ async def generate_pdf(req: PDFRequest):
 
         if req.direct_download:
             return StreamingResponse(
-                io.BytesIO(raw_bytes),
+                io.BytesIO(bytes(raw_bytes)),
                 media_type="application/pdf",
-                headers={"Content-Disposition": f"attachment; filename={filename}"}
+                headers={"Content-Disposition": f'attachment; filename="{filename}"'}
             )
 
         return {
@@ -295,12 +336,15 @@ async def generate_pdf(req: PDFRequest):
             "download_url": f"/download/{filename}",
             "template": req.template
         }
+    except HTTPException:
+        raise
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
 
 @app.get("/download/{filename}")
 async def download_pdf(filename: str):
+    filename = safe_filename(filename)
     filepath = os.path.join(OUTPUT_DIR, filename)
     if not os.path.exists(filepath):
         raise HTTPException(status_code=404, detail="PDF file not found.")
@@ -309,7 +353,7 @@ async def download_pdf(filename: str):
 
 @app.get("/list")
 async def list_pdfs():
-    files = [f for f in os.listdir(OUTPUT_DIR) if f.endswith(".pdf")]
+    files = sorted(f for f in os.listdir(OUTPUT_DIR) if f.endswith(".pdf"))
     return {"pdfs": files}
 
 
@@ -320,7 +364,7 @@ async def health():
 
 @app.get("/web", response_class=HTMLResponse)
 async def web_ui():
-    return """<!DOCTYPE html>
+    return r"""<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -379,7 +423,8 @@ async function generate(){
     const r=await fetch('/generate',{method:'POST',headers:{'Content-Type':'application/json'},
       body:JSON.stringify({title,content,template:document.getElementById('template').value,
         author:document.getElementById('author').value||'ASTRA AI',
-        subtitle:document.getElementById('subtitle').value||null})});
+        subtitle:document.getElementById('subtitle').value||null,
+        direct_download:true})});
     if(!r.ok)throw new Error(await r.text());
     const blob=await r.blob();
     const a=document.createElement('a');

@@ -13,7 +13,7 @@ import tempfile
 from contextlib import asynccontextmanager
 from fastapi import FastAPI, HTTPException, UploadFile, File
 from fastapi.responses import JSONResponse, HTMLResponse
-from pydantic import BaseModel
+from starlette.concurrency import run_in_threadpool
 
 TEMP_DIR = os.path.join(tempfile.gettempdir(), "astra_whisper")
 os.makedirs(TEMP_DIR, exist_ok=True)
@@ -40,9 +40,8 @@ def load_model():
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Lifespan context: load the model on startup."""
-    import asyncio
-    loop = asyncio.get_event_loop()
-    loop.run_in_executor(None, load_model)
+    import threading
+    threading.Thread(target=load_model, daemon=True).start()
     yield
 
 
@@ -58,7 +57,7 @@ async def transcribe(file: UploadFile = File(...)):
         raise HTTPException(status_code=500, detail="Model not loaded. Try restarting the server.")
 
     # Save uploaded file temporarily
-    file_ext = os.path.splitext(file.filename)[1] or ".wav"
+    file_ext = os.path.splitext(file.filename or "")[1][:10] or ".wav"
     temp_path = os.path.join(TEMP_DIR, f"audio_{uuid.uuid4().hex}{file_ext}")
     
     try:
@@ -68,7 +67,8 @@ async def transcribe(file: UploadFile = File(...)):
         print(f"[ASTRA WHISPER] Transcribing temporary file: {temp_path}...")
         
         # Transcribe audio file
-        result = model.transcribe(temp_path)
+        # Run the blocking transcription off the event loop so /health stays responsive
+        result = await run_in_threadpool(model.transcribe, temp_path)
         transcription = result.get("text", "").strip()
         
         print(f"[ASTRA WHISPER] Done! Transcribed: '{transcription[:60]}...'")

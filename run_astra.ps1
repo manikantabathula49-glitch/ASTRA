@@ -1,11 +1,13 @@
+# Resolve the ASTRA folder from this script's location (works from any drive)
+$AstraRoot = $PSScriptRoot
+
 # Set Permanent Environment Variables for Windows Ollama Background Service
 [System.Environment]::SetEnvironmentVariable("OLLAMA_KEEP_ALIVE", "-1", "User")
 [System.Environment]::SetEnvironmentVariable("OLLAMA_NUM_PARALLEL", "2", "User")
 
-$env:DATA_DIR="f:\ASTRA\webui_env\Lib\site-packages\open_webui\data"
-$env:FRONTEND_BUILD_DIR="f:\ASTRA\webui_env\Lib\site-packages\open_webui\frontend"
+$env:DATA_DIR="$AstraRoot\webui_env\Lib\site-packages\open_webui\data"
+$env:FRONTEND_BUILD_DIR="$AstraRoot\webui_env\Lib\site-packages\open_webui\frontend"
 $env:FROM_INIT_PY="true"
-$env:WEBUI_SECRET_KEY="p0/6YLuw3mv6mLiP"
 $env:OLLAMA_HOST="0.0.0.0"
 $env:OLLAMA_BASE_URL="http://127.0.0.1:11434"
 $env:OLLAMA_KEEP_ALIVE="-1"
@@ -62,26 +64,26 @@ try {
 } catch {}
 
 Write-Host "[2/9] Synchronizing Open WebUI High-Speed Settings..."
-& "f:\ASTRA\webui_env\Scripts\python.exe" "f:\ASTRA\core\sync_webui_db.py"
+& "$AstraRoot\webui_env\Scripts\python.exe" "$AstraRoot\core\sync_webui_db.py"
 
 Write-Host "[3/9] Starting Open WebUI Chat (Port 8080)..."
-Start-Process -FilePath "f:\ASTRA\webui_env\Scripts\python.exe" -ArgumentList "services\run_webui.py" -WorkingDirectory "f:\ASTRA" -WindowStyle Hidden
+Start-Process -FilePath "$AstraRoot\webui_env\Scripts\python.exe" -ArgumentList "services\run_webui.py" -WorkingDirectory "$AstraRoot" -WindowStyle Hidden
 
 Write-Host "[4/9] Starting ComfyUI (Port 8188)..."
-Start-Process -FilePath "f:\ASTRA\comfy_env\Scripts\python.exe" -ArgumentList ".\ComfyUI\main.py", "--listen", "0.0.0.0", "--cpu" -WorkingDirectory "f:\ASTRA" -WindowStyle Hidden
+Start-Process -FilePath "$AstraRoot\comfy_env\Scripts\python.exe" -ArgumentList ".\ComfyUI\main.py", "--listen", "0.0.0.0", "--cpu" -WorkingDirectory "$AstraRoot" -WindowStyle Hidden
 Start-Sleep -Seconds 1
 
 Write-Host "[5/9] Starting Voice Agent (Port 8880)..."
-Start-Process -FilePath "f:\ASTRA\comfy_env\Scripts\python.exe" -ArgumentList ".\services\voice_server.py" -WorkingDirectory "f:\ASTRA" -WindowStyle Hidden
+Start-Process -FilePath "$AstraRoot\comfy_env\Scripts\python.exe" -ArgumentList ".\services\voice_server.py" -WorkingDirectory "$AstraRoot" -WindowStyle Hidden
 
 Write-Host "[6/9] Starting Whisper Transcriber (Port 8885)..."
-Start-Process -FilePath "f:\ASTRA\comfy_env\Scripts\python.exe" -ArgumentList ".\services\whisper_server.py" -WorkingDirectory "f:\ASTRA" -WindowStyle Hidden
+Start-Process -FilePath "$AstraRoot\comfy_env\Scripts\python.exe" -ArgumentList ".\services\whisper_server.py" -WorkingDirectory "$AstraRoot" -WindowStyle Hidden
 
-Write-Host "[7/8] Starting PDF Engine (Port 8890)..."
-Start-Process -FilePath "f:\ASTRA\comfy_env\Scripts\python.exe" -ArgumentList ".\services\pdf_server.py" -WorkingDirectory "f:\ASTRA" -WindowStyle Hidden
+Write-Host "[7/9] Starting PDF Engine (Port 8890)..."
+Start-Process -FilePath "$AstraRoot\comfy_env\Scripts\python.exe" -ArgumentList ".\services\pdf_server.py" -WorkingDirectory "$AstraRoot" -WindowStyle Hidden
 
-Write-Host "[8/8] Starting Image Engine (Port 8892)..."
-Start-Process -FilePath "f:\ASTRA\comfy_env\Scripts\python.exe" -ArgumentList ".\services\image_server.py" -WorkingDirectory "f:\ASTRA" -WindowStyle Hidden
+Write-Host "[8/9] Starting Image Engine (Port 8892)..."
+Start-Process -FilePath "$AstraRoot\comfy_env\Scripts\python.exe" -ArgumentList ".\services\image_server.py" -WorkingDirectory "$AstraRoot" -WindowStyle Hidden
 
 Write-Host "`nWaiting for Open WebUI to complete initialization..." -ForegroundColor Yellow
 $ready = $false

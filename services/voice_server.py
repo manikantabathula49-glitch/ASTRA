@@ -14,6 +14,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import StreamingResponse, HTMLResponse
 from pydantic import BaseModel
+from starlette.concurrency import run_in_threadpool
 
 logging.basicConfig(
     level=logging.INFO,
@@ -77,11 +78,16 @@ async def text_to_speech(request: TTSRequest):
         import soundfile as sf
 
         logger.info(f"Generating speech | voice={request.voice} | text={request.input[:60]}...")
-        audio_chunks = []
 
-        for _, _, audio in pipeline(request.input, voice=request.voice, speed=request.speed):
-            if audio is not None:
-                audio_chunks.append(audio)
+        def _synthesize():
+            chunks = []
+            for _, _, audio in pipeline(request.input, voice=request.voice, speed=request.speed):
+                if audio is not None:
+                    chunks.append(audio)
+            return chunks
+
+        # Kokoro inference is blocking; keep the event loop free for other requests
+        audio_chunks = await run_in_threadpool(_synthesize)
 
         if not audio_chunks:
             raise HTTPException(status_code=500, detail="No audio was generated.")

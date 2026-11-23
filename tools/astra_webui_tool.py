@@ -136,7 +136,7 @@ class Tools:
                 filename = data.get("filename", "document.pdf")
                 download_path = data.get("download_url", f"/download/{filename}")
                 pdf_url = f"{self.valves.PDF_URL}{download_path}"
-                filepath = data.get("filepath", f"f:\\ASTRA\\pdf_output\\{filename}")
+                filepath = data.get("filepath", filename)
                 return (
                     f"📄 **PDF Document Created Successfully!**\n\n"
                     f"### 📑 {title}\n"

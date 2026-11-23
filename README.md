@@ -58,7 +58,7 @@ Open `http://localhost:8080` and try prompting:
 ## 📁 Repository Structure
 
 ```text
-f:\ASTRA\
+ASTRA\                             # (any folder/drive — paths are resolved automatically)
 ├── Start-ASTRA.bat                  # Primary 1-click startup launcher
 ├── run_astra.ps1                    # PowerShell startup script
 ├── Modelfile                        # Root Ollama model configuration
@@ -96,6 +96,7 @@ f:\ASTRA\
 │   ├── test_image_gen.py            # Image generation validation
 │   ├── test_pipe.py                 # Open WebUI Pipe validation
 │   ├── test_runner.py               # Process runner diagnostic
+│   ├── test_pdf_offline.py          # Offline PDF engine regression tests (no services needed)
 │   └── inspect_astra.py             # SQLite DB inspector
 │
 └── deployment\                      # ☁️ Docker & Cloud Configurations
@@ -119,6 +120,13 @@ f:\ASTRA\
 ### 3. Open WebUI Pipe Integration & Database Sync
 * **Challenge:** Open WebUI is natively text-focused and does not support real-time inline document/audio rendering or dynamic tool triggers by default.
 * **Solution:** Created a custom Pipe Function (`tools/create_astra_pipe.py`) and SQLite database sync script (`core/sync_webui_db.py`) that captures prompt intents and renders base64 images and PDF download cards directly in chat streams.
+
+---
+
+### 4. Portable Paths & Security
+* **Run from any folder/drive:** scripts locate the project from their own location (override with the `ASTRA_HOME` env var). `DATA_DIR` is honoured when locating `webui.db`.
+* **Per-install secret key:** `WEBUI_SECRET_KEY` is no longer hardcoded. If it isn't set, a random key is generated once and saved to `<DATA_DIR>/.webui_secret_key`.
+* **Safe downloads:** the Image and PDF `/download/{filename}` endpoints reject path-traversal filenames.
 
 ---
 

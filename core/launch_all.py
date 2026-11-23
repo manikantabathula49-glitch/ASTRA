@@ -12,9 +12,21 @@ import socket
 import urllib.request
 import json
 
-base_dir = r"f:\ASTRA"
-comfy_python = os.path.join(base_dir, "comfy_env", "Scripts", "python.exe")
-webui_python = os.path.join(base_dir, "webui_env", "Scripts", "python.exe")
+BASE_DIR = os.environ.get("ASTRA_HOME") or os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+base_dir = BASE_DIR
+
+
+def venv_python(name):
+    """Return the interpreter of a project venv (Windows or Linux/macOS layout), else the current one."""
+    for rel in (("Scripts", "python.exe"), ("bin", "python")):
+        path = os.path.join(BASE_DIR, name, *rel)
+        if os.path.exists(path):
+            return path
+    return sys.executable
+
+
+comfy_python = venv_python("comfy_env")
+webui_python = venv_python("webui_env")
 
 log_dir = os.path.join(base_dir, "service_logs")
 os.makedirs(log_dir, exist_ok=True)
@@ -67,7 +79,9 @@ for name, cmd, port, log_name in services:
     env["ENABLE_BASE_MODELS_CACHE"] = "True"
     env["ENABLE_PIP_INSTALL_FRONTMATTER_REQUIREMENTS"] = "False"
     env["USER_AGENT"] = "ASTRA-AI"
-    env["FRONTEND_BUILD_DIR"] = os.path.join(base_dir, "webui_env", "Lib", "site-packages", "open_webui", "frontend")
+    frontend_dir = os.path.join(base_dir, "webui_env", "Lib", "site-packages", "open_webui", "frontend")
+    if os.path.isdir(frontend_dir):
+        env["FRONTEND_BUILD_DIR"] = frontend_dir  # otherwise run_webui.py auto-detects it
     env["FROM_INIT_PY"] = "true"
     env["ENABLE_IMAGE_GENERATION"] = "True"
     env["IMAGE_GENERATION_ENGINE"] = "openai"
