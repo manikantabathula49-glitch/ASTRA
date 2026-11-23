@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>AI vs ML vs DL: Exam Notes</title>
+<style>
+  @page { size: A4; margin: 14mm 14mm 16mm; }
+  :root { --ai:#2563EB; --ml:#16A34A; --dl:#D97706; --ink:#0F172A; --muted:#475569; --line:#E2E8F0; --soft:#F8FAFC; }
+  * { box-sizing: border-box; }
+  body { font-family: Inter, "DejaVu Sans", sans-serif; color: var(--ink); font-size: 10.5pt; line-height: 1.45; margin: 0; }
+  h1 { font-size: 22pt; margin: 0 0 2mm; letter-spacing: -0.3px; }
+  h2 { font-size: 13pt; margin: 6mm 0 2.5mm; padding-bottom: 1.5mm; border-bottom: 2px solid var(--line); }
+  h3 { font-size: 11pt; margin: 3mm 0 1mm; }
+  p { margin: 1.5mm 0; }
+  .brand { display:flex; justify-content:space-between; align-items:center; border-bottom: 3px solid var(--ink); padding-bottom: 3mm; margin-bottom: 4mm; }
+  .brand .ch { font-weight: 800; font-size: 11pt; }
+  .brand .sub { color: var(--muted); font-size: 9pt; }
+  .pill { display:inline-block; padding: 0.5mm 2.5mm; border-radius: 99px; font-weight: 700; font-size: 9pt; color: #fff; }
+  .ai { color: var(--ai); } .ml { color: var(--ml); } .dl { color: var(--dl); }
+  .bg-ai { background: var(--ai); } .bg-ml { background: var(--ml); } .bg-dl { background: var(--dl); }
+  .grid3 { display:grid; grid-template-columns: repeat(3,1fr); gap: 3mm; }
+  .card { border: 1px solid var(--line); border-radius: 3mm; padding: 3mm; background: var(--soft); }
+  .card h3 { margin-top: 0; }
+  table { width:100%; border-collapse: collapse; margin: 2mm 0; font-size: 9.5pt; }
+  th, td { border: 1px solid var(--line); padding: 1.6mm 2mm; text-align: left; vertical-align: top; }
+  th { background: #F1F5F9; }
+  .tip { border-left: 4px solid var(--dl); background: #FFFBEB; padding: 2mm 3mm; margin: 2.5mm 0; border-radius: 0 2mm 2mm 0; }
+  .trap { border-left: 4px solid #DC2626; background: #FEF2F2; padding: 2mm 3mm; margin: 2.5mm 0; border-radius: 0 2mm 2mm 0; }
+  .circles { display:flex; align-items:center; gap:6mm; margin: 2mm 0 1mm; }
+  ol, ul { margin: 1mm 0 1mm 5mm; padding-left: 3mm; }
+  li { margin: 0.6mm 0; }
+  .qa { border: 1px solid var(--line); border-radius: 2mm; padding: 2mm 3mm; margin: 2mm 0; break-inside: avoid; }
+  .qa b.q { display:block; margin-bottom: 0.8mm; }
+  .page-break { break-before: page; }
+  .foot { margin-top: 5mm; padding-top: 2mm; border-top: 1px solid var(--line); color: var(--muted); font-size: 8.5pt; display:flex; justify-content:space-between; }
+  .ans { color: var(--muted); font-size: 9pt; }
+</style>
+</head>
+<body>
+
+<div class="brand">
+  <div><div class="ch">AI with Mani</div><div class="sub">Free exam notes · Telugu + English video on YouTube</div></div>
+  <div style="text-align:right"><span class="pill bg-ai">AI</span> <span class="pill bg-ml">ML</span> <span class="pill bg-dl">DL</span></div>
+</div>
+
+<h1>AI vs ML vs DL: Exam Notes</h1>
+<p class="ans">Definitions, differences, types, algorithms, deep learning basics, and ready-to-write answers.</p>
+
+<h2>1. The big picture</h2>
+<div class="circles">
+  <svg width="170" height="150" viewBox="0 0 170 150" aria-label="AI contains ML which contains DL">
+    <circle cx="85" cy="75" r="70" fill="#DBEAFE" stroke="#2563EB" stroke-width="3"/>
+    <circle cx="85" cy="92" r="47" fill="#DCFCE7" stroke="#16A34A" stroke-width="3"/>
+    <circle cx="85" cy="110" r="24" fill="#FEF3C7" stroke="#D97706" stroke-width="3"/>
+    <text x="85" y="28" text-anchor="middle" font-weight="800" fill="#2563EB" font-size="14">AI</text>
+    <text x="85" y="66" text-anchor="middle" font-weight="800" fill="#16A34A" font-size="13">ML</text>
+    <text x="85" y="115" text-anchor="middle" font-weight="800" fill="#D97706" font-size="12">DL</text>
+  </svg>
+  <div>
+    <p><b>Every DL is ML. Every ML is AI.</b> Not the other way round.</p>
+    <p>Not all AI learns: GPS shortest-path and old chess programs are AI built on rules and search, not ML.</p>
+  </div>
+</div>
+
+<div class="grid3">
+  <div class="card"><h3 class="ai">Artificial Intelligence</h3>Machines doing tasks that normally need human intelligence: reasoning, deciding, understanding language, recognising things.<br><i>e.g. Google Maps routes, chess engines, voice assistants</i></div>
+  <div class="card"><h3 class="ml">Machine Learning</h3>A subset of AI where machines <b>learn patterns from data</b> instead of following rules written by humans.<br><i>e.g. spam filter, Netflix/YouTube recommendations</i></div>
+  <div class="card"><h3 class="dl">Deep Learning</h3>A subset of ML that uses <b>neural networks with many hidden layers</b> to learn directly from raw data (images, audio, text).<br><i>e.g. face unlock, ChatGPT, Google Translate</i></div>
+</div>
+
+<div class="tip"><b>Exam tip:</b> Arthur Samuel (1959) described ML as giving computers the ability to learn without being explicitly programmed.</div>
+
+<h3>Traditional programming vs Machine Learning</h3>
+<table>
+  <tr><th></th><th>Input</th><th>Output</th></tr>
+  <tr><td><b>Traditional programming</b></td><td>Rules + Data</td><td>Answers</td></tr>
+  <tr><td><b>Machine Learning</b></td><td>Data + Answers</td><td>Rules (the model)</td></tr>
+</table>
+
+<h3>Timeline</h3>
+<table>
+  <tr><th>1950</th><th>1956</th><th>1959</th><th>1986</th><th>1997</th><th>2012</th><th>2017</th><th>2022</th></tr>
+  <tr><td>Turing Test idea</td><td>Term "AI" (Dartmouth)</td><td>"Machine Learning" named</td><td>Backpropagation popularised</td><td>Deep Blue beats Kasparov</td><td>AlexNet: DL boom</td><td>Transformers</td><td>ChatGPT launched</td></tr>
+</table>
+
+<div class="page-break"></div>
+
+<h2>2. How machine learning learns</h2>
+<table>
+  <tr><th>Term</th><th>Meaning</th><th>Student analogy</th></tr>
+  <tr><td><b>Features</b></td><td>Inputs / clues (size, bedrooms, location)</td><td>Information in the question</td></tr>
+  <tr><td><b>Label</b></td><td>The correct answer to predict (price)</td><td>Answer key</td></tr>
+  <tr><td><b>Training data</b></td><td>Examples the model learns from (~80%)</td><td>Practice questions with answers</td></tr>
+  <tr><td><b>Test data</b></td><td>Hidden examples to check the model (~20%)</td><td>Final exam</td></tr>
+  <tr><td><b>Model</b></td><td>Maths function learned from data</td><td>Your understanding of the method</td></tr>
+  <tr><td><b>Weights / parameters</b></td><td>Numbers inside the model that training adjusts</td><td>—</td></tr>
+  <tr><td><b>Loss</b></td><td>Number showing how wrong predictions are</td><td>Marks lost</td></tr>
+  <tr><td><b>Epoch</b></td><td>One full pass over the training data</td><td>One full revision of the syllabus</td></tr>
+</table>
+
+<p><b>ML pipeline:</b> collect data → clean data → choose model → train → test → deploy (use). <i>Garbage in, garbage out:</i> data quality matters more than a fancy model.</p>
+<p><b>Training loop:</b> predict → measure error (loss) → adjust weights → repeat.</p>
+<p><b>Gradient descent:</b> like walking downhill blindfolded; each step moves the weights in the direction that reduces loss. The <b>learning rate</b> is the step size: too big overshoots the minimum, too small is very slow.</p>
+
+<table>
+  <tr><th>Underfitting</th><th>Good fit</th><th>Overfitting</th></tr>
+  <tr><td>Model too simple; bad on training <i>and</i> test data</td><td>Learns the real pattern; good on new data</td><td>Memorises training data (and noise); great on training, bad on test</td></tr>
+  <tr><td>Student who didn't study</td><td>Student who understood</td><td>Student who memorised answers</td></tr>
+</table>
+<p class="ans">Signs of overfitting: training loss keeps falling while validation loss rises. <b>Data leakage</b> = test data sneaking into training, which makes results look falsely good.</p>
+
+<h2>3. Three types of machine learning</h2>
+<table>
+  <tr><th>Type</th><th>Data</th><th>Goal</th><th>Examples</th></tr>
+  <tr><td><b class="ml">Supervised</b></td><td>Labelled (input + correct answer)</td><td>Predict the answer for new inputs</td><td>Spam filter, house price, exam marks</td></tr>
+  <tr><td><b class="ai">Unsupervised</b></td><td>No labels</td><td>Find groups / hidden patterns</td><td>Customer segments, fraud detection</td></tr>
+  <tr><td><b class="dl">Reinforcement</b></td><td>Rewards / penalties from an environment</td><td>Learn the best actions</td><td>Game-playing AI (AlphaGo), robots</td></tr>
+</table>
+<p><b>Supervised has two kinds:</b> <b>Classification</b> → output is a category (spam/not spam, cat/dog). <b>Regression</b> → output is a number (price, temperature, marks).</p>
+<p><b>Reinforcement keywords:</b> agent, environment, action, reward. <b>RLHF</b> (Reinforcement Learning from Human Feedback) is used to make chatbots like ChatGPT more helpful.</p>
+
+<h2>4. Popular algorithms (cheat sheet)</h2>
+<table>
+  <tr><th>Algorithm</th><th>Type</th><th>Output</th><th>Idea in one line</th></tr>
+  <tr><td>Linear Regression</td><td>Supervised</td><td>Number</td><td>Best straight line: y = m·x + c</td></tr>
+  <tr><td>Logistic Regression</td><td>Supervised</td><td>Category</td><td>Sigmoid gives probability 0–1; threshold 0.5</td></tr>
+  <tr><td>Decision Tree</td><td>Supervised</td><td>Category / number</td><td>Flowchart of yes/no questions</td></tr>
+  <tr><td>Random Forest</td><td>Supervised</td><td>Category / number</td><td>Many trees vote; less overfitting</td></tr>
+  <tr><td>KNN</td><td>Supervised</td><td>Category</td><td>Majority vote of the K nearest neighbours</td></tr>
+  <tr><td>SVM</td><td>Supervised</td><td>Category</td><td>Boundary with the widest margin</td></tr>
+  <tr><td>K-Means</td><td>Unsupervised</td><td>Groups</td><td>K centres; assign nearest; move to average; repeat</td></tr>
+</table>
+<div class="trap"><b>Exam trap:</b> Logistic <i>Regression</i> is used for <b>classification</b>, not regression.</div>
+
+<h2>5. Deep learning basics</h2>
+<p><b>Artificial neuron:</b> output = activation( w₁x₁ + w₂x₂ + … + b ). Inspired by brain neurons, but far simpler.</p>
+<p><b>Worked example:</b> inputs 0.5, 0.2, 0.9 · weights 0.8, −0.4, 0.6 → 0.40 − 0.08 + 0.54 = <b>0.86</b> → ReLU(0.86) = 0.86.</p>
+<p><b>Activation functions:</b> ReLU = max(0, x), fast, used in hidden layers. Sigmoid = 1/(1+e<sup>−x</sup>), squashes to 0–1. Without activations, the network can only learn straight-line (linear) relationships.</p>
+<p><b>Why "deep"?</b> Many hidden layers between input and output. Each layer learns more complex features: edges → shapes → parts → whole object.</p>
+<p><b>Backpropagation:</b> make a prediction (forward pass) → compute the error → send it backward through the layers → adjust each weight with gradient descent.</p>
+<table>
+  <tr><th>Network</th><th>Best for</th></tr>
+  <tr><td>CNN (Convolutional)</td><td>Images, video: filters slide over the image to detect patterns</td></tr>
+  <tr><td>RNN / LSTM</td><td>Sequences (older approach for text and speech)</td></tr>
+  <tr><td>Transformer</td><td>Language: ChatGPT, Gemini, Claude. Uses <b>attention</b> to focus on relevant words</td></tr>
+  <tr><td>GAN / Diffusion</td><td>Generating images</td></tr>
+</table>
+<p><b>How ChatGPT works (simply):</b> a large Transformer trained to predict the next word (token), one at a time. GPT-3 has 175 billion parameters.</p>
+<p><b>Limits of DL:</b> needs huge data and GPUs, expensive, hard to explain (black box), and can produce confident but wrong answers (<b>hallucinations</b>). Verify important facts.</p>
+
+<h2>6. ML vs DL</h2>
+<table>
+  <tr><th></th><th class="ml">Traditional ML</th><th class="dl">Deep Learning</th></tr>
+  <tr><td>Data needed</td><td>Small to medium (thousands)</td><td>Large (often millions)</td></tr>
+  <tr><td>Features</td><td>Mostly chosen by humans</td><td>Learned automatically</td></tr>
+  <tr><td>Hardware</td><td>Normal CPU is often enough</td><td>GPUs / TPUs</td></tr>
+  <tr><td>Training time</td><td>Minutes to hours</td><td>Hours to weeks</td></tr>
+  <tr><td>Explainability</td><td>Easier to explain</td><td>Black box</td></tr>
+  <tr><td>Best for</td><td>Tables, structured data</td><td>Images, audio, text</td></tr>
+</table>
+
+<h2>7. Ready-to-write answers</h2>
+<div class="qa"><b class="q">Q1 (2 marks). Define AI, ML and DL.</b>AI is making machines perform tasks that need human intelligence. ML is a subset of AI where machines learn patterns from data without explicit rules. DL is a subset of ML that uses multi-layer neural networks to learn from raw data.</div>
+<div class="qa"><b class="q">Q2 (2 marks). Differentiate classification and regression.</b>Both are supervised learning. Classification predicts a category (e.g. spam / not spam); regression predicts a continuous number (e.g. house price).</div>
+<div class="qa"><b class="q">Q3 (2 marks). What is overfitting?</b>When a model memorises the training data, including noise, so it performs well on training data but poorly on new, unseen data. Reduced by more data, simpler models, regularisation, or ensembles like random forest.</div>
+<div class="qa"><b class="q">Q4 (5 marks). Explain five differences between ML and DL.</b>(1) Scope: DL is a subset of ML. (2) Data: DL needs far more data. (3) Features: ML relies on human-chosen features; DL learns features automatically. (4) Hardware: DL usually needs GPUs. (5) Explainability: ML models are easier to interpret; DL is a black box. Add one example each: spam filter (ML), face recognition (DL).</div>
+<div class="qa"><b class="q">Q5 (5 marks). Explain the types of machine learning with examples.</b>Supervised (labelled data; classification and regression; spam filter, price prediction). Unsupervised (unlabelled data; clustering such as K-Means; customer segmentation). Reinforcement (agent learns from rewards and penalties in an environment; game-playing AI, robots). Draw the summary table from Section 3.</div>
+
+<h3>Self-test</h3>
+<ol>
+  <li>ChatGPT belongs to AI, ML or DL? <span class="ans">→ DL (and therefore ML and AI)</span></li>
+  <li>Netflix recommendations? <span class="ans">→ ML</span></li>
+  <li>Grouping customers without labels? <span class="ans">→ Unsupervised (clustering)</span></li>
+  <li>A robot learning to walk with rewards? <span class="ans">→ Reinforcement learning</span></li>
+  <li>Which algorithm predicts a number like house price? <span class="ans">→ Linear regression</span></li>
+</ol>
+
+<div class="foot"><span>AI with Mani · YouTube & Instagram</span><span>Share with a friend preparing for exams</span></div>
+</body>
+</html>
