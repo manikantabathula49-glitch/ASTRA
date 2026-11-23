@@ -1,0 +1,25 @@
+# AI with Mani: branding pack
+
+Original designs in the channel colours (AI blue, ML green, DL orange).
+
+| File | Use |
+|---|---|
+| `BrandIntro.mp4` | 5s channel intro: particles form the logo, then name and tagline |
+| `BrandTransition_*` | 1.2s colour-bar wipe to place between scenes |
+| `Sub_<video>_*` | 7s subscribe pop-up: cursor clicks Subscribe, bell rings, special message |
+
+Each overlay comes in 3 versions:
+- `_alpha.mov`: transparent, for Premiere, DaVinci Resolve, Final Cut, CapCut desktop
+- `_green.mp4`: green screen, for CapCut mobile / VN (use **Chroma Key**)
+- `.mp4`: dark background preview
+
+Special messages (edit `SUB_NOTES` in `branding.py`, then `./render_branding.sh`):
+| Video | Message |
+|---|---|
+| `ai_ml_dl` | Exams ki prepare avtunnara? Ee video save cheyyandi! |
+| `quantum` | Quantum series continue avtundi. Next episode miss avvakandi! |
+| `ai_agents` | AI Agents future! Next level content vasthundi |
+| `neural_networks` | Neural Networks next video lo, deep ga! |
+| `general` | Video nachithe like cheyyandi! |
+
+Tip: place the subscribe pop-up around 30-60 seconds in, right after a "wow" moment, not at the very start.
