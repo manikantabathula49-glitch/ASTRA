@@ -33,3 +33,11 @@ Original scenes in styles referenced from Pinterest (isometric servers, code typ
 | `CodeVsData` | Hand-written rules vs rules learned from data | C07 |
 | `NeonData` | How much data rule-based AI, ML and DL need | C64 |
 | `GpuChip` | Why GPUs train neural networks faster | C66 |
+
+## People scenes (`people.py`)
+Original flat-style characters interacting with tech.
+| Scene | What happens | Place near |
+|---|---|---|
+| `PresenterBoard` | Presenter waves, points at a board drawing AI ⊃ ML ⊃ DL; students go "?" → "!" | C02 / intro |
+| `TeachTheRobot` | Person shows labelled Cat/Dog cards to a robot, it learns, then guesses a new card | C30–C31 (supervised) |
+| `StudentAndAI` | Student types "What is Deep Learning?", AI answers, "?" turns into a lightbulb | Hook / intro / C57 |

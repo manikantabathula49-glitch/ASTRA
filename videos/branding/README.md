@@ -23,3 +23,12 @@ Special messages (edit `SUB_NOTES` in `branding.py`, then `./render_branding.sh`
 | `general` | Video nachithe like cheyyandi! |
 
 Tip: place the subscribe pop-up around 30-60 seconds in, right after a "wow" moment, not at the very start.
+
+## Transitions (`transitions.py`)
+Each ~1s, in `_alpha.mov` (transparent), `_green.mp4` and `.mp4` versions. **Cut from clip A to clip B at the midpoint**, when the screen is fully covered.
+| File | Look | Best for |
+|---|---|---|
+| `TrIris` | Blue/green/orange rings expand, then open like a camera iris | Chapter changes |
+| `TrSlidePanels` | 5 coloured panels drop in and lift away | Section changes |
+| `TrBlobs` | Soft colour blobs swell and slide off | Calm topic changes |
+| `TrSpeedLines` | Light streaks + flash | Fast, exciting moments (hook, reveals) |
