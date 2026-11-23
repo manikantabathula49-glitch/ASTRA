@@ -1,514 +1,542 @@
-# AI vs ML vs DL — Full Voiceover Script (Telugu + English)
+# AI vs ML vs DL: Voiceover Script (Telugu + English)
 
-**Channel:** AI with Mani · **Length:** 18–21 minutes · **Spoken words:** ~2,700 (130–150 words/minute)
+**Channel:** AI with Mani · **Length:** about 19–22 minutes · **Version 2** (natural speaking style)
 
-**How to read this script**
-- `[ ... ]` = what is on screen (clip number from `SHOT_LIST.md`, Flow clip, or new scene). Don't read these aloud.
-- **Bold** = stress this word.
-- `(pause)` = take a 1-second breath. Pauses make you sound confident.
-- Speak like you're explaining to a friend before an exam — not like a news reader.
-- Telugu is written in English letters. Change any word to how you naturally speak.
+**How to use this**
+- `[ ... ]` = what's on screen. Don't read it aloud.
+- `(pause)` = stop for a breath. `(pause 3)` = 3 seconds, for quizzes.
+- **Bold** = stress the word.
+- `[YOUR STORY]` = put a real moment from your own life here. This is what makes it sound like YOU. Keep it short, 2–3 lines.
+- Read it once out loud before recording. Wherever a line feels weird in your mouth, change it to how you'd actually say it. Seriously, change it. Your words > my words.
 
 ---
 
-## 0:00 — HOOK (first 40 seconds: most important part!)
+## 0:00 · HOOK
 
-`[HookKinetic — "AI. ML. DL." snapping in]`
+`[HookKinetic: "AI." "ML." "DL." snap in]`
 
 AI. ML. DL.
-Ee moodu words ni meeru roju vintunnaru. News lo, college lo, YouTube lo, prathi chota.
+Ee moodu words lekunda oka roju kooda gadavatledu. News lo, college lo, Instagram lo... ekkada chusina ive.
 
-`["Confused?" gets selected by the cursor]`
+`["Confused?" gets selected]`
 
-Kaani nijam cheppandi... ee moodinti madhya difference enti ani evaraina adigithe, clear ga cheppagalara? (pause)
-Chala mandi cheppaleru. Endukante chala videos lo ee moodu words ni oke meaning lo use chestaru. Adi **wrong**.
+Kaani okka question. Ee moodinti madhya difference enti ani evaraina adigithe... meeru cheppagalara? (pause)
+Honest ga cheppandi.
+Chala mandi cheppaleru. Mistake vaalladi kaadu. Chala videos lo ee moodu words ni kalipesi, same meaning lo vaadestaru. Anduke confusion.
 
-`[Flow clip 1 — robot / futuristic city]`
-`[Flow clip 2 — phone face unlock]`
-`[Flow clip 3 — ChatGPT style screen]`
+`[Flow clip 1: robot / futuristic city]`
+`[Flow clip 2: phone face unlock]`
+`[Flow clip 3: ChatGPT style screen]`
 
-Mee phone face unlock — adi AI aa, ML aa, DL aa?
-ChatGPT — edi?
-Netflix recommendations — edi?
+Mee phone face unlock... adi AI aa? ML aa? DL aa?
+ChatGPT?
+Netflix lo "you might like this" ani vache suggestions?
 
-`[HookKinetic — words travel along the curve]`
+Ippude answer cheppakandi. Gurthupettukondi. Video last lo malli adugutha.
 
-Ee video ayyesariki, meeru ee questions ki **confident** ga answer cheptaru. Exam lo 2 marks question vachina, 10 marks question vachina, interview lo adigina — meeru ready.
+`[HookKinetic: words travel along the curve]`
+
+Ee video aipoyesariki, 2 marks question aina, 10 marks question aina, interview aina... meeru confident ga cheptaru. Promise.
 
 `["One video. All 3. Exam-ready." + "Telugu lo!"]`
 
-One video. All three. Exam-ready. Anni simple Telugu lo. Let's go!
+Okka video. Moodu topics. Simple Telugu lo. Start cheddam.
 
 ---
 
-## 0:40 — INTRO
+## 0:45 · INTRO
 
 `[BrandIntro]`
 
-Hi everyone, welcome to **AI with Mani**! Nenu Mani.
-Ee channel lo AI, Machine Learning, Quantum Computing laanti complex topics ni simple ga, Telugu lo explain chestanu.
+Hi andi, welcome to **AI with Mani**. Nenu Mani.
+AI, ML, Quantum... ilaanti heavy topics ni easy ga, mana Telugu lo explain cheyyadaniki ee channel.
 
-`[C01 style — show a quick chapter list, or a Flow clip]`
+`[YOUR STORY: e.g. "Nenu first time ML chadivinappudu, naaku kooda ivanni oke laaga anipinchayi..." — only if it's true for you]`
 
-Ee video lo manam 7 chapters cover cheddam:
-First, asalu AI ante enti.
-Tarvatha, AI, ML, DL ela connect ayi untayi — big picture.
-Machine ela nerchukuntundi.
-ML lo moodu types.
-Famous algorithms.
-Deep Learning and neural networks — ChatGPT venaka unna engine.
-And last lo, exam kosam full revision with quizzes.
+Ee video lo 7 chapters unnayi. Asalu AI ante enti nundi start chesi, machine ela nerchukuntundi, ML types, algorithms, Deep Learning, ChatGPT ela pani chestundi... last lo full exam revision.
 
-Video madhyalo quiz questions untayi. Pause chesi answer guess cheyyandi — appude meeku baaga gurtuntundi. Ready? Start cheddam.
+Madhya madhyalo nenu meeku questions adugutha. Appudu video pause chesi, meeru alochinchandi. Correct ga ravakapoyina parledu. Alochinche aa 5 seconds lo ne asalu learning jarugutundi. Sare na? Let's go.
 
 ---
 
-## CHAPTER 1 — What is AI? (about 2 minutes)
+## CHAPTER 1 · What is AI? (~2 min)
 
-`[Flow clips 4–10 — real-world AI scenes: self-driving car, voice assistant, robot arm, hospital scan, chess, Google Maps]`
+`[Flow clips 4–10: Google Maps, voice assistant, robot arm, hospital scan, chess, self-driving car]`
 
-Mundu oka simple question. Intelligence ante enti?
-Manam alochinchagalam, decide cheyyagalam, kotha vishayalu nerchukogalam, problems solve cheyyagalam. Ide intelligence.
+Mundu meeke oka question. (pause)
+"Intelligence" ante meeru em anukuntunnaru?
 
-Ippudu ade pani oka **machine** chesthe? Ade **Artificial Intelligence**.
-Artificial ante — manushulu create chesindi. Natural ga puttindi kaadu.
+...Manam alochistham. Decide chestham. Kotha vishayalu nerchukuntam. Problems solve chestham. Idantha intelligence.
 
-`[Flow clip — Google Maps / traffic]`
+Ippudu ade pani oka machine chesthe? Adi **Artificial Intelligence**. Artificial ante manushulu tayaru chesindi, natural ga puttindi kaadu. Anthe.
 
-Example chuddam. Meeru Google Maps open chesi destination pedithe, adi traffic chusi, fastest route chuputundi. Oka human driver alochinche pani ni machine chestundi. Adi AI.
+`[Flow clip: Google Maps / traffic]`
 
-`[Flow clip — voice assistant]`
+Google Maps chudandi. Meeru destination pettagane, traffic chusi, "ee route lo 10 minutes save" antundi. Oka experienced driver alochinche pani adi. Machine chestundi.
 
-"Hey Google, repu weather ela undi?" ani adigithe, mee voice ni artham chesukuni answer istundi. Adi kooda AI.
+`[Flow clip: voice assistant]`
 
-`[Flow clip — chess]`
+"Hey Google, repu varsham padutunda?" Mee voice vini, artham chesukuni, answer istundi. Adi kooda AI.
 
-1997 lo IBM Deep Blue ane computer, world chess champion Garry Kasparov ni odinchindi. Prapancham antha shock ayyindi. Adi kooda AI.
+`[Flow clip: chess]`
 
-`[Flow clip — robot]`
+1997 lo IBM vaalla Deep Blue ane computer, appati world chess champion Garry Kasparov ni odinchindi. Appudu chala mandi "machines manalni overtake chesestayi" ani bayapaddaru.
 
-So simple definition gurthupettukondi:
-**AI ante, saadharanam ga manishi intelligence avasaram ayye panulni, machine cheyyadam.**
+`[Flow clip: robot]`
 
-Kaani ikkade chala mandi confuse avtaru. AI ante robots maatrame anukuntaru. Kaadu. AI oka **pedda field**. Andulo chala techniques untayi. Kondaru AI systems manam raasina rules follow avtayi. Kondaru data nundi **nerchukuntayi**. Aa nerchukune part ee — Machine Learning. Next chapter lo idi clear ga chuddam.
+So simple ga:
+**Manishi buddhi avasaram ayye panulni machine cheyyadam = AI.**
 
----
-
-## CHAPTER 2 — The Big Picture (about 2.5 minutes)
-
-`[C01 — Chapter 2 card]`
-
-Chapter 2. The Big Picture.
-
-`[C02 — nested circles]`
-
-Moodu circles imagine cheyyandi.
-Anni kanna pedda circle — **Artificial Intelligence**.
-Daani lopala inko circle — **Machine Learning**.
-Daani lopala inka chinna circle — **Deep Learning**.
-
-Ante, Deep Learning anedi Machine Learning lo oka part. Machine Learning anedi AI lo oka part.
-Gurthupettukondi: **Every DL is ML. Every ML is AI. Kaani reverse lo kaadu.**
-
-`[C03 — AI definition]`
-
-AI definition already chusam — human intelligence avasaram ayye panulni machine cheyyadam.
-
-`[C04 — ML definition]`
-
-**Machine Learning** ante — AI lo oka branch, ekkada machine fixed rules follow avvakunda, **data nundi patterns nerchukuntundi**.
-Example: spam filter. Daaniki manam "ee word unte spam" ani rules raayamu. Vela emails chupistham, adi sontham ga nerchukuntundi.
-Exam tip: 1959 lo **Arthur Samuel** ML ni define chesaru — "learning without being explicitly programmed".
-
-`[C05 — DL definition]`
-
-**Deep Learning** ante — ML lo oka branch, ekkada **chala layers unna neural networks** use chestaru. Images, audio, text laanti raw data nundi direct ga nerchukuntundi.
-Face unlock, ChatGPT, Google Translate — ivanni Deep Learning.
-
-`[C06 — history timeline]`
-
-Konchem history chuddam. 1950 lo Alan Turing "machines alochinchagalava?" ani adigaru. 1956 lo "Artificial Intelligence" ane word puttindi. 1959 lo "Machine Learning" ane peru vachindi. 1986 lo backpropagation popular ayyindi — deeni gurinchi Chapter 6 lo chuddam. 1997 Deep Blue. 2012 lo AlexNet ane neural network image competition gelichindi — akkadi nundi Deep Learning boom start ayyindi. 2017 lo Transformers vachayi. 2022 lo ChatGPT launch ayyindi. Ippudu meeru aa history lo bhagam!
-
-`[C07 — rules vs learning]`
-
-Ippudu ee video lo **most important idea**. Jagratha ga vinandi.
-Normal programming lo, manam computer ki **rules** and **data** istham, adi **answers** istundi. Example: "marks 35 kanna ekkuva unte PASS" ani rule raastham.
-Machine Learning lo idi **reverse**. Manam **data** and **answers** istham. Computer sontham ga **rules** kanukkuntundi. (pause)
-Ide ML lo magic.
-
-`[C08 — rule-based AI vs ML]`
-
-So rule-based AI manam raasina cases ki maatrame pani chestundi. Kotha situation vasthe fail avtundi. ML examples nundi nerchukuntundi kabatti, kotha cases ni kooda handle cheyyagaladu.
-
-`[C09 — AI without ML]`
-
-Oka interesting point: prathi AI, ML kaadu. GPS shortest route, old chess programs, game lo enemies — ivanni AI, kaani avi nerchukovu. Rules and search maatrame. So **AI is bigger than ML**.
-
-`[C10 — sorting examples]`
-
-Konni examples sort cheddam. Old chess engine — AI, rules. Spam filter — ML. Face unlock — DL. GPS route — AI. Movie recommendations — ML. ChatGPT — DL.
-
-`[C11 — quiz]`
-
-Quiz time! ChatGPT ee field ki chendutundi? (pause 3 seconds)
-Answer: **Deep Learning**. And Deep Learning ML lo part, ML AI lo part kabatti — ChatGPT moodintiki chendutundi.
-
-`[Sub_ai_ml_dl — subscribe pop-up]`
-
-Ikkadi varaku clear ga artham ayithe, ee video ni **save** cheskondi — exams mundu revise cheyyadaniki use avtundi. Inka channel ki subscribe cheyyandi.
+Ikkada chala mandi chese mistake okati undi. AI ante robots ani anukuntaru. Kaadu. AI chala pedda field. Konni AI systems manam raasina rules ni follow avtayi anthe. Inkonni data chusi sontham ga **nerchukuntayi**. Aa nerchukune bhagam ki ee peru... Machine Learning. Next chapter lo idi clear avtundi.
 
 ---
 
-## CHAPTER 3 — How Machine Learning Learns (about 3.5 minutes)
+## CHAPTER 2 · The Big Picture (~2.5 min)
 
-`[C12 — Chapter 3 card]`
+`[C01: Chapter 2 card]`
 
-Chapter 3. Ippudu asalu point — machine **ela** nerchukuntundi?
+Chapter 2. Big picture.
 
-`[C13 — student analogy table]`
+`[C02: nested circles]`
+
+Moodu circles imagine cheyyandi. Okadaani lopala okati.
+Biggest circle... **AI**.
+Daani lopala... **Machine Learning**.
+Inka lopala, chinna circle... **Deep Learning**.
+
+Ante DL anedi ML lo oka part. ML anedi AI lo oka part.
+Ee okka line gurthupettukondi chalu: **every DL is ML, every ML is AI.** Reverse lo kaadu. Prathi AI, ML avvalsina avasaram ledu.
+
+`[C03: AI definition]`
+
+AI definition already chusam.
+
+`[C04: ML definition]`
+
+**Machine Learning** enti ante... machine ki manam rules cheppam. Data chupistham. Adi patterns sontham ga pattukuntundi.
+Spam filter teeskondi. "Free money ane word unte spam" ani manam ekkada raayam. Velasarlu spam emails, normal emails chupistham. Adi tane nerchukuntundi.
+1959 lo **Arthur Samuel** ane scientist ML ni ilaa define chesaru: programming cheyyakunda nerchukunela computers ki ability ivvadam. Exam lo idi raasthe extra impression.
+
+`[C05: DL definition]`
+
+**Deep Learning** ante ML lo inko step. Ikkada **neural networks** use chestaru, adi kooda chala layers unna networks. Photos, voice, text laanti raw data ni direct ga artham chesukuntundi.
+Face unlock, ChatGPT, Google Translate... ivanni DL.
+
+`[C06: history timeline]`
+
+Konchem history. Boring kaadu, promise.
+1950 lo Alan Turing "machines alochinchagalava?" ani oka question vesaru. 1956 lo "Artificial Intelligence" ane peru puttindi. 1959 lo "Machine Learning". 1986 lo backpropagation popular ayyindi, idi Chapter 6 lo chuddam. 1997 lo Deep Blue. 2012 lo AlexNet ane neural network oka pedda image competition lo andarni chala dooram lo vadilesi gelichindi. Akkadi nundi Deep Learning boom. 2017 lo Transformers. 2022 lo ChatGPT. Ippudu manam aa story lo madhyalo unnam.
+
+`[C07: rules vs learning]`
+
+Okay, ippudu ee video lo naaku most favourite part. Konchem focus pettandi.
+
+Normal programming lo em chestham? Computer ki **rules** istham, **data** istham. Adi **answers** istundi. Example: "marks 35 paina unte PASS." Rule manam raasam.
+
+Machine Learning lo? Ulta. Manam **data** istham, **answers** kooda istham. Rules ni computer kanukkuntundi. (pause)
+
+Okkasari alochinchandi. Rules raayadam kashtam ayina chota... face gurthupattadam, voice artham chesukovadam... akkada ML ne dikku. Endukante "face ante ivi rules" ani evaru raayagalaru cheppandi?
+
+`[C08: rule-based AI vs ML]`
+
+Anduke rule-based systems manam plan chesina cases ki maatrame pani chestayi. Kotha situation vasthe, confuse. ML examples nundi nerchukuntundi kabatti, mundu chudani cases ni kooda handle chestundi.
+
+`[C09: AI without ML]`
+
+Oka twist. Prathi AI nerchukodu. GPS shortest route chudandi... adi oka algorithm, rules and search. Nerchukovatledu. Kaani adi kooda AI ne. Old chess programs, games lo villains, same. So AI ML kanna pedda.
+
+`[C10: sorting examples]`
+
+Practice cheddam. Old chess engine... AI. Spam filter... ML. Face unlock... DL. GPS route... AI. Movie recommendations... ML. ChatGPT... DL.
+
+`[C11: quiz]`
+
+Quiz! ChatGPT ee field ki chendutundi? (pause 3)
+Deep Learning. Kaani DL ML lo undi, ML AI lo undi kabatti... ChatGPT moodintiki chendutundi. Trick question, sorry. 😄
+
+`[Sub_ai_ml_dl: subscribe pop-up]`
+
+Ikkadi daaka clear ga unte, ee video ni save cheskondi. Exam mundu roju okasari chusthe chalu. Channel kotha aithe, subscribe kooda cheyyandi. Naaku chala help avtundi.
+
+---
+
+## CHAPTER 3 · How Machine Learning Learns (~4 min)
+
+`[C12: Chapter 3 card]`
+
+Chapter 3. Mundu quick check. (pause)
+ML lo computer ki em istham? Rules aa, data aa?
+...Data and answers. Rules adi kanukkuntundi. Good. Ippudu asalu question: **ela** kanukkuntundi?
+
+`[C13: student analogy table]`
 
 Meeru exam ki ela prepare avtaro gurthu tecchukondi.
-Mundu practice questions with answers chustaru — ML lo adi **training data**.
-Method nerchukuntaru — adi **training the model**.
-Final exam lo kotha questions vastayi — adi **test data**.
-Meeku vachina marks — adi **accuracy**.
-Artham kakunda answers byheart chesthe? Kotha question vasthe fail avtaru. ML lo daanini **overfitting** antaru. Ee word gurthupettukondi, malli vastundi.
+Mundu practice questions, answers tho saha chustaru. ML lo ide **training data**.
+Method ardham chesukuntaru. Adi **training**.
+Exam lo kotha questions. Adi **test data**.
+Vachina marks... **accuracy**.
+Concept ardham cheskokunda, answers byheart chesthe? Exam lo question konchem twist chesthe, gone. ML lo deenini **overfitting** antaru. Ee word malli vastundi, gurthupettukondi.
 
-`[C14 — house price dataset]`
+`[C14: house price dataset]`
 
-Oka real dataset chuddam — house prices.
-Size, bedrooms, location — ivi **features**. Ante clues, inputs.
-Price — idi **label**. Ante manaki kavalsina answer.
-Ippudu kotha illu vachindi: 1300 square feet, 3 bedrooms, city lo. Price enti? Model patterns chusi — dagga dagga 58 lakhs ani predict chestundi.
+Oka real example. House prices table.
+Size, bedrooms, location... ivi **features**. Clues anukondi.
+Price... idi **label**. Manaki kavalsina answer.
+Ippudu kotha illu: 1300 square feet, 3 bedrooms, city. Price entha untundi? Model mundu chusina examples nundi pattern pattukuni... dagga dagga 58 lakhs antundi.
 
-`[C15 — features & label definition]`
+`[C15: features & label]`
 
-Simple ga: **Features = inputs. Label = correct answer.** Labels unna data tho nerchukovadam ni supervised learning antaru — Chapter 4 lo chuddam.
+Short ga: **features = inputs, label = answer.** Labels unna data tho nerchukovadam ni supervised learning antaru. Next chapter.
 
-`[C16 — ML pipeline]`
+`[C16: ML pipeline]`
 
-Prathi ML project lo steps ivi: data collect cheyyadam, data clean cheyyadam, model choose cheyyadam, train cheyyadam, test cheyyadam, use cheyyadam.
-Oka secret cheptha — **fancy model kanna, manchi data important**. Chetta data isthe, chetta results vastayi. Garbage in, garbage out.
+Real project lo steps: data collect cheyyali, clean cheyyali, model choose cheyyali, train, test, appudu use.
+Industry lo unna vaallu oka maata cheptaru: **garbage in, garbage out.** Data chetta aithe, entha pedda model aina chetta results. Chala projects lo asalu time antha data cleaning ke potundi.
 
-`[C17 — train/test split]`
+`[C17: train/test split]`
 
-Data ni rendu parts ga split chestham. 80% training ki — model daani nundi nerchukuntundi. 20% hide chestham — adi final exam laaga.
-Rule: model already chusina data meeda test cheyyakoodadu. Adi question paper mundhe leak chesinattu!
+Data ni rendu bhagalu chestham. 80% tho model nerchukuntundi. 20% daachi pedatham. Adi final exam.
+Ikkada oka dangerous mistake undi, daaniki **data leakage** antaru. Test data emaina training lo leak aithe, model chala baaga perform chesinattu kanipistundi... real world lo fail. Question paper mundhe leak aithe, marks nammagalama? Same.
 
-`[C18 — regression line fitting]`
+`[C18: regression line fitting]`
 
-Ippudu nerchukovadam live ga chuddam. Ee dots houses. Model mundu oka random line tho start chestundi — chala wrong. Red lines error ni chupistunnayi.
-Training jarugutunte, line move avutundi... total error taggutundi... chivaraku **best fit line** vastundi. Ide learning! Error ni taggistu, best line kanukkovadam.
+Ippudu learning ni kallatho chuddam.
+Ee dots houses. Model oka random line tho start chestundi. Chudandi, chala wrong ga undi. Red lines error.
+Training start... line kadulutundi... error taggutundi... (pause) inka taggutundi... and ide **best fit line**.
+Idhe learning. Error ni konchem konchem taggistu, best answer kanukkovadam. Magic emi ledu.
 
-`[C19 — loss definition]`
+`[C19: loss definition]`
 
-Aa error ni oka number ga cheppadam ni **Loss** antaru. Model enta wrong undo cheppe number. Training ante — ee loss ni minimum cheyyadam.
+Aa error ni okka number lo cheppadam ni **loss** antaru. "Model entha wrong ga undi" ane number. Training goal okkate: loss ni ventane taggincheyyadam.
 
-`[C20 — gradient descent]`
+`[C20: gradient descent]`
 
-Ela minimum chestundi? **Gradient Descent** dwara.
-Imagine cheyyandi — meeru fog lo oka kondapaina unnaru. Kindiki ela velataru? Prathi step lo, kindiki jaarutunna direction lo oka adugu vestaru. Step by step... lowest point ki cherukuntaru.
-Model kooda ade chestundi. Prathi step lo loss taggey direction lo weights ni konchem change chestundi.
+Ela tagginchali? Deeniki peru **gradient descent**.
+Imagine cheyyandi. Meeru kallaki gudda katti, oka konda meeda unnaru. Kindiki ravali. Em chestaru? Kaalla kinda vaalu ye side undo feel chesi, aa side oka adugu vestaru. Malli feel, malli adugu. Slowly kindiki vachestaru.
+Model kooda ade. Prathi step lo loss taggey direction lo weights ni konchem marchutundi.
 
-`[C21 — loss and accuracy curves]`
+Oka chinna detail, interviews lo adugutaru: prathi adugu entha pedda ga veyyali? Daanini **learning rate** antaru. Marii pedda adugulu vesthe, valley ni daati avatali side ki vellipotaru. Marii chinnavi aithe, reach avvadaniki yugalu padutundi. Correct size kavali.
 
-Training jarugutunte, loss kindiki veltundi, accuracy paiki veltundi. Okka **epoch** ante — model mottham training data ni okasari chudadam.
+`[C21: loss and accuracy curves]`
 
-`[C22 — training loop]`
+Training jarugutunte loss kindiki, accuracy paiki. Okka **epoch** ante, model mottham training data ni okasari chudadam.
 
-So training oka loop: predict cheyyi, error measure cheyyi, weights adjust cheyyi, malli repeat. Ilaa velasarlu. Ide training.
+`[C22: training loop]`
 
-`[C23 — underfit / good fit / overfit]`
+Summary ga training oka loop: guess cheyyi, entha wrong o chudu, konchem correct cheyyi, malli. Velasarlu.
 
-Ippudu aa promise chesina word — overfitting.
-Moodu models chudandi. First di — straight line, chala simple. Pattern ni pattukoledu. Adi **underfit**.
-Second — curve correct ga pattern ni follow avutundi. Adi **good fit**.
-Third — prathi dot ni touch cheyyadaniki pichi ga wiggle avtundi. Adi noise ni kooda byheart chesindi. Adi **overfit**.
+`[C23: underfit / good fit / overfit]`
 
-`[C24 — underfitting vs overfitting]`
+Ippudu promise chesina word. Overfitting.
+Ee moodu graphs chudandi. (pause) Ye model best anipistundi? Alochinchandi.
 
-Underfitting — chadavakunda exam ki vellina student. Overfitting — answers byheart chesina student. Manaki kavalsindi — concept artham chesukunna student. **Pattern nerchukovali, noise kaadu.**
+First di just straight line. Pattern ni pattukoledu. **Underfit**.
+Second di curve, data shape ni follow avtundi. **Good fit**.
+Third di prathi dot ni touch cheyyadaniki pichi pichi ga oogutundi. Adi pattern nerchukoledu, noise ni byheart chesindi. **Overfit**.
 
-`[C25 — what is a model]`
+Real ga ela kanipedataru? Training loss taggutune untundi, kaani validation loss, ante chudani data meeda loss, perugutundi. Adi overfitting signal.
 
-Asalu "model" ante enti? Model ante data nundi nerchukunna oka **maths function**. Input isthe prediction istundi. Andulo unna numbers ni **parameters** leda **weights** antaru. Training ante best weights kanukkovadam.
+`[C24: underfitting vs overfitting]`
 
-`[C26 — spam filter example]`
+Underfitting = chadavakunda exam ki vellina student. Overfitting = byheart batch. Manaki kavalsindi concept ardham chesukunna student.
 
-Example: kotha email vachindi. Trained model daani lo words, links, sender ni chusi — "98% spam" ani cheptundi. Simple!
+`[C25: what is a model]`
 
-`[C27 — quiz]`
+Asalu "model" ante? Data nundi nerchukunna oka maths function. Input isthe, prediction istundi. Andulo unna numbers ni **weights** leda **parameters** antaru. Training ante best weights vethakadam. Anthe.
 
-Quiz! Dataset lo "label" ante enti? (pause 3 seconds)
-Correct answer: **manam predict cheyyalanukunna answer**. Features inputs, label answer.
+`[C26: spam filter example]`
 
----
+Kotha email vachindi. Model words, links, sender chusi... "98% spam." Done.
 
-## CHAPTER 4 — 3 Types of Machine Learning (about 2.5 minutes)
+`[C27: quiz]`
 
-`[C28 — Chapter 4 card]`
-
-Chapter 4. Machine Learning lo **moodu** main types unnayi. Exam lo idi pakka vastundi.
-
-`[C29 — three types]`
-
-Supervised — answers tho nerchukovadam.
-Unsupervised — answers lekunda patterns kanukkovadam.
-Reinforcement — rewards and punishments tho nerchukovadam.
-
-`[C30 — supervised definition]`
-
-**Supervised Learning** — teacher tho nerchukovadam laantidi. Prathi example ki correct answer untundi. "Idi cat, idi dog" ani label chesina photos tho train chestham.
-
-`[C31 — classification boundary]`
-
-Ee graph chudandi. X axis study hours, Y axis practice tests. Green — pass, red — fail. Model rendu groups madhya oka boundary line geestundi.
-Kotha student vachadu. Line ki ee side unnadu? Pass side. So prediction — **PASS**.
-
-`[C32 — classification vs regression]`
-
-Supervised lo rendu kinds:
-**Classification** — answer oka category. Spam or not, cat or dog, pass or fail.
-**Regression** — answer oka number. House price, repu temperature, exam marks.
-Trick: category aithe classification, number aithe regression.
-
-`[C33 — unsupervised definition]`
-
-**Unsupervised Learning** — ikkada labels undavu. Teacher ledu. Model sontham ga data lo hidden groups kanukkuntundi.
-
-`[C34 — K-Means clustering animation]`
-
-Ee grey dots chudandi — evariki label ledu. K-Means algorithm moodu centres pedutundi. Prathi dot daggaraga unna centre ki join avutundi. Centres average ki move avtayi. Repeat... chivaraki moodu clear groups vachayi! Oka shop ki moodu types customers unnattu.
-
-`[C35 — unsupervised uses]`
-
-Real life lo — customer segmentation, bank lo fraud detection — unusual transactions kanukkovadam — similar news group cheyyadam, recommendations.
-
-`[C36 — reinforcement definition]`
-
-**Reinforcement Learning** — trial and error tho nerchukovadam. Manchi action ki reward, chedda action ki penalty. Chinnappudu cycle nerchukunnattu — padi, lechi, malli try chesi nerchukunnam kada? Same.
-
-`[C37 — robot grid]`
-
-Ee robot chudandi. First try lo trap lo padindi — minus 10. Next try lo goal cherindi — plus 10. Ilaa chala tries tarvatha, ye moves reward istayo nerchukuntundi.
-
-`[C38 — RL loop]`
-
-Keywords exam kosam: **Agent** action teesukuntundi, **Environment** reward leda penalty istundi, loop repeat avtundi. Goal — total reward maximum cheyyadam. Google AlphaGo ilaage nerchukundi.
-
-`[C39 — summary table]`
-
-Ee table screenshot teeskondi. Supervised — labelled data, spam filter. Unsupervised — no labels, customer groups. Reinforcement — rewards, game-playing AI.
-
-`[C40 — sorting examples]`
-
-Practice: exam marks predict cheyyadam — supervised. Customer groups — unsupervised. Robot walk nerchukovadam — reinforcement. Spam — supervised. Unusual bank transactions — unsupervised. Games aade AI — reinforcement.
-
-`[C41 — quiz]`
-
-Quiz! Labels lekunda customers ni group cheyyadam ye type? (pause 3 seconds)
-**Unsupervised learning** — clustering!
+Quiz. Dataset lo "label" ante? (pause 3)
+Manam predict cheyyalanukunna answer. Features inputs, label answer.
 
 ---
 
-## CHAPTER 5 — Popular ML Algorithms (about 2 minutes)
+## CHAPTER 4 · 3 Types of ML (~2.5 min)
 
-`[C42 — Chapter 5 card]`
+`[C28: Chapter 4 card]`
 
-Chapter 5. Exams lo ekkuva adige algorithms ni fast ga chuddam.
+Chapter 4. Mundu quick recall. (pause)
+Overfitting ante enti? ...Byheart chesi, kotha questions lo fail avvadam. Correct. Ippudu ML lo moodu types. Exam lo idi pakka vastundi, rasi pettukondi.
 
-`[C43 — linear regression]`
+`[C29: three types]`
 
-**Linear Regression** — best straight line geesi oka **number** predict chestundi. Formula: y equals m x plus c. House size nundi price predict cheyyadam.
+Supervised. Unsupervised. Reinforcement.
 
-`[C44 — logistic regression]`
+`[C30: supervised definition]`
 
-**Logistic Regression** — peru lo regression undi kaani, idi **classification** ki use chestaru! Exam lo trap question. Idi 0 nundi 1 madhya probability istundi. 0.5 paina unte spam, kinda unte not spam.
+**Supervised learning**... teacher unna class laantidi. Prathi example ki correct answer ichi untaru. "Idi cat, idi dog" ani label chesina photos.
 
-`[C45 — decision tree]`
+`[C31: classification boundary]`
 
-**Decision Tree** — yes or no questions flowchart. "Email lo 'free money' undha? Ledu. Sender contacts lo unnara? Avunu. So — NOT SPAM." Manam decisions teesukune laage.
+Ee graph lo study hours, practice tests. Green dots pass, red fail. Model rendu groups madhya oka line geestundi.
+Kotha student vachadu. Line ki ee vaipu unnadu? (pause) Pass vaipu. So prediction... **PASS**.
 
-`[C46 — random forest]`
+`[C32: classification vs regression]`
 
-**Random Forest** — okka tree kaadu, chala trees. Prathi tree vote chestundi, majority gelustundi. Okka tree kanna accurate, overfitting kooda takkuva.
+Supervised lo rendu rakalu.
+Answer oka category aithe, **classification**. Spam or not. Cat or dog.
+Answer oka number aithe, **regression**. House price. Repu temperature. Exam marks.
+Easy trick: category aa, number aa? Anthe.
 
-`[C47 — KNN]`
+`[C33: unsupervised definition]`
 
-**KNN, K-Nearest Neighbours** — "mee friends evaro cheppu, nuvvu evaro chepta" type. Kotha animal vachindi. Daggaraga unna 5 neighbours lo 3 cats, 2 dogs. So prediction — **cat**.
+**Unsupervised learning** lo labels undavu. Teacher ledu. Model ki "ee data lo groups emaina unnaya chudu" ani vadilestham.
 
-`[C48 — K-Means]`
+`[C34: K-Means clustering]`
 
-**K-Means** — mundu chusinde. Unsupervised, data ni K groups ga split chestundi. K meere choose cheyyali.
+Ee grey dots ki evariki labels levu. Algorithm moodu centres pedutundi. Prathi dot daggaraga unna centre ki join. Centres madhyaki jarugutayi. Malli... malli... chudandi, moodu groups vachesayi. Oka supermarket ki moodu rakala customers unnattu.
 
-`[C49 — SVM]`
+`[C35: unsupervised uses]`
 
-**SVM, Support Vector Machine** — rendu classes madhya **widest gap** unna boundary geestundi. Boundary ki daggaraga unna points ni support vectors antaru.
+Real life lo: customers ni groups cheyyadam, bank lo fraud pattukovadam (normal ga lenivi, odd transactions), similar news articles, recommendations.
 
-`[C50 — cheat sheet]`
+`[C36: reinforcement definition]`
 
-Idi mee cheat sheet. Pause chesi screenshot teeskondi. Algorithm, type, output, example — anni okka chota.
+**Reinforcement learning**... trial and error. Manchi pani chesthe reward, tappu chesthe penalty.
+Cycle nerchukunnappudu gurthunda? Paddam, lecham, malli try chesam. Evaru rules raasi ivvaledu. Same idea.
 
-`[C51 — quiz]`
+`[C37: robot grid]`
 
-Quiz! House price laanti number ni ye algorithm predict chestundi? (pause 3 seconds)
-**Linear Regression**. Logistic Regression kaadu — adi classification!
+Ee robot first try lo trap lo padindi. Minus 10. Next try lo goal ki vellindi. Plus 10. Ilaa vandala sarlu try chesi, ye moves reward istayo nerchukuntundi.
 
----
+`[C38: RL loop]`
 
-## CHAPTER 6 — Deep Learning & Neural Networks (about 3.5 minutes)
+Exam keywords: **agent**, **environment**, **action**, **reward**. Agent action teeskuntundi, environment reward istundi, loop.
+Oka interesting fact: ChatGPT laanti models ni konchem polite ga, helpful ga cheyyadaniki kooda reinforcement learning vaadaru. Humans answers ki ratings icharu, model aa ratings nundi nerchukundi. Deeniki **RLHF** antaru. Reinforcement Learning from Human Feedback.
 
-`[C52 — Chapter 6 card]`
+`[C39: summary table]`
 
-Chapter 6. Ippudu ee video lo most exciting part — **Deep Learning**. ChatGPT, face unlock, self-driving cars venaka unna engine.
+Ee table screenshot teeskondi. Revision ki perfect.
 
-`[C53 — brain neuron vs artificial neuron]`
+`[C40: sorting examples]`
 
-Mana brain lo billions of neurons untayi. Prathi neuron signals receive chesi, add chesi, strong ga unte fire avtundi.
-Artificial neuron kooda inspired by brain — inputs teeskuntundi, weights tho multiply chestundi, add chestundi, activation function lo pampistundi. Kaani brain kanna chala simple.
+Practice: exam marks predict cheyyadam? Supervised. Customer groups? Unsupervised. Robot walk? Reinforcement. Spam? Supervised. Unusual bank transactions? Unsupervised. Games aade AI? Reinforcement.
 
-`[C54 — neuron maths]`
+`[C41: quiz]`
 
-Oka neuron lo maths live ga chuddam. Inputs 0.5, 0.2, 0.9. Weights 0.8, minus 0.4, 0.6.
-0.5 into 0.8 plus 0.2 into minus 0.4 plus 0.9 into 0.6 — equals 0.86. ReLU tarvatha output 0.86. Ee number next layer ki veltundi. Antha simple!
-
-`[C55 — activation functions]`
-
-**Activation functions** — ReLU fast, hidden layers lo use chestaru. Sigmoid 0 to 1 squash chestundi, probability kosam. Activation lekapothe, entha pedda network aina just oka straight line laaga behave chestundi.
-
-`[C56 — neural network]`
-
-Ilaanti neurons ni layers lo connect chesthe — **Neural Network**. Input layer, hidden layers, output layer. Cat photo isthe, signals layers lo flow ayyi — "Cat 97%".
-
-`[HudNeural — futuristic HUD]`
-
-Idi oka real deep network laaga imagine cheyyandi — layers, neurons, accuracy climb avtundi... 97.4%. Ide Deep Learning.
-
-`[C57 — why "deep"]`
-
-Asalu "deep" enduku antaru? Simple — **chala hidden layers** unnayi kabatti. 1–2 layers shallow, chala layers deep. Ekkuva layers unte, ekkuva complex patterns nerchukovachu.
-
-`[C58 — backpropagation]`
-
-Network ela nerchukuntundi? **Backpropagation**.
-Mundu forward pass — prediction: "Dog". Kaani actual answer "Cat". Wrong!
-Appudu aa error ni **venakki** pampistaru — output nundi input varaku. Prathi weight ni konchem fix chestaru. Malli try — "Cat" correct! Mistakes nundi nerchukovadam — exactly mana laage.
-
-`[C59 — ML vs DL features]`
-
-ML ki DL ki pedda difference ikkade.
-Traditional ML lo, **human** features choose cheyyali — "chevulu shape, meesalu" laaga.
-Deep Learning lo, raw photo isthe chalu. Network **sontham ga** features nerchukuntundi. Anduke DL ki ekkuva data kavali, kaani manual work takkuva.
-
-`[C60 — feature hierarchy]`
-
-Face recognition lo prathi layer emi nerchukuntundo chudandi. First layer — edges, lines. Second — shapes. Third — kallu, chevulu, mukku laanti parts. Last — full face. Simple patterns kalisi complex patterns avtayi.
-
-`[C61 — CNN filter]`
-
-Images kosam **CNN — Convolutional Neural Network**. Oka chinna filter image meeda slide avtundi, edges laanti patterns kanukkuntundi. Bright ga unna chota edge dorikindi.
-
-`[C62 — network types]`
-
-Different jobs ki different networks: CNN — images. RNN, LSTM — sequences. **Transformer** — language, ChatGPT, Gemini, Claude. GANs and Diffusion — images create cheyyadaniki.
-
-`[C63 — LLM next word]`
-
-ChatGPT ela pani chestundi? Simple ga cheppalante — **next word predict chestundi**.
-"Machine learning is a part of..." — next word enti? **Attention** ane mechanism ye words important o chustundi. "AI" ki 72% chance. So "AI" ani raastundi. Ilaa word by word, mottham answer.
-
-`[BigFact — 175 billion counter]`
-
-Inka shocking fact: GPT-3 lo **175 billion** parameters unnayi. 175 followed by 9 zeros! Training lo prathi number ni tune chesaru.
-
-`[C64 — data vs performance]`
-
-Anduke Deep Learning ki **big data** kavali. Takkuva data unte traditional ML better. Data perigithe, DL performance perugutune untundi.
-
-`[C65 — what DL needs]`
-
-DL ki kavalsinavi: huge data, powerful GPUs, long training time — konni sarlu weeks — and chala current, dabbulu.
-
-`[C66 — CPU vs GPU]`
-
-GPU enduku? CPU lo konni powerful cores — step by step pani. GPU lo **thousands of small cores** — okesari millions of multiplications. Neural networks ante matrix maths kabatti, GPUs chala fast ga train chestayi.
-
-`[C67 — DL around you]`
-
-Meeru roju DL use chestunnaru: face unlock, Google Assistant, Google Translate, Lens, ChatGPT, self-driving cars, medical scans.
-
-`[C68 — DL limitations]`
-
-Kaani limitations kooda unnayi. **Black box** — enduku aa decision teeskundo explain cheyyadam kashtam. Chala data kavali. Expensive. And konni sarlu **confident ga wrong** cheptundi. So AI cheppindanta blind ga nammakandi!
-
-`[C69 — quiz]`
-
-Quiz! Deep Learning ni "deep" ani enduku antaru? (pause 3 seconds)
-**Chala hidden layers unnayi kabatti!** Deep ga alochistundi ani kaadu. 😄
+Quiz. Labels lekunda customers ni group cheyyadam? (pause 3)
+Unsupervised. Clustering.
 
 ---
 
-## CHAPTER 7 — Final Comparison & Exam Revision (about 2 minutes)
+## CHAPTER 5 · Popular ML Algorithms (~2 min)
 
-`[C70 — Chapter 7 card]`
+`[C42: Chapter 5 card]`
 
-Chapter 7. Final revision. Exam mundu ee part okkate chusina chalu.
+Chapter 5. Exams lo ekkuva adige algorithms. Fast ga velladam, okkokkatiki 20 seconds.
 
-`[C71 — AI vs ML vs DL table]`
+`[C43: linear regression]`
 
-AI — machines smart ga act cheyyadam. Pedda field. Rules tho kooda pani chestundi.
-ML — data nundi nerchukovadam. AI subset. Features mostly humans choose chestaru.
-DL — deep neural networks tho nerchukovadam. ML subset. Huge data kavali. Features automatic ga nerchukuntundi.
+**Linear regression.** Best straight line geesi, oka number predict chestundi. y = m x + c. School lo chusina formula ne.
 
-`[C72 — ML vs DL table]`
+`[C44: logistic regression]`
 
-ML vs DL: ML normal CPU lo run avtundi, DL ki GPUs kavali. ML minutes nundi hours, DL hours nundi weeks. ML explain cheyyadam easy, DL black box. ML tables kosam, DL images, audio, text kosam. Data perigithe ML aagipotundi, DL improve avtune untundi.
+**Logistic regression.** Ikkada trap undi. Peru lo regression undi kaani, idi **classification** ki vaadataru. Chala mandi exam lo ikkade mark potaru. Idi 0 nundi 1 madhya probability istundi. 0.5 paina aithe spam, kinda aithe kaadu.
 
-`[C73 — self-driving car example]`
+`[C45: decision tree]`
 
-Okka example lo moodu: self-driving car. Mottham car driving decisions teesukovadam — AI. Millions of kilometres data nundi driving patterns nerchukovadam — ML. Cameras tho people, signs gurthinchadam CNN tho — DL.
+**Decision tree.** Yes/no questions flowchart. "Email lo free money undha? Ledu. Sender contacts lo unnara? Unnaru. So not spam." Manam roju decisions ilaage teeskuntam.
 
-`[C74 — 2-mark answers]`
+`[C46: random forest]`
 
-2 marks questions ki ivi raayandi:
-AI — human intelligence avasaram ayye tasks machine cheyyadam.
-ML — AI subset, data nundi patterns nerchukuntundi.
-DL — ML subset, multi-layer neural networks use chestundi.
+**Random forest.** Okka tree kaadu, chala trees. Prathi tree vote chestundi, majority gelustundi. Okkari opinion kanna group opinion better kada? Overfitting kooda takkuva.
 
-`[C75 — 5 differences]`
+`[C47: KNN]`
 
-Long answer ki 5 differences: Scope, Data, Features, Hardware, Explainability. Ivi raasthe full marks!
+**KNN**, K-nearest neighbours. "Nee friends evaro cheppu, nuvvu evaro chepta" type algorithm. Kotha animal ki daggaraga unna 5 lo 3 cats, 2 dogs. So, cat.
 
-`[C76 — quiz]`
+`[C48: K-Means]`
 
-Last quiz round! Ekkuva data and computing power deniki kavali? (pause)
-**Deep Learning**.
+**K-Means**. Mundu chusam. Unsupervised, K groups. K enta ane di meere decide cheyyali.
 
-`[C77 — quiz]`
+`[C49: SVM]`
 
-Netflix mee watch history chusi movies suggest cheyyadam? (pause)
-**Machine Learning**.
+**SVM**, Support Vector Machine. Rendu groups madhya line geestundi, kaani ekkuva gap tho. Road ki rendu vaipula maximum space vadilinattu. Line ki daggaraga unna points ni support vectors antaru.
 
-`[C78 — quiz]`
+`[C50: cheat sheet]`
 
-Robot rewards tho walk cheyyadam nerchukuntundi? (pause)
-**Reinforcement Learning**. Meeku entha correct vachayi? Comment lo cheppandi!
+Ide mee cheat sheet. Pause, screenshot.
 
-`[C79 — recap circles]`
+`[C51: quiz]`
 
-So final ga gurthupettukondi: AI pedda circle. Andulo ML. Andulo DL. Every DL is ML, every ML is AI.
+Quiz. House price laanti number predict chese algorithm? (pause 3)
+Linear regression. Logistic kaadu. Trap gurthunda?
 
-`[C80 — outro]`
+---
 
-Ee video meeku help ayithe, **like** cheyyandi, exams ki prepare avtunna mee friends ki **share** cheyyandi. Doubts unte comment lo adagandi — nenu reply istanu.
-Next video lo **Neural Networks** ni inka deep ga, Telugu lo chuddam. Subscribe chesi bell icon press cheyyandi.
-Nenu Mani, idi **AI with Mani**. Keep learning, keep building. Bye!
+## CHAPTER 6 · Deep Learning (~4 min)
+
+`[C52: Chapter 6 card]`
+
+Chapter 6. Recall first. (pause)
+Classification ki, regression ki difference? ...Category vs number. Super.
+Ippudu video lo best part. Deep Learning. ChatGPT, face unlock, self-driving cars... annitiki engine idi.
+
+`[C53: brain neuron vs artificial neuron]`
+
+Mana brain lo billions of neurons. Prathi neuron signals teeskuni, kalipi, strong ga unte fire avtundi.
+Artificial neuron ee idea nundi inspire ayyindi. Kaani nijam cheppali ante, brain kanna chala chala simple. "AI ki brain undi" ani evaraina cheppithe, konchem doubt pettukondi.
+
+`[C54: neuron maths]`
+
+Okka neuron lo em jarugutundo chuddam. Maths simple, bayapadakandi.
+Inputs 0.5, 0.2, 0.9. Weights 0.8, minus 0.4, 0.6.
+Multiply chesi kalipithe... 0.4 minus 0.08 plus 0.54... 0.86.
+ReLU tarvatha kooda 0.86. Ee number next layer ki veltundi. Ante okka neuron chese pani idhe. Multiply, add, pass.
+
+`[C55: activation functions]`
+
+Activation function enduku? ReLU fast, hidden layers lo vaadataru. Sigmoid 0 to 1 ki squash chestundi, probability laaga.
+Activation lekapothe, entha pedda network aina oka straight line laage behave chestundi. Curves nerchukoledu.
+
+`[C56: neural network]`
+
+Ilaanti neurons ni layers ga kalipithe... neural network. Input layer, hidden layers, output.
+Cat photo pampisthe, signals layers lo vellipoyi... "Cat 97%".
+
+`[HudNeural: futuristic HUD]`
+
+Real deep network ilaa untundi anukondi. Layers, neurons, accuracy meedaki... 97.4.
+
+`[C57: why "deep"]`
+
+"Deep" ani enduku antaru? Deep ga alochistundi ani kaadu. 😄 **Hidden layers chala unnayi** kabatti. Okati rendu unte shallow, chala unte deep.
+
+`[C58: backpropagation]`
+
+Network ela nerchukuntundi? **Backpropagation.**
+Mundu photo pampistham. Network "Dog" antundi. Actual answer "Cat". Wrong.
+Appudu aa error ni **venakki** pampistaru, output nundi first layer varaku. Prathi weight ki "nuvvu ee mistake lo enta responsible?" ani lekka vesi, konchem fix chestaru. Malli try... Cat. Correct.
+Mistakes nundi nerchukovadam. Mana laage. Ikkada kooda gradient descent ne, chapter 3 lo chusina konda gurthunda? Same idea.
+
+`[C59: ML vs DL features]`
+
+ML ki DL ki asalu difference ikkade undi.
+Traditional ML lo, ye features chudalo **manam** cheppali. "Chevulu shape chudu, meesalu chudu."
+DL lo raw photo isthe chalu. Ye features important o network **tane** nerchukuntundi. Anduke DL ki data ekkuva kavali, kaani manual pani takkuva.
+
+`[C60: feature hierarchy]`
+
+Face recognition lo layers em nerchukuntayo chudandi. First layer lines, edges. Next shapes. Next kallu, chevulu, mukku. Last lo full face. Chinna patterns kalisi pedda patterns.
+
+`[C61: CNN filter]`
+
+Images ki special network, **CNN**. Oka chinna filter photo meeda jaripistaru, torch light laaga. Edges dorikina chota bright avtundi.
+
+`[C62: network types]`
+
+Different pani ki different network. CNN photos ki. RNN, LSTM sequences ki, ippudu ekkuva vaadatledu. **Transformer**... language ki. ChatGPT, Gemini, Claude annee transformers. GANs, diffusion models images create cheyyadaniki.
+
+`[C63: LLM next word]`
+
+Ippudu meeru wait chestunna question. ChatGPT ela pani chestundi?
+Nammandi, nammakapondi... core lo adi **next word guess chestundi**. Anthe.
+"Machine learning is a part of..." next word? AI. 72% chance. Raastundi. Malli next word. Ilaa word by word mottham answer.
+
+Kaani ye words ni chudali ani ela telustundi? Deeniki **attention** antaru. Oka spotlight laaga.
+Ee sentence chudandi: "Trophy bag lo pattaledu, endukante adi chala pedda ga undi." (pause) Ikkada "adi" ante trophy aa, bag aa?
+...Trophy. Meeru ela kanipettaru? Sentence lo venakki chusi, ye word ki connection undo chusaru. Attention ade chestundi, prathi word ki.
+
+`[BigFact: 175 billion counter]`
+
+Size telusa? GPT-3 lo **175 billion** parameters. 175 tarvatha tommidi zeros. Training lo prathi okkati tune chesaru.
+
+`[C64: data vs performance]`
+
+Anduke DL ki **big data** kavali. Data takkuva unte, normal ML ne better. Data perigina koddi, DL inka inka improve avtundi.
+
+`[C65: what DL needs]`
+
+Kavalsinavi: bhayankaramaina data, powerful GPUs, weeks of training, chala current, chala dabbulu.
+
+`[C66: CPU vs GPU]`
+
+GPU enduku? CPU lo konni strong cores, okati tarvatha okati pani. GPU lo velala chinna cores, anni okesari. Neural networks ante multiplications kuppalu kabatti, GPU perfect.
+
+`[C67: DL around you]`
+
+Meeru roju vaadutunnaru: face unlock, Google Assistant, Translate, Lens, ChatGPT, self-driving cars, hospital scans.
+
+`[C68: DL limitations]`
+
+Kaani limitations kooda cheppali, lekapothe nenu honest kaadu.
+Black box. Enduku aa answer ichindo cheppadam kashtam.
+Data chala kavali. Kharchu ekkuva.
+And idi important: konni sarlu **confident ga tappu** cheptundi. Leni facts, leni books, leni dates kooda chala nammakam ga cheptundi. Deenini **hallucination** antaru. So AI cheppindi kada ani blind ga nammakandi. Important vishayam aithe, cross-check cheyyandi.
+
+`[C69: quiz]`
+
+Quiz. DL ni "deep" ani enduku antaru? (pause 3)
+Chala hidden layers. Deep thinking kaadu! 😄
+
+---
+
+## CHAPTER 7 · Final Revision (~2 min)
+
+`[C70: Chapter 7 card]`
+
+Last chapter. Exam mundu roju time lekapothe, ikkadi nundi chusina chalu.
+
+`[C71: AI vs ML vs DL table]`
+
+AI: machines smart ga act cheyyadam. Pedda field. Rules tho kooda pani chestundi.
+ML: data nundi nerchukovadam. AI lo part. Features mostly manam istham.
+DL: deep neural networks. ML lo part. Data bhayankaram ga kavali. Features tane nerchukuntundi.
+
+`[C72: ML vs DL table]`
+
+ML vs DL, interview favourite. ML normal laptop lo nadustundi, DL ki GPU. ML minutes, hours. DL hours, weeks. ML explain cheyyochu, DL black box. ML tables ki, DL photos, audio, text ki. Data penchithe ML aagipotundi, DL penchutune untundi.
+
+`[C73: self-driving car]`
+
+Okka example lo moodu. Self-driving car. Mottham car decisions teesukovadam, AI. Lakshala kilometres driving data nundi nerchukovadam, ML. Camera tho manushulni, signals ni gurthupattadam, CNN tho, DL.
+
+`[C74: 2-mark answers]`
+
+2 marks ki ivi raayandi:
+AI, human intelligence kavalsina tasks ni machine cheyyadam.
+ML, AI subset, data nundi patterns nerchukuntundi.
+DL, ML subset, multi-layer neural networks vaadutundi.
+
+`[C75: 5 differences]`
+
+Long answer ki 5 points: scope, data, features, hardware, explainability. Ee aidu raasthe full marks raavali.
+
+`[C76: quiz]`
+
+Final quiz round. Ekkuva data, computing power deniki? (pause 3) Deep Learning.
+
+`[C77: quiz]`
+
+Netflix mee history chusi movies suggest cheyyadam? (pause 3) Machine Learning.
+
+`[C78: quiz]`
+
+Robot rewards tho walk nerchukuntundi? (pause 3) Reinforcement learning.
+
+Ippudu start lo adiginavi gurthunnaya? Face unlock? ...DL. ChatGPT? ...DL. Netflix? ...ML. Chudandi, ippudu meeru alochinchakunda cheppesaru. Ade nenu promise chesindi.
+Meeku entha correct vachayi? Comment lo cheppandi, nenu chadavutha.
+
+`[C79: recap circles]`
+
+Last ga okka line. AI pedda circle. Lopala ML. Inka lopala DL. Every DL is ML, every ML is AI.
+
+`[C80: outro]`
+
+Video useful aithe like cheyyandi. Exam ki chaduvutunna mee friend ki okka share cheyyandi, vaallaki kooda help avtundi. Doubts unte comment lo adagandi, reply istanu.
+Next video lo **neural networks** ni inka deep ga chuddam. Subscribe chesi bell kottandi.
+Nenu Mani. Idi AI with Mani. Bye!
 
 ---
 
 ## Recording tips
-1. Record **chapter by chapter**, not the whole thing at once. Mistake vasthe aa chapter maatrame malli record cheyyandi.
-2. Phone ni 15–20 cm daggaraga pettandi, quiet room lo, blanket/pillows unna room lo echo takkuva.
-3. Hook ni **3–4 sarlu** record cheyyandi — best energy unnadi use cheyyandi.
-4. Numbers (175 billion, 97.4%) slow ga, clear ga cheppandi.
-5. Smile chesthu matladithe voice lo energy vastundi — try cheyyandi!
+1. Chapter by chapter record cheyyandi. Mistake vasthe aa part maatrame malli.
+2. Script ni chadivinattu kaakunda, friend ki cheptunnattu cheppandi. Konni words marchina parledu, actually better.
+3. Hook ni 3–4 sarlu record cheyyandi. Best energy unnadi theeskondi.
+4. Numbers (0.86, 175 billion) slow ga.
+5. Quiz tarvatha nijam ga 3 seconds aagandi. Edit lo kooda cut cheyyakandi.
+6. Smile chesthu matladithe voice lo energy vinipistundi. Try cheyyandi.
