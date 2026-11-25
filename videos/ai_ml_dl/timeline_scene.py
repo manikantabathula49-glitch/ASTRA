@@ -16,7 +16,7 @@ AI_C, ML_C, DL_C = "#4F8CFF", "#22C55E", "#F59E0B"
 TXT, MUTED, PAPER = "#F1F5F9", "#94A3B8", "#FFF7E6"
 SANS = "Inter"
 config.background_color = BG
-SPACING = 7.5
+SPACING = 11.0
 
 
 def T(s, size, color=TXT, weight=BOLD):
@@ -165,9 +165,10 @@ class AITimeline(MovingCameraScene):
         wait_until(cues.get("_now", total - 4.5))
         here = VGroup(Triangle(fill_color=DL_C, fill_opacity=1, stroke_width=0).scale(0.18).rotate(PI),
                       T("YOU ARE HERE", 26, DL_C)).arrange(DOWN, buff=0.12)
-        here.move_to([(n - 1) * SPACING + 1.8, -2.2, 0])
-        self.play(self.camera.frame.animate.scale(2.45).move_to([(n - 1) * SPACING / 2, -0.2, 0]),
-                  title.animate.scale(2.2).move_to([(n - 1) * SPACING / 2, 6.6, 0]), run_time=1.8,
+        here.scale(1.8).next_to(Dot([(n - 1) * SPACING, -2.9, 0]), DOWN, buff=0.9)
+        mid = (n - 2) * SPACING
+        self.play(self.camera.frame.animate.scale(2.3).move_to([mid, -0.6, 0]),
+                  title.animate.scale(2.0).move_to([mid, 7.2, 0]), run_time=1.8,
                   rate_func=rate_functions.ease_in_out_cubic)
         self.play(FadeIn(here, shift=DOWN * 0.4, scale=2.0), run_time=0.5)
         wait_until(total)
