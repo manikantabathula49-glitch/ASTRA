@@ -1,0 +1,41 @@
+{
+ "transcribe": [
+  {
+   "start": 0.0,
+   "end": 15.2,
+   "text": "around the world"
+  },
+  {
+   "start": 15.2,
+   "end": 19.6,
+   "text": "everything is about polar sport"
+  }
+ ],
+ "translate": [
+  {
+   "start": 0.0,
+   "end": 4.0,
+   "text": "First question for you is, what do you think intelligence is?"
+  },
+  {
+   "start": 4.0,
+   "end": 10.0,
+   "text": "We think, decide, learn new things, solve problems."
+  },
+  {
+   "start": 10.0,
+   "end": 11.0,
+   "text": "This is intelligence."
+  },
+  {
+   "start": 11.0,
+   "end": 15.0,
+   "text": "Now if we do the same thing with a machine, it is artificial intelligence."
+  },
+  {
+   "start": 15.0,
+   "end": 19.0,
+   "text": "Artificial means that what humans have created is not normal."
+  }
+ ]
+}

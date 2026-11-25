@@ -1,0 +1,46 @@
+{
+ "transcribe": [
+  {
+   "start": 0.0,
+   "end": 30.0,
+   "text": "1950 కాలనలను సంలూగడతిసిక్ రాన్చికల్ ఆలూడికిక్లిసిక్లేమె, నినాపువరకిసిక్లు ఇపెపుడితిలికారికాలో నినాపువరక్ నినాపుగిక్లుది�"
+  },
+  {
+   "start": 30.0,
+   "end": 34.5,
+   "text": "తిరంలల విదిలాస్ గిలచిని అకారణ ని డిపతిలిక బానినిక బానినిన బిమాయన్ ని."
+  },
+  {
+   "start": 34.5,
+   "end": 40.0,
+   "text": "టరంసాన స్లసాన సందిలిన లా తోస్లముడి లా చాజి పిట్."
+  },
+  {
+   "start": 40.0,
+   "end": 43.5,
+   "text": "ఉల్గావాకికలో అసావర్సికంది మిదిలిలానా ఉనాడి"
+  }
+ ],
+ "translate": [
+  {
+   "start": 0.0,
+   "end": 6.24,
+   "text": "In 1950, Alan Keuring asked a question, Can machines be used?"
+  },
+  {
+   "start": 6.24,
+   "end": 18.32,
+   "text": "In 1956, the name Artificial was born. In 1959, machine learning. In 1986, back propagation became popular."
+  },
+  {
+   "start": 18.32,
+   "end": 32.12,
+   "text": "Let's see this in chapter 6. In 1997, Deep blue. In 2012, Alex next, a huge image competition, left everyone behind and won."
+  },
+  {
+   "start": 32.12,
+   "end": 43.52,
+   "text": "From there, deep learning boom happened. In 2017, Transformers. In 2022, Chagy Pitti. Now we are in the middle of that story."
+  }
+ ]
+}

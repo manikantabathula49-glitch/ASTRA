@@ -5,3 +5,5 @@ __pycache__/
 out_next/
 shorts/
 flow/*.mp4
+voice/*.mp3
+voice/*.wav
