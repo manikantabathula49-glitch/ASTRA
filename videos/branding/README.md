@@ -32,3 +32,12 @@ Each ~1s, in `_alpha.mov` (transparent), `_green.mp4` and `.mp4` versions. **Cut
 | `TrSlidePanels` | 5 coloured panels drop in and lift away | Section changes |
 | `TrBlobs` | Soft colour blobs swell and slide off | Calm topic changes |
 | `TrSpeedLines` | Light streaks + flash | Fast, exciting moments (hook, reveals) |
+
+## Engagement bar with sounds (`engage.py`, `render_engage.sh`)
+Your photo + **Like, Share, Comment, Subscribe, Bell**, clicked one by one with sound effects (click, pop, bell ding, whoosh), all generated, no third-party audio.
+| File | Use |
+|---|---|
+| `Engage_<video>_alpha.mov` | Transparent + sound (Premiere, DaVinci, CapCut desktop) |
+| `Engage_<video>_green.mp4` | Green screen + sound (CapCut mobile: Chroma Key) |
+| `Engage_<video>.mp4` | Preview with sound |
+Versions: `ai_ml_dl`, `quantum`, `general`. Add more in `NOTES` inside `engage.py`, then run `./render_engage.sh`.
