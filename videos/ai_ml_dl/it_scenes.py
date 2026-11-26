@@ -185,7 +185,7 @@ class CodeVsData(Scene):
         re = editor(6.4, 4.4, "training data", ML_C).move_to([3.6, 0.45, 0])
         self.play(FadeIn(lt), FadeIn(rt), FadeIn(le), FadeIn(re), run_time=0.7)
 
-        code = [(0, 'def result(marks):'), (1, 'if marks > 35:'), (2, 'return "PASS"'), (1, 'return "FAIL"')]
+        code = [(0, 'def result(marks):'), (1, 'if marks > 25:'), (2, 'return "PASS"'), (1, 'return "FAIL"')]
         lines = VGroup(*[Text(src, font=MONO, font_size=24, color=TXT,
                               t2c={"def": PURPLE, "if": PURPLE, "return": PURPLE, '"PASS"': ML_C, '"FAIL"': PINK})
                          for _, src in code])
@@ -197,7 +197,7 @@ class CodeVsData(Scene):
         cap_l = T("A human writes every rule", 24, AI_C, NORMAL).next_to(le, DOWN, buff=0.3)
         self.play(FadeIn(cap_l, shift=UP * 0.2), run_time=0.4)
 
-        rows = [("72", "PASS", ML_C), ("20", "FAIL", PINK), ("55", "PASS", ML_C), ("31", "FAIL", PINK),
+        rows = [("72", "PASS", ML_C), ("20", "FAIL", PINK), ("55", "PASS", ML_C), ("18", "FAIL", PINK),
                 ("90", "PASS", ML_C), ("12", "FAIL", PINK)]
         data = VGroup(*[VGroup(T(f"marks: {m}", 22, TXT, NORMAL, MONO), T("→", 22, MUTED, NORMAL, MONO),
                                T(r, 22, c, BOLD, MONO)).arrange(RIGHT, buff=0.25) for m, r, c in rows])
@@ -209,7 +209,7 @@ class CodeVsData(Scene):
         self.play(*[d.animate.scale(0.6).move_to(brain).set_opacity(0) for d in data], run_time=0.9, lag_ratio=0.1)
         self.play(Indicate(brain, color=ML_C), run_time=0.5)
         learned = VGroup(T("learned rule:", 22, MUTED, NORMAL, MONO),
-                         T("marks > 35 → PASS", 26, ML_C, BOLD, MONO)).arrange(DOWN, buff=0.12)
+                         T("marks > 25 → PASS", 26, ML_C, BOLD, MONO)).arrange(DOWN, buff=0.12)
         learned.move_to(re[0]).shift(LEFT * 0.6 + DOWN * 0.2)
         box = glow(SurroundingRectangle(learned, buff=0.2, corner_radius=0.12), ML_C, 2, 3)
         self.play(FadeIn(learned, shift=UP * 0.2), Create(box), run_time=0.6)

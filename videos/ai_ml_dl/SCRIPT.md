@@ -131,7 +131,7 @@ Konchem history. Boring kaadu, promise.
 
 Okay, ippudu ee video lo naaku most favourite part. Konchem focus pettandi.
 
-Normal programming lo em chestham? Computer ki **rules** istham, **data** istham. Adi **answers** istundi. Example: "marks 35 paina unte PASS." Rule manam raasam.
+Normal programming lo em chestham? Computer ki **rules** istham, **data** istham. Adi **answers** istundi. Example: "marks 25 paina unte PASS." Rule manam raasam.
 
 Machine Learning lo? Ulta. Manam **data** istham, **answers** kooda istham. Rules ni computer kanukkuntundi. (pause)
 

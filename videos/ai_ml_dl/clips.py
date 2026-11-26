@@ -408,7 +408,7 @@ def rules_vs_learning(s):
 
     for title, col, ins, out, oc, hint in (
             ("Traditional Programming", AI_C, [("Rules", AI_C), ("Data", MUTED)], "Answers", TXT,
-             "Human writes the rules  (if marks > 35 then PASS)"),
+             "Human writes the rules  (if marks > 25 then PASS)"),
             ("Machine Learning", ML_C, [("Data", MUTED), ("Answers", TXT)], "Rules", ML_C,
              "Machine finds the rules itself from examples")):
         t = T(title, 40, col, BOLD).to_edge(UP, buff=0.6)
