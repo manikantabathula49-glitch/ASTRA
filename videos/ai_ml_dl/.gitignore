@@ -1,0 +1,9 @@
+out/
+out_preview/
+__pycache__/
+*.zip
+out_next/
+shorts/
+flow/*.mp4
+voice/*.mp3
+voice/*.wav

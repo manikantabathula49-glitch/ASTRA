@@ -1,0 +1,46 @@
+{
+ "transcribe": [
+  {
+   "start": 0.0,
+   "end": 25.72,
+   "text": "అకుతు పోట్లిలో పోట్లికందికండిలితికోను విడి సంపివికికినిలో పోట్లిలిలో చానిలో చానిక్నితోలి విమాలో ముాకు భాలము ఫారుడిపట�"
+  }
+ ],
+ "translate": [
+  {
+   "start": 0.0,
+   "end": 4.5,
+   "text": "Okay, now in this video, I will tell you my favorite part."
+  },
+  {
+   "start": 4.5,
+   "end": 6.26,
+   "text": "Focus on this video."
+  },
+  {
+   "start": 6.26,
+   "end": 8.5,
+   "text": "What we do in normal programming?"
+  },
+  {
+   "start": 8.5,
+   "end": 12.5,
+   "text": "We give rules to computer, we give data, it gives the answers."
+  },
+  {
+   "start": 12.5,
+   "end": 17.0,
+   "text": "Example, if we have MOX 25, we write the rules."
+  },
+  {
+   "start": 17.0,
+   "end": 24.0,
+   "text": "In machine learning, we give data, we give answers, it gives the rules to computer."
+  },
+  {
+   "start": 24.0,
+   "end": 25.5,
+   "text": "Think about it once."
+  }
+ ]
+}

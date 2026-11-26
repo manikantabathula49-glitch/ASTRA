@@ -1,0 +1,41 @@
+{
+ "transcribe": [
+  {
+   "start": 0.0,
+   "end": 30.0,
+   "text": "మైశమ కే మরధ్లు స్టండిస్తా ఫ్న్న బిప్ధాగు నుండిస్ట్ నికాళి స్టండిస్తా బిప్కాగు లైటారి పెటట్ల్స స్టండికెట్ని తిదికోకాది"
+  }
+ ],
+ "translate": [
+  {
+   "start": 0.0,
+   "end": 7.0,
+   "text": "We show the data to the machine, it will keep the patterns on its own."
+  },
+  {
+   "start": 7.0,
+   "end": 15.0,
+   "text": "Take the spam filter and write the word free money."
+  },
+  {
+   "start": 15.0,
+   "end": 19.0,
+   "text": "We show spam emails and normal emails thousands of times."
+  },
+  {
+   "start": 19.0,
+   "end": 21.0,
+   "text": "It will learn."
+  },
+  {
+   "start": 21.0,
+   "end": 28.0,
+   "text": "In 1959, the scientist Samuel was defined as an author spam."
+  },
+  {
+   "start": 28.0,
+   "end": 38.0,
+   "text": "If you give the ability to the computer to learn without programming, you will get extra impression in the exam."
+  }
+ ]
+}

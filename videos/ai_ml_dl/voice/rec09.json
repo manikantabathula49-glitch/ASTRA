@@ -1,0 +1,46 @@
+{
+ "transcribe": [
+  {
+   "start": 0.0,
+   "end": 30.0,
+   "text": "మిగిసరకిల లాకోసికంది ఉపకలాక మికిలకునికాలో పరిలానిలి ఇదికి ఏనిలా కిలానూడికాల్నికాలో మర్లసలికాలి కెలు అంపట్తక మికాలకాల�"
+  },
+  {
+   "start": 30.0,
+   "end": 34.73,
+   "text": "మాయక పాలికింసం ఆలో చూసం మాశ్ లానిన్క నిట్త మానికి ఎంట్ ఇంట్ సిక్క సికాద్ మాకికితాల్ పారిలియాన్న్ 3.5.3.3.4.5.6.2.6.3.3.3.2.3.3.3.3.3.3.3.3.3"
+  }
+ ],
+ "translate": [
+  {
+   "start": 0.0,
+   "end": 10.38,
+   "text": "Imagine 3 circles, one of them is bigger circle A, machine learning inside it, and deep learning inside it."
+  },
+  {
+   "start": 10.38,
+   "end": 16.22,
+   "text": "DL is a part of ML, ML is a part of AI."
+  },
+  {
+   "start": 16.22,
+   "end": 24.14,
+   "text": "Remember this line, every DL is ML, every ML is AI."
+  },
+  {
+   "start": 24.14,
+   "end": 29.54,
+   "text": "Not in reverse, there is no need for every AIML"
+  },
+  {
+   "start": 29.54,
+   "end": 31.98,
+   "text": "We have already seen the AIML definition"
+  },
+  {
+   "start": 31.98,
+   "end": 34.34,
+   "text": "What is machine learning?"
+  }
+ ]
+}
